@@ -1,0 +1,124 @@
+### Recommended Baseline Models for Your NLP Classification Project
+
+Project on classifying cyber harm content (e.g., fraud, scams, hate speech), baseline models provide a solid starting point to benchmark performance before advancing to more complex architectures. Based on a review of relevant research and tools, I'll suggest viable baselines across these categories. These are drawn from established NLP techniques, including traditional machine learning, deep learning, and transformer-based models. They are "viable" because they are widely used, open-source or replicable, and have demonstrated effectiveness in similar tasks. Many can be implemented via libraries like scikit-learn, TensorFlow, PyTorch, or Hugging Face Transformers.
+
+I'll focus on models that are accessible for experimentation, often with associated datasets or code. For a unified cyber harm classifier, consider starting with multi-label versions of these (e.g., via fine-tuning for multiple classes). If your existing projects include basic setups like Naive Bayes for spam, these build on that.
+
+#### Key Baselines by Category
+Here's a table summarizing recommended baselines. I've prioritized models mentioned in recent studies for their balance of simplicity, performance, and adaptability. For implementation, use datasets like those from Kaggle (e.g., SMS Spam Collection for scams) or papers (e.g., FraudNLP dataset).
+
+| Category       | Model Name/Type                  | Description                                                                 | Why Viable as Baseline                  | Source/Reference                                                                 |
+|----------------|----------------------------------|-----------------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------|
+| Hate Speech   | Logistic Regression with n-grams | Uses TF-IDF or bag-of-words features for binary/multi-class classification (hate vs. non-hate). | Simple, interpretable, and quick to train; often beats random baselines in text tasks. | Toxic Speech Detection paper (Stanford); common in NLP benchmarks. |
+| Hate Speech   | Baseline CNN                     | Convolutional Neural Network on word embeddings (e.g., GloVe) for sequence classification. | Effective for capturing local patterns in text; easy to implement with Keras. | Hate Speech Detection Using NLP (Stanford report). |
+| Hate Speech   | BERT-based Ensemble              | Fine-tuned BERT variants (e.g., BERT-base) combined in an ensemble for hate/offensive detection. | State-of-the-art transfer learning; handles nuances like sarcasm. Start with Hugging Face's bert-base-uncased. | Adaptive ensemble techniques; Hate speech detection with BERT. |
+| Fraud/Scam    | TF-IDF + SVM/Logistic Regression | Vectorizes text (e.g., emails, invoices) and classifies as fraud/non-fraud using support vector machines or logistic regression. | Robust for imbalanced data; low computational cost. | FraudNLP dataset benchmarks; SMS Spam Detection. |
+| Fraud/Scam    | LSTM/RNN with Word Embeddings    | Recurrent networks on pre-trained embeddings (e.g., Word2Vec) for sequential text analysis. | Captures context in long texts like scam messages; good for temporal patterns. | AI fraud detection with ML & NLP; Scam Detection Using ML. |
+| Fraud/Scam    | Fine-tuned LLM (e.g., DistilBERT)| Distilled BERT model adapted for fraud/scam text classification. | Efficient for deployment; pre-trained on large corpora for better generalization. | Detecting Scams Using LLMs; NLP in Fraud Detection paper. |
+| Cyber Harm (General) | Hybrid BERT for Multi-Class      | BERT fine-tuned for multi-label classification (e.g., hate, fraud, scam as labels). | Versatile for combined cyber harm; supports entity recognition for added features. | ML and NLP for Hate Speech and Cyberbullying; Automated Classification of Cybercrime. |
+| Cyber Harm (General) | RoBERTa-based Classifier         | Optimized BERT variant for threat/abuse detection in social media or complaints. | Strong on noisy data; often outperforms vanilla BERT in benchmarks. | A survey of textual cyber abuse detection; Hybrid DL for Cyberbullying. |
+
+#### Getting Started Tips
+- **Implementation**: Begin with scikit-learn for traditional models (e.g., Logistic Regression). For deep learning, use Hugging Face's Transformers library to fine-tune BERT—it's beginner-friendly with tutorials for text classification.
+- **Datasets**: Pair with public ones like Jigsaw Toxic Comment Classification (for hate), Enron Email Dataset (for fraud), or UCI SMS Spam Collection (for scams). For a unified dataset, combine them or use cyber threat datasets from papers.
+- **Evaluation**: Use metrics like F1-score for imbalanced classes, as seen in hate speech studies (e.g., >92% F1 in some ensembles).
+- **Next Steps**: If these baselines perform well (~80-90% accuracy in benchmarks), iterate by adding features like sentiment analysis or ensembles.
+
+These should complement your existing projects—let me know if you need code snippets or dataset links!
+
+
+NLP Classification for Cyber Harm Detection: Analysis
+on Existing Similar Projects
+September 4, 2025
+1 Analysis of Existing Projects
+ThereferencedprojectsfocusonusingNLPtoclassifyharmfulcontent(e.g.,hatespeech,
+spam, fraud, phishing) in texts like tweets, emails, URLs, and job postings. Given your
+group’s preference for fine-tuning pre-trained models, we highlight projects leveraging
+LLMs, while noting traditional ML for context:
+• Data Sources: Projects utilize labeled datasets from Kaggle, Hugging Face, or cus-
+tom sources (e.g., Twitter data [2], SMS spam [10]). Imbalanced classes (e.g., 6%
+hate speech [2]) are common, addressed via oversampling (SMOTE [7]) or focal
+loss [1]).
+• Techniques: Advanced projects fine-tune pre-trained LLMs like BERT [4, 5, 6] or
+Flan-T5 [9] for superior context understanding, especially in few-shot scenarios.
+EarlierprojectsusetraditionalML(NaiveBayes,SVM,RandomForest)withTF-IDF
+[10, 3], but LLMs outperform in nuanced tasks like detecting slang or deceptive
+language.
+• Workflow: Standardpipelineincludesdatacleaning,tokenization,embeddinggen-
+eration (e.g., BERT embeddings [4]), fine-tuning, evaluation, and deployment (e.g.,
+Flask [7], Heroku [2]).
+• Evaluation: Emphasis on recall/F1 for rare harms (e.g., 62% recall [2], 98% accu-
+racy with BERT [10]). Visualizations include word clouds and confusion matrices.
+• Challenges Addressed: Handling slang (e.g., hate speech nuances [2]), class im-
+balance, and multimodal features (e.g., URLs + text [5]).
+• ScaleandInnovation: Fine-tunedLLMslikeSpam-T5[9]excelinfew-shotsettings,
+while simpler projects [3] use sentiment for quick pilots.
+These projects, often capstone/academic efforts, start with Jupyter notebooks and
+scale to apps, using GitHub for collaboration.
+2 Recommended Approach
+A five-step pipeline centered on fine-tuning pre-trained LLMs, inspired by projects like
+[4, 9, 5], with traditional ML baselines for initial validation.
+1
+2.1 Data Collection and Preparation
+• Source: UseHuggingFacedatasets(e.g.,“hate_speech_offensive”forhate,“imanoop7/phishing_url_classification”
+for scams) to gather 5,000–50,000 samples across fraud, scams, and hate speech.
+• Preprocessing: Tokenize with BERT tokenizer [5], remove stopwords, lemmatize
+(spaCy/NLTK). Use stratified splits (70% train, 15% validation, 15% test) to handle
+imbalance.
+• Tools: Pandas for loading, Hugging Face Datasets for access.
+2.2 Feature Extraction
+• LLM Embeddings: Use pre-trained BERT (“bert-base-uncased”) via Hugging Face
+Transformers to generate contextual embeddings, capturing nuances like sarcasm
+or scam patterns [4, 6].
+• Baselines: For comparison, extract TF-IDF features [3].
+• Extras: Add sentiment scores (VADER [2]) or n-grams for fraud indicators.
+2.3 Model Selection and Fine-Tuning
+• Primary Approach: Fine-tune BERT or Flan-T5 using Hugging Face Trainer API
+[5,9]. Addaclassificationheadformulti-label(normal,hate,fraud,scam)orbinary
+tasks. Train for 3–5 epochs, learning rate 2e-5.
+• Few-Shot: Fine-tune on 100–500 samples per harm to simulate low-data scenarios
+[9].
+• Baselines: Train Logistic Regression/SVM on TF-IDF for quick validation [10].
+• Tools: PyTorch/HuggingFaceforLLMs,scikit-learnforbaselines. UseGoogleColab
+GPU.
+• Imbalance: Apply focal loss [1] or class weights.
+2.4 Evaluation
+• Metrics: Prioritize recall/F1 (target 95%+ F1 [10]) for rare harms. Include ROC-
+AUC.
+• Methods: 5-fold cross-validation, confusion matrices, word clouds for top harm
+words.
+• Error Analysis: Check biases (e.g., misclassifying cultural slang [2]).
+2.5 Deployment
+• App: Build a Flask/Streamlit interface for text input and predictions [2, 7].
+• Hosting: Use Heroku/AWS for scalability.
+• Ethics: Address biases (e.g., over-flagging minority languages).
+2
+3 Challenges and Mitigations
+• Class Imbalance: Use focal loss [1] or SMOTE [7].
+• Compute: Leverage Google Colab’s free GPU for LLM fine-tuning.
+• Nuances: Fine-tunedLLMshandleslang/deceptivelanguagebetterthantraditional
+ML [9].
+References
+[1] Osika, A. (2025). NLP to Identify Toxic or Abusive Language. https://github.
+com/andiosika/NLP-to-identify-toxic-or-abusive-language-for-online-conversation-using-Keras-Deep-Learning-Models
+[2] Kung, S. (2025). Twitter Hate Speech Detection. https://github.com/
+sidneykung/twitter_hate_speech_detection
+[3] Mubashir, R. (2025). Fraud App Detection Using Senti-
+ment Analysis. https://github.com/RaoMubashir760/
+Fraud-App-Detection-using-sentiment-analysis-By-Rao-Mubashir
+[4] Mohammadi, N. (2025). BERT Mail Classification. https://github.com/
+Nargesmohammadi/Bert-Mail-Classification
+[5] Maurya, A. (2025). Fine-Tuning BERT for Phishing URL
+Detection. Towards AI. https://pub.towardsai.net/
+fine-tuning-bert-for-phishing-url-detection-a-beginners-guide-619fad27db41
+[6] Gull, A. (2025). Detect AI-Generated Phishing Emails with BERT.
+https://github.com/AsimGull/Data-Science-Projects/tree/
+c751d862cc31535d4e0d3077fb1febd0388e117a
+[7] Ervenderr. (2025). Fraud Detection in Job Postings. https://github.com/
+ervenderr/Fraud-Detection-in-Job-Postings-using-NLP-and-Machine-Learning
+[8] Justmephoenix. (2025). Phishing Detection with NLP. https://github.com/
+Justmephoenix/PHISHING-DETECTION-WITH-NLP
+[9] Labonne,M.,&Moran,S.(2023).Spam-T5: BenchmarkingLLMsforEmailSpamDe-
+tection. https://github.com/jpmorganchase/llm-email-spam-detection
+[10] Aniass. (2025). Spam Detection inMappings Messages. https://github.com/
+aniass/Spam-detection
