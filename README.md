@@ -1,6 +1,13 @@
 # NLP Fraud/Scam Detection Baseline Models
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
+
 A comprehensive baseline implementation for fraud and scam detection using Natural Language Processing techniques. This project provides multiple approaches from simple keyword-based detection to advanced BERT-based classification.
+
+## 📁 Repository
+
+🔗 **GitHub Repository**: [https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
+
 
 ## 🎯 Project Overview
 

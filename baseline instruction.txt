@@ -2,10 +2,10 @@
 
 Project on classifying cyber harm content (e.g., fraud, scams, hate speech), baseline models provide a solid starting point to benchmark performance before advancing to more complex architectures. Based on a review of relevant research and tools, I'll suggest viable baselines across these categories. These are drawn from established NLP techniques, including traditional machine learning, deep learning, and transformer-based models. They are "viable" because they are widely used, open-source or replicable, and have demonstrated effectiveness in similar tasks. Many can be implemented via libraries like scikit-learn, TensorFlow, PyTorch, or Hugging Face Transformers.
 
-I'll focus on models that are accessible for experimentation, often with associated datasets or code. For a unified cyber harm classifier, consider starting with multi-label versions of these (e.g., via fine-tuning for multiple classes). If your existing projects include basic setups like Naive Bayes for spam, these build on that.
+For a unified cyber harm classifier, consider starting with multi-label versions of these (e.g., via fine-tuning for multiple classes). If existing projects include basic setups like Naive Bayes for spam, these build on that.
 
 #### Key Baselines by Category
-Here's a table summarizing recommended baselines. I've prioritized models mentioned in recent studies for their balance of simplicity, performance, and adaptability. For implementation, use datasets like those from Kaggle (e.g., SMS Spam Collection for scams) or papers (e.g., FraudNLP dataset).
+Here's a table summarizing recommended baselines with prioritized models mentioned in recent studies for their balance of simplicity, performance, and adaptability. For implementation, use datasets like those from Kaggle (e.g., SMS Spam Collection for scams) or papers (e.g., FraudNLP dataset).
 
 | Category       | Model Name/Type                  | Description                                                                 | Why Viable as Baseline                  | Source/Reference                                                                 |
 |----------------|----------------------------------|-----------------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------|
@@ -24,12 +24,10 @@ Here's a table summarizing recommended baselines. I've prioritized models mentio
 - **Evaluation**: Use metrics like F1-score for imbalanced classes, as seen in hate speech studies (e.g., >92% F1 in some ensembles).
 - **Next Steps**: If these baselines perform well (~80-90% accuracy in benchmarks), iterate by adding features like sentiment analysis or ensembles.
 
-These should complement your existing projects—let me know if you need code snippets or dataset links!
 
 
 NLP Classification for Cyber Harm Detection: Analysis
 on Existing Similar Projects
-September 4, 2025
 1 Analysis of Existing Projects
 ThereferencedprojectsfocusonusingNLPtoclassifyharmfulcontent(e.g.,hatespeech,
 spam, fraud, phishing) in texts like tweets, emails, URLs, and job postings. Given your
