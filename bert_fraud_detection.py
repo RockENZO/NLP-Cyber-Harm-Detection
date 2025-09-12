@@ -319,7 +319,37 @@ class BERTFraudClassifier:
 
 def create_sample_data():
     """
-    Create sample data for BERT training (same as baseline)
+    Load fraud/scam data from CSV dataset
+    """
+    try:
+        # Load the dataset (subset for testing)
+        df = pd.read_csv('final_fraud_detection_dataset.csv', nrows=500)
+        print(f"Loaded dataset with {len(df)} samples (subset for testing)")
+        
+        # Map binary_label to string labels
+        df['label'] = df['binary_label'].map({1: 'fraud', 0: 'normal'})
+        
+        # Select relevant columns
+        data = df[['text', 'label']].copy()
+        data.columns = ['message', 'label']
+        
+        print(f"Dataset prepared with {len(data)} samples")
+        print(f"Label distribution:\n{data['label'].value_counts()}")
+        
+        return data
+        
+    except FileNotFoundError:
+        print("Error: final_fraud_detection_dataset.csv not found.")
+        print("Falling back to sample data...")
+        return _create_sample_data()
+    except Exception as e:
+        print(f"Error loading dataset: {e}")
+        print("Falling back to sample data...")
+        return _create_sample_data()
+
+def _create_sample_data():
+    """
+    Create sample data for BERT training (fallback)
     """
     fraud_messages = [
         "URGENT! Your account will be suspended. Click here to verify: suspicious-link.com",
@@ -347,7 +377,7 @@ def create_sample_data():
         "Can you please send me the quarterly report?",
         "The weather is great today, perfect for a walk",
         "Reminder: Your appointment is scheduled for Friday",
-        "Great job on the presentation yesterday!",
+        "Great job on the presentation yesterday?",
         "Let me know if you need any assistance",
         "The new restaurant downtown has excellent reviews",
         "Conference call scheduled for next Tuesday at 2 PM",

@@ -53,8 +53,37 @@ class FraudDetectionBaseline:
         
     def load_sample_data(self):
         """
-        Create sample fraud/scam data for demonstration
-        In practice, replace with actual datasets like SMS Spam Collection
+        Load fraud/scam data from CSV dataset
+        """
+        try:
+            # Load the dataset (first 1000 rows for testing)
+            df = pd.read_csv('final_fraud_detection_dataset.csv', nrows=1000)
+            print(f"Loaded dataset with {len(df)} samples (subset for testing)")
+            
+            # Map binary_label to string labels
+            df['label'] = df['binary_label'].map({1: 'fraud', 0: 'normal'})
+            
+            # Select relevant columns
+            self.data = df[['text', 'label']].copy()
+            self.data.columns = ['message', 'label']
+            
+            print(f"Dataset prepared with {len(self.data)} samples")
+            print(f"Label distribution:\n{self.data['label'].value_counts()}")
+            
+            return self.data
+            
+        except FileNotFoundError:
+            print("Error: final_fraud_detection_dataset.csv not found.")
+            print("Falling back to sample data...")
+            return self._create_sample_data()
+        except Exception as e:
+            print(f"Error loading dataset: {e}")
+            print("Falling back to sample data...")
+            return self._create_sample_data()
+    
+    def _create_sample_data(self):
+        """
+        Create sample fraud/scam data for demonstration (fallback)
         """
         # Sample data - replace with real dataset
         fraud_messages = [
@@ -78,7 +107,7 @@ class FraudDetectionBaseline:
             "Can you please send me the quarterly report?",
             "The weather is great today, perfect for a walk",
             "Reminder: Your appointment is scheduled for Friday",
-            "Great job on the presentation yesterday!",
+            "Great job on the presentation yesterday?",
             "Let me know if you need any assistance",
             "The new restaurant downtown has excellent reviews"
         ]
@@ -112,7 +141,7 @@ class FraudDetectionBaseline:
             'label': labels
         })
         
-        print(f"Dataset created with {len(self.data)} samples")
+        print(f"Sample dataset created with {len(self.data)} samples")
         print(f"Label distribution:\n{self.data['label'].value_counts()}")
         
         return self.data

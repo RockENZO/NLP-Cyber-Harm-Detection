@@ -23,29 +23,17 @@ This project implements baseline models for detecting fraudulent content (scams,
 NLP Detection/
 ├── README.md                           # This documentation file
 ├── requirements.txt                    # Python dependencies
-├── setup.py                           # Automated setup and demo script
-├── simple_fraud_demo.py               # Simple demo (no external dependencies)
 ├── baseline_fraud_detection.py        # Traditional ML baseline models
 ├── bert_fraud_detection.py            # BERT-based classifier
 ├── fraud_detection_baseline.ipynb     # Interactive Jupyter notebook
-├── baseline instruction.txt           # Project analysis and recommendations
-├── Analysis on Existing Similar Projects.pdf  # Detailed project analysis
+├── kaggle_fraud_detection.ipynb       # Kaggle-optimized training notebook
+├── final_fraud_detection_dataset.csv  # Training dataset
 └── .git/                              # Git repository
 ```
 
 ## 🚀 Quick Start
 
-### Option 1: Simple Demo (No Installation Required)
-
-Run the simple demo to understand the concepts:
-
-```bash
-python simple_fraud_demo.py
-```
-
-This demo uses only built-in Python libraries and demonstrates basic fraud detection using keyword analysis.
-
-### Option 2: Full Baseline Models
+### Option 1: Local Training
 
 1. **Install Dependencies**
    ```bash
@@ -62,23 +50,15 @@ This demo uses only built-in Python libraries and demonstrates basic fraud detec
    python bert_fraud_detection.py
    ```
 
-### Option 3: Automated Setup
+### Option 2: Kaggle Training (Recommended for GPU access)
 
-Run the setup script for guided installation and execution:
-
-```bash
-python setup.py
-```
+1. Upload `final_fraud_detection_dataset.csv` to Kaggle
+2. Create a new notebook and copy the code from `kaggle_fraud_detection.ipynb`
+3. Enable GPU accelerator for fast BERT training
 
 ## 📊 Models Implemented
 
-### 1. Simple Rule-Based Classifier (`simple_fraud_demo.py`)
-- **Approach**: Keyword-based scoring
-- **Features**: Fraud/normal keyword dictionaries
-- **Pros**: Fast, interpretable, no dependencies
-- **Cons**: Limited accuracy, can't handle context
-
-### 2. Traditional ML Baselines (`baseline_fraud_detection.py`)
+### 1. Traditional ML Baselines (`baseline_fraud_detection.py`)
 - **TF-IDF + Logistic Regression**
 - **TF-IDF + Support Vector Machine (SVM)**
 - **Features**: 
@@ -87,13 +67,18 @@ python setup.py
   - Cross-validation evaluation
   - Feature importance analysis
 
-### 3. BERT-Based Classifier (`bert_fraud_detection.py`)
+### 2. BERT-Based Classifier (`bert_fraud_detection.py`)
 - **Model**: BERT-base-uncased fine-tuned for classification
 - **Features**:
   - Contextual understanding
   - Class imbalance handling (weighted loss)
   - Pre-trained language model knowledge
   - Transfer learning capabilities
+
+### 3. Kaggle Training Notebook (`kaggle_fraud_detection.ipynb`)
+- **GPU-accelerated training** on Kaggle's free infrastructure
+- **Complete pipeline**: Data loading, preprocessing, training, evaluation
+- **Model export**: Saves trained models for download
 
 ## 📈 Expected Performance
 
@@ -107,12 +92,6 @@ Based on similar projects and baseline implementations:
 | BERT Fine-tuned | 90-95% | 0.9-0.95 | Best performance |
 
 ## 🔧 Configuration
-
-### Adjusting the Simple Detector
-```python
-detector = SimpleFraudDetector()
-detector.fraud_score_threshold = 0.3  # Adjust sensitivity
-```
 
 ### Traditional ML Parameters
 ```python
@@ -134,22 +113,16 @@ classifier = BERTFraudClassifier(
 )
 ```
 
+### Kaggle Training Configuration
+```python
+# In kaggle_fraud_detection.ipynb
+batch_size = 16      # Adjust based on GPU memory
+max_length = 128     # Maximum sequence length
+epochs = 3          # Training epochs
+learning_rate = 2e-5 # BERT learning rate
+```
+
 ## 📊 Sample Results
-
-### Simple Demo Output:
-```
-Results:
-Accuracy: 0.867
-Precision: 0.800
-Recall: 0.800
-F1-Score: 0.800
-
-Testing on new messages:
-1. Message: URGENT: Your bank account is compromised! Click here now!
-   Prediction: FRAUD
-   Fraud Score: 0.650
-   Confidence: 0.300
-```
 
 ### Traditional ML Output:
 ```
@@ -162,6 +135,19 @@ SVM:
   Accuracy: 0.889
   F1-Score: 0.889
   AUC Score: 0.944
+```
+
+### BERT Output:
+```
+BERT Evaluation Results:
+              precision    recall  f1-score   support
+
+      normal       0.92      0.92      0.92        38
+       fraud       0.92      0.92      0.92        37
+
+    accuracy                           0.92        75
+   macro avg       0.92      0.92      0.92        75
+weighted avg       0.92      0.92      0.92        75
 ```
 
 ## 📋 Data Requirements
