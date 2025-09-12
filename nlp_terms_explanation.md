@@ -42,7 +42,7 @@ BERT (Bidirectional Encoder Representations from Transformers) is a pre-trained 
 ### Why used
 Excels at capturing nuanced meanings, sarcasm, or context that simpler models miss, leading to higher accuracy in tasks like fraud detection.
 
-### Implementation in your project
+### Implementation
 - Uses `BertForSequenceClassification` from the `transformers` library.
 - Tokenizes input with `BertTokenizer`, handling max length (e.g., 128 tokens).
 - Fine-tunes with `AdamW` optimizer, linear scheduler, and cross-entropy loss (weighted for class imbalance).
