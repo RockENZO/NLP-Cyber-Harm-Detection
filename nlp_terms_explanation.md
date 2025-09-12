@@ -15,7 +15,7 @@ The formula is: `TF-IDF = TF * IDF`. This helps highlight unique words that are 
 ### Why used in NLP
 It's a simple, effective way to convert text into numerical vectors for machine learning models, capturing semantic importance without deep learning.
 
-### Implementation in your project
+### Implementation
 - Uses `TfidfVectorizer` from scikit-learn.
 - Configured with parameters like `max_features=5000` (limits vocabulary), `ngram_range=(1, 2)` (includes unigrams and bigrams), and `stop_words='english'` (removes common words).
 - Applied to preprocessed text: `X_tfidf = tfidf_vectorizer.fit_transform(df['cleaned_message'])`.
