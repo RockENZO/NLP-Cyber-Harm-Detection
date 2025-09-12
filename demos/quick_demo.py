@@ -31,8 +31,8 @@ def quick_demo():
         # Load model
         print("📥 Loading model...")
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        tokenizer = BertTokenizer.from_pretrained('models/bert_tokenizer')
-        model = BertForSequenceClassification.from_pretrained('models/bert_model')
+        tokenizer = BertTokenizer.from_pretrained('../models/bert_tokenizer')
+        model = BertForSequenceClassification.from_pretrained('../models/bert_model')
         model.to(device)
         model.eval()
         print("✅ Model loaded!")
@@ -84,8 +84,9 @@ def quick_demo():
     except Exception as e:
         print(f"❌ Error: {e}")
         print(f"\n💡 Make sure:")
-        print(f"   1. Model files are in 'models/' directory")
-        print(f"   2. Required packages are installed: pip install torch transformers")
+        print(f"   1. Model files are in the '../models/' directory")
+        print(f"   2. Check that you downloaded the model from Kaggle correctly")
+        print(f"   3. Required packages are installed: pip install torch transformers")
 
 if __name__ == "__main__":
     quick_demo()

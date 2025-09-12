@@ -23,19 +23,23 @@ This project implements baseline models for detecting fraudulent content (scams,
 NLP Detection/
 ├── README.md                           # This comprehensive documentation
 ├── requirements.txt                    # Python dependencies
-├── baseline_fraud_detection.py        # Traditional ML baseline models
-├── bert_fraud_detection.py            # BERT-based classifier
-├── fraud_detection_baseline.ipynb     # Interactive Jupyter notebook
-├── kaggle_fraud_detection.ipynb       # Kaggle-optimized training notebook
-├── fraud-detection-kaggle-training.ipynb # Kaggle training notebook (multiclass)
 ├── final_fraud_detection_dataset.csv  # Training dataset (Git LFS)
 ├── models/                            # Saved trained models
 │   ├── bert_model/                    # Trained BERT model files
 │   └── bert_tokenizer/               # BERT tokenizer files
-├── fraud_detection_demo.py           # Full-featured demo script
-├── fraud_detection_demo.ipynb        # Interactive demo notebook
-├── quick_demo.py                     # Quick verification script
-├── .gitattributes                    # Git LFS configuration
+├── training/                          # Training scripts and notebooks
+│   ├── baseline_fraud_detection.py   # Traditional ML baseline models
+│   ├── bert_fraud_detection.py       # BERT-based classifier
+│   ├── fraud_detection_baseline.ipynb # Interactive Jupyter notebook
+│   ├── kaggle_fraud_detection.ipynb  # Kaggle-optimized training notebook
+│   └── fraud-detection-kaggle-training.ipynb # Kaggle training notebook (multiclass)
+├── demos/                             # Demo and testing tools
+│   ├── fraud_detection_demo.py       # Full-featured demo script
+│   ├── fraud_detection_demo.ipynb    # Interactive demo notebook
+│   └── quick_demo.py                 # Quick verification script
+├── docs/                              # Documentation
+│   └── nlp_terms_explanation.md      # NLP concepts explanation
+├── .gitattributes                     # Git LFS configuration
 └── .git/                             # Git repository
 ```
 
@@ -52,17 +56,17 @@ If you have already trained a model on Kaggle:
 
 2. **Quick Test Your Model**
    ```bash
-   python quick_demo.py
+   python demos/quick_demo.py
    ```
 
 3. **Interactive Demo Notebook** ⭐
    ```bash
-   jupyter notebook fraud_detection_demo.ipynb
+   jupyter notebook demos/fraud_detection_demo.ipynb
    ```
 
 4. **Full Demo Script**
    ```bash
-   python fraud_detection_demo.py
+   python demos/fraud_detection_demo.py
    ```
 
 ### Option 2: Train from Scratch
@@ -74,18 +78,18 @@ If you have already trained a model on Kaggle:
 
 2. **Run Traditional ML Baselines**
    ```bash
-   python baseline_fraud_detection.py
+   python training/baseline_fraud_detection.py
    ```
 
 3. **Run BERT Baseline** (requires more computational resources)
    ```bash
-   python bert_fraud_detection.py
+   python training/bert_fraud_detection.py
    ```
 
 ### Option 3: Kaggle Training (Recommended for GPU access)
 
 1. Upload `final_fraud_detection_dataset.csv` to Kaggle
-2. Create a new notebook and copy the code from `kaggle_fraud_detection.ipynb`
+2. Create a new notebook and copy the code from `training/kaggle_fraud_detection.ipynb`
 3. Enable GPU accelerator for fast BERT training
 4. Download the trained models from Kaggle output
 5. Use the demo scripts to test your trained model
@@ -94,7 +98,7 @@ If you have already trained a model on Kaggle:
 
 ## 📊 Models Implemented
 
-### 1. Traditional ML Baselines (`baseline_fraud_detection.py`)
+### 1. Traditional ML Baselines (`training/baseline_fraud_detection.py`)
 - **TF-IDF + Logistic Regression**
 - **TF-IDF + Support Vector Machine (SVM)**
 - **Features**: 
@@ -103,7 +107,7 @@ If you have already trained a model on Kaggle:
   - Cross-validation evaluation
   - Feature importance analysis
 
-### 2. BERT-Based Classifier (`bert_fraud_detection.py`)
+### 2. BERT-Based Classifier (`training/bert_fraud_detection.py`)
 - **Model**: BERT-base-uncased fine-tuned for classification
 - **Features**:
   - Contextual understanding
@@ -111,7 +115,7 @@ If you have already trained a model on Kaggle:
   - Pre-trained language model knowledge
   - Transfer learning capabilities
 
-### 3. Kaggle Training Notebook (`kaggle_fraud_detection.ipynb`)
+### 3. Kaggle Training Notebook (`training/kaggle_fraud_detection.ipynb`)
 - **GPU-accelerated training** on Kaggle's free infrastructure
 - **Complete pipeline**: Data loading, preprocessing, training, evaluation
 - **Model export**: Saves trained models for download
@@ -122,6 +126,7 @@ Once you have a trained model, use these tools to test and demonstrate fraud det
 
 ### 1. **fraud_detection_demo.ipynb** ⭐ (Recommended)
 - **Type**: Interactive Jupyter Notebook
+- **Location**: `demos/fraud_detection_demo.ipynb`
 - **Best for**: Exploratory testing, visualizations, learning
 - **Features**:
   - Step-by-step model loading
@@ -133,6 +138,7 @@ Once you have a trained model, use these tools to test and demonstrate fraud det
 
 ### 2. **fraud_detection_demo.py**
 - **Type**: Comprehensive Python script
+- **Location**: `demos/fraud_detection_demo.py`
 - **Best for**: Integration into applications, command-line use
 - **Features**:
   - Full-featured demo class
@@ -143,6 +149,7 @@ Once you have a trained model, use these tools to test and demonstrate fraud det
 
 ### 3. **quick_demo.py**
 - **Type**: Simple test script
+- **Location**: `demos/quick_demo.py`
 - **Best for**: Quick verification that your model works
 - **Features**:
   - Fast model loading test
@@ -168,7 +175,7 @@ Your trained model can detect these 9 classes:
 
 ### Single Prediction
 ```python
-from fraud_detection_demo import FraudDetectionDemo
+from demos.fraud_detection_demo import FraudDetectionDemo
 
 demo = FraudDetectionDemo()
 result = demo.predict_single("Your account has been compromised! Click here now!")
@@ -192,7 +199,7 @@ for result in results:
 
 ### Interactive Jupyter Demo
 ```python
-# In fraud_detection_demo.ipynb
+# In demos/fraud_detection_demo.ipynb
 your_text = "Your Netflix subscription has expired. Update your payment method to continue watching."
 result = predict_fraud(your_text)
 display_prediction(result)
@@ -235,7 +242,7 @@ Based on similar projects and baseline implementations:
 
 ### Traditional ML Parameters
 ```python
-# In baseline_fraud_detection.py
+# In training/baseline_fraud_detection.py
 vectorizer = TfidfVectorizer(
     max_features=5000,    # Vocabulary size
     stop_words='english', # Remove common words
@@ -245,7 +252,7 @@ vectorizer = TfidfVectorizer(
 
 ### BERT Configuration
 ```python
-# In bert_fraud_detection.py
+# In training/bert_fraud_detection.py
 classifier = BERTFraudClassifier(
     model_name='bert-base-uncased',  # Or 'distilbert-base-uncased' for faster training
     max_length=128,                  # Maximum sequence length
@@ -255,7 +262,7 @@ classifier = BERTFraudClassifier(
 
 ### Kaggle Training Configuration
 ```python
-# In kaggle_fraud_detection.ipynb
+# In training/kaggle_fraud_detection.ipynb
 batch_size = 16      # Adjust based on GPU memory
 max_length = 128     # Maximum sequence length
 epochs = 3          # Training epochs
@@ -353,7 +360,7 @@ def ensemble_predict(text):
 ### Using the Demo Framework
 ```python
 # Production-ready integration using the demo class
-from fraud_detection_demo import FraudDetectionDemo
+from demos.fraud_detection_demo import FraudDetectionDemo
 
 detector = FraudDetectionDemo()
 
@@ -366,7 +373,7 @@ if result['is_fraud'] and result['confidence'] > 0.8:
 ### Flask Web App
 ```python
 from flask import Flask, request, jsonify
-from fraud_detection_demo import FraudDetectionDemo
+from demos.fraud_detection_demo import FraudDetectionDemo
 
 app = Flask(__name__)
 detector = FraudDetectionDemo()
@@ -385,7 +392,7 @@ def predict():
 ### Streamlit Dashboard
 ```python
 import streamlit as st
-from fraud_detection_demo import FraudDetectionDemo
+from demos.fraud_detection_demo import FraudDetectionDemo
 
 st.title("🛡️ Fraud Detection System")
 detector = FraudDetectionDemo()
@@ -459,14 +466,14 @@ Based on analysis of existing projects including:
 ## 🔗 Quick Reference
 
 ### Training Files
-- `baseline_fraud_detection.py` - Traditional ML models
-- `bert_fraud_detection.py` - BERT training script
-- `kaggle_fraud_detection.ipynb` - Kaggle training notebook
+- `training/baseline_fraud_detection.py` - Traditional ML models
+- `training/bert_fraud_detection.py` - BERT training script
+- `training/kaggle_fraud_detection.ipynb` - Kaggle training notebook
 
 ### Demo Files
-- `fraud_detection_demo.ipynb` - Interactive demo notebook ⭐
-- `fraud_detection_demo.py` - Full demo script
-- `quick_demo.py` - Quick verification
+- `demos/fraud_detection_demo.ipynb` - Interactive demo notebook ⭐
+- `demos/fraud_detection_demo.py` - Full demo script
+- `demos/quick_demo.py` - Quick verification
 
 ### Model Files (after training)
 - `models/bert_model/` - Trained BERT model
@@ -475,16 +482,16 @@ Based on analysis of existing projects including:
 ### Commands
 ```bash
 # Quick test
-python quick_demo.py
+python demos/quick_demo.py
 
 # Interactive demo
-jupyter notebook fraud_detection_demo.ipynb
+jupyter notebook demos/fraud_detection_demo.ipynb
 
 # Full demo
-python fraud_detection_demo.py
+python demos/fraud_detection_demo.py
 
 # Train from scratch
-python baseline_fraud_detection.py
+python training/baseline_fraud_detection.py
 ```
 
 ## 🤝 Contributing

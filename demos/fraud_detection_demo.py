@@ -29,7 +29,7 @@ class FraudDetectionDemo:
     Demo class for fraud detection using trained BERT model
     """
     
-    def __init__(self, model_path='models/bert_model', tokenizer_path='models/bert_tokenizer'):
+    def __init__(self, model_path='../models/bert_model', tokenizer_path='../models/bert_tokenizer'):
         """
         Initialize the demo with trained model and tokenizer
         
@@ -317,7 +317,7 @@ def main():
     except Exception as e:
         print(f"❌ Error: {e}")
         print("\nTroubleshooting:")
-        print("1. Make sure your model files are in the 'models/' directory")
+        print("1. Make sure your model files are in the '../models/' directory")
         print("2. Check that you have the required packages installed:")
         print("   pip install torch transformers")
         print("3. Verify the model was saved correctly from Kaggle")
