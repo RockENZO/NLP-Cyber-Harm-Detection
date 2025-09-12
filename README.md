@@ -27,7 +27,8 @@ NLP Detection/
 ├── bert_fraud_detection.py            # BERT-based classifier
 ├── fraud_detection_baseline.ipynb     # Interactive Jupyter notebook
 ├── kaggle_fraud_detection.ipynb       # Kaggle-optimized training notebook
-├── final_fraud_detection_dataset.csv  # Training dataset
+├── final_fraud_detection_dataset.csv  # Training dataset (Git LFS)
+├── .gitattributes                     # Git LFS configuration
 └── .git/                              # Git repository
 ```
 
@@ -55,6 +56,8 @@ NLP Detection/
 1. Upload `final_fraud_detection_dataset.csv` to Kaggle
 2. Create a new notebook and copy the code from `kaggle_fraud_detection.ipynb`
 3. Enable GPU accelerator for fast BERT training
+
+**Note**: The dataset is stored with Git LFS due to its size (~158MB). Clone with `git lfs pull` to download the full dataset.
 
 ## 📊 Models Implemented
 
