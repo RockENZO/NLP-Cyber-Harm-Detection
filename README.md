@@ -21,20 +21,51 @@ This project implements baseline models for detecting fraudulent content (scams,
 
 ```
 NLP Detection/
-├── README.md                           # This documentation file
+├── README.md                           # This comprehensive documentation
 ├── requirements.txt                    # Python dependencies
 ├── baseline_fraud_detection.py        # Traditional ML baseline models
 ├── bert_fraud_detection.py            # BERT-based classifier
 ├── fraud_detection_baseline.ipynb     # Interactive Jupyter notebook
 ├── kaggle_fraud_detection.ipynb       # Kaggle-optimized training notebook
+├── fraud-detection-kaggle-training.ipynb # Kaggle training notebook (multiclass)
 ├── final_fraud_detection_dataset.csv  # Training dataset (Git LFS)
-├── .gitattributes                     # Git LFS configuration
-└── .git/                              # Git repository
+├── models/                            # Saved trained models
+│   ├── bert_model/                    # Trained BERT model files
+│   └── bert_tokenizer/               # BERT tokenizer files
+├── fraud_detection_demo.py           # Full-featured demo script
+├── fraud_detection_demo.ipynb        # Interactive demo notebook
+├── quick_demo.py                     # Quick verification script
+├── .gitattributes                    # Git LFS configuration
+└── .git/                             # Git repository
 ```
 
 ## 🚀 Quick Start
 
-### Option 1: Local Training
+### Option 1: Use Pre-trained Model (Recommended)
+
+If you have already trained a model on Kaggle:
+
+1. **Install Dependencies**
+   ```bash
+   pip install torch transformers pandas numpy matplotlib seaborn jupyter
+   ```
+
+2. **Quick Test Your Model**
+   ```bash
+   python quick_demo.py
+   ```
+
+3. **Interactive Demo Notebook** ⭐
+   ```bash
+   jupyter notebook fraud_detection_demo.ipynb
+   ```
+
+4. **Full Demo Script**
+   ```bash
+   python fraud_detection_demo.py
+   ```
+
+### Option 2: Train from Scratch
 
 1. **Install Dependencies**
    ```bash
@@ -51,11 +82,13 @@ NLP Detection/
    python bert_fraud_detection.py
    ```
 
-### Option 2: Kaggle Training (Recommended for GPU access)
+### Option 3: Kaggle Training (Recommended for GPU access)
 
 1. Upload `final_fraud_detection_dataset.csv` to Kaggle
 2. Create a new notebook and copy the code from `kaggle_fraud_detection.ipynb`
 3. Enable GPU accelerator for fast BERT training
+4. Download the trained models from Kaggle output
+5. Use the demo scripts to test your trained model
 
 **Note**: The dataset is stored with Git LFS due to its size (~158MB). Clone with `git lfs pull` to download the full dataset.
 
@@ -83,7 +116,89 @@ NLP Detection/
 - **Complete pipeline**: Data loading, preprocessing, training, evaluation
 - **Model export**: Saves trained models for download
 
-## 📈 Expected Performance
+## 🎮 Demo and Testing Tools
+
+Once you have a trained model, use these tools to test and demonstrate fraud detection capabilities:
+
+### 1. **fraud_detection_demo.ipynb** ⭐ (Recommended)
+- **Type**: Interactive Jupyter Notebook
+- **Best for**: Exploratory testing, visualizations, learning
+- **Features**:
+  - Step-by-step model loading
+  - Interactive prediction cells
+  - Sample test cases for all fraud types
+  - Visualizations and analysis
+  - Batch prediction capabilities
+  - Model information display
+
+### 2. **fraud_detection_demo.py**
+- **Type**: Comprehensive Python script
+- **Best for**: Integration into applications, command-line use
+- **Features**:
+  - Full-featured demo class
+  - Interactive terminal interface
+  - Sample test runner
+  - Single and batch predictions
+  - Production-ready code structure
+
+### 3. **quick_demo.py**
+- **Type**: Simple test script
+- **Best for**: Quick verification that your model works
+- **Features**:
+  - Fast model loading test
+  - 5 sample predictions
+  - Basic accuracy check
+  - Minimal dependencies
+
+## 🎯 Fraud Types Detected
+
+Your trained model can detect these 9 classes:
+
+1. **legitimate** - Normal, safe messages
+2. **phishing** - Attempts to steal credentials/personal info
+3. **tech_support_scam** - Fake technical support
+4. **reward_scam** - Fake prizes/lottery winnings
+5. **job_scam** - Fraudulent employment opportunities
+6. **sms_spam** - Unwanted promotional messages
+7. **popup_scam** - Fake security alerts
+8. **refund_scam** - Fake refund/billing notifications
+9. **ssn_scam** - Social Security number theft attempts
+
+## � Demo Usage Examples
+
+### Single Prediction
+```python
+from fraud_detection_demo import FraudDetectionDemo
+
+demo = FraudDetectionDemo()
+result = demo.predict_single("Your account has been compromised! Click here now!")
+print(f"Prediction: {result['predicted_class']}")
+print(f"Confidence: {result['confidence']:.4f}")
+print(f"Is Fraud: {result['is_fraud']}")
+```
+
+### Batch Prediction
+```python
+texts = [
+    "Meeting at 3 PM tomorrow",
+    "URGENT: Verify your SSN now!",
+    "You won $10,000! Send fee to claim"
+]
+
+results = demo.predict_batch(texts)
+for result in results:
+    print(f"{result['predicted_class']}: {result['text']}")
+```
+
+### Interactive Jupyter Demo
+```python
+# In fraud_detection_demo.ipynb
+your_text = "Your Netflix subscription has expired. Update your payment method to continue watching."
+result = predict_fraud(your_text)
+display_prediction(result)
+```
+
+## �📈 Expected Performance
 
 Based on similar projects and baseline implementations:
 
@@ -94,7 +209,29 @@ Based on similar projects and baseline implementations:
 | TF-IDF + SVM | 80-90% | 0.8-0.9 | Robust to noise |
 | BERT Fine-tuned | 90-95% | 0.9-0.95 | Best performance |
 
-## 🔧 Configuration
+## �️ Demo Troubleshooting
+
+### Model Not Loading
+- ✅ Check that `models/bert_model/` and `models/bert_tokenizer/` exist
+- ✅ Verify you downloaded the complete model from Kaggle
+- ✅ Ensure all required packages are installed: `pip install torch transformers pandas numpy matplotlib seaborn`
+
+### Low Performance
+- 🎯 Check if your test data matches the training distribution
+- 🎯 Consider retraining with more diverse examples
+- 🎯 Adjust confidence thresholds for your specific needs
+
+### Memory Issues
+- 💾 Reduce batch size in `predict_batch()`
+- 💾 Use CPU instead of GPU if memory is limited
+- 💾 Process smaller chunks of data at a time
+
+### Customization Tips
+- **Confidence thresholds**: Consider predictions with confidence < 0.5 as uncertain
+- **Adding custom test cases**: Edit the sample test cases in the demo files
+- **Integration**: Use the `FraudDetectionDemo` class as a starting point for applications
+
+## �🔧 Configuration
 
 ### Traditional ML Parameters
 ```python
@@ -213,31 +350,60 @@ def ensemble_predict(text):
 
 ## 🌐 Deployment Options
 
+### Using the Demo Framework
+```python
+# Production-ready integration using the demo class
+from fraud_detection_demo import FraudDetectionDemo
+
+detector = FraudDetectionDemo()
+
+# Single prediction
+result = detector.predict_single(user_message)
+if result['is_fraud'] and result['confidence'] > 0.8:
+    alert_user(result['predicted_class'])
+```
+
 ### Flask Web App
 ```python
 from flask import Flask, request, jsonify
+from fraud_detection_demo import FraudDetectionDemo
 
 app = Flask(__name__)
-detector = FraudDetectionBaseline()
+detector = FraudDetectionDemo()
 
 @app.route('/predict', methods=['POST'])
 def predict():
     text = request.json['text']
-    result = detector.predict_new_message(text)
-    return jsonify(result)
+    result = detector.predict_single(text)
+    return jsonify({
+        'prediction': result['predicted_class'],
+        'is_fraud': result['is_fraud'],
+        'confidence': result['confidence']
+    })
 ```
 
 ### Streamlit Dashboard
 ```python
 import streamlit as st
+from fraud_detection_demo import FraudDetectionDemo
 
-st.title("Fraud Detection System")
+st.title("🛡️ Fraud Detection System")
+detector = FraudDetectionDemo()
+
 text_input = st.text_area("Enter message to analyze:")
 
 if st.button("Analyze"):
-    result = detector.predict_new_message(text_input)
-    st.write(f"Prediction: {result['prediction']}")
-    st.write(f"Confidence: {result['confidence']:.2f}")
+    result = detector.predict_single(text_input)
+    
+    if result['is_fraud']:
+        st.error(f"🚨 FRAUD DETECTED: {result['predicted_class']}")
+    else:
+        st.success("✅ Message appears legitimate")
+    
+    st.write(f"Confidence: {result['confidence']:.2%}")
+    
+    # Show probability distribution
+    st.bar_chart(result['all_probabilities'])
 ```
 
 ## 🔍 Evaluation Metrics
@@ -261,13 +427,26 @@ For fraud detection, **Recall** is often most important (don't miss actual fraud
 
 ## 🔮 Next Steps
 
+### For Model Development
 1. **Data Collection**: Gather real fraud/scam datasets
 2. **Feature Engineering**: Add metadata features (sender, timestamp, etc.)
 3. **Advanced Models**: Experiment with RoBERTa, DistilBERT, or domain-specific models
 4. **Active Learning**: Implement feedback loop for continuous improvement
 5. **Multi-modal**: Combine text with image analysis for comprehensive detection
-6. **Real-time Processing**: Optimize for low-latency inference
-7. **A/B Testing**: Compare model performance in production
+
+### For Production Deployment
+1. **Performance Optimization**: Optimize for low-latency inference using the demo framework
+2. **A/B Testing**: Compare model performance in production using demo tools
+3. **Real-time Processing**: Integrate demo classes into streaming systems
+4. **Monitoring**: Use demo tools to validate model performance over time
+5. **User Interface**: Build on the Streamlit demo for user-facing applications
+
+### For Demo Enhancement
+1. **Interactive Web App**: Extend the Streamlit demo with more features
+2. **API Development**: Use the demo classes to build REST APIs
+3. **Batch Processing**: Implement large-scale batch prediction capabilities
+4. **Model Comparison**: Add functionality to compare multiple model versions
+5. **Feedback Collection**: Integrate user feedback mechanisms for continuous learning
 
 ## 📚 References
 
@@ -276,6 +455,37 @@ Based on analysis of existing projects including:
 - Fine-Tuning BERT for Phishing URL Detection
 - Spam-T5: Benchmarking LLMs for Email Spam Detection
 - Various Kaggle fraud detection competitions
+
+## 🔗 Quick Reference
+
+### Training Files
+- `baseline_fraud_detection.py` - Traditional ML models
+- `bert_fraud_detection.py` - BERT training script
+- `kaggle_fraud_detection.ipynb` - Kaggle training notebook
+
+### Demo Files
+- `fraud_detection_demo.ipynb` - Interactive demo notebook ⭐
+- `fraud_detection_demo.py` - Full demo script
+- `quick_demo.py` - Quick verification
+
+### Model Files (after training)
+- `models/bert_model/` - Trained BERT model
+- `models/bert_tokenizer/` - BERT tokenizer
+
+### Commands
+```bash
+# Quick test
+python quick_demo.py
+
+# Interactive demo
+jupyter notebook fraud_detection_demo.ipynb
+
+# Full demo
+python fraud_detection_demo.py
+
+# Train from scratch
+python baseline_fraud_detection.py
+```
 
 ## 🤝 Contributing
 
