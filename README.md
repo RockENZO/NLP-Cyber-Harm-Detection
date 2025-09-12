@@ -20,15 +20,17 @@ This project implements baseline models for detecting fraudulent content (scams,
 ## 📁 Project Structure
 
 ```
-nlp project/
-├── simple_fraud_demo.py          # Simple demo (no dependencies)
-├── baseline_fraud_detection.py   # Traditional ML baselines
-├── bert_fraud_detection.py       # BERT-based classifier
-├── setup.py                      # Setup and installation script
-├── requirements.txt               # Python dependencies
-├── README.md                      # This file
-├── untitled.txt                  # Project analysis and recommendations
-└── Analysis on Existing Similar Projects.pdf
+NLP Detection/
+├── README.md                           # This documentation file
+├── requirements.txt                    # Python dependencies
+├── setup.py                           # Automated setup and demo script
+├── simple_fraud_demo.py               # Simple demo (no external dependencies)
+├── baseline_fraud_detection.py        # Traditional ML baseline models
+├── bert_fraud_detection.py            # BERT-based classifier
+├── fraud_detection_baseline.ipynb     # Interactive Jupyter notebook
+├── baseline instruction.txt           # Project analysis and recommendations
+├── Analysis on Existing Similar Projects.pdf  # Detailed project analysis
+└── .git/                              # Git repository
 ```
 
 ## 🚀 Quick Start
