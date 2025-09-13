@@ -32,7 +32,7 @@ NLP Detection/
 │   ├── bert_fraud_detection.py       # BERT-based classifier
 │   ├── fraud_detection_baseline.ipynb # Interactive Jupyter notebook
 │   ├── kaggle_fraud_detection.ipynb  # Kaggle-optimized training notebook
-│   └── fraud-detection-kaggle-training.ipynb # Kaggle training notebook (multiclass)
+│   └── fraud-detection-kaggle-training-bert-run.ipynb # Kaggle BERT training notebook (multiclass)
 ├── demos/                             # Demo and testing tools
 │   ├── fraud_detection_demo.py       # Full-featured demo script
 │   ├── fraud_detection_demo.ipynb    # Interactive demo notebook
@@ -89,7 +89,7 @@ If you have already trained a model on Kaggle:
 ### Option 3: Kaggle Training (Recommended for GPU access)
 
 1. Upload `final_fraud_detection_dataset.csv` to Kaggle
-2. Create a new notebook and copy the code from `training/kaggle_fraud_detection.ipynb`
+2. Create a new notebook and copy the code from `training/fraud-detection-kaggle-training-bert-run.ipynb`
 3. Enable GPU accelerator for fast BERT training
 4. Download the trained models from Kaggle output
 5. Use the demo scripts to test your trained model
@@ -115,7 +115,7 @@ If you have already trained a model on Kaggle:
   - Pre-trained language model knowledge
   - Transfer learning capabilities
 
-### 3. Kaggle Training Notebook (`training/kaggle_fraud_detection.ipynb`)
+### 3. Kaggle Training Notebook (`training/fraud-detection-kaggle-training-bert-run.ipynb`)
 - **GPU-accelerated training** on Kaggle's free infrastructure
 - **Complete pipeline**: Data loading, preprocessing, training, evaluation
 - **Model export**: Saves trained models for download
@@ -262,7 +262,7 @@ classifier = BERTFraudClassifier(
 
 ### Kaggle Training Configuration
 ```python
-# In training/kaggle_fraud_detection.ipynb
+# In training/fraud-detection-kaggle-training-bert-run.ipynb
 batch_size = 16      # Adjust based on GPU memory
 max_length = 128     # Maximum sequence length
 epochs = 3          # Training epochs
@@ -468,7 +468,7 @@ Based on analysis of existing projects including:
 ### Training Files
 - `training/baseline_fraud_detection.py` - Traditional ML models
 - `training/bert_fraud_detection.py` - BERT training script
-- `training/kaggle_fraud_detection.ipynb` - Kaggle training notebook
+- `training/fraud-detection-kaggle-training-bert-run.ipynb` - Kaggle BERT training notebook
 
 ### Demo Files
 - `demos/fraud_detection_demo.ipynb` - Interactive demo notebook ⭐
