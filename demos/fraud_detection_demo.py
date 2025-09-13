@@ -42,17 +42,17 @@ class FraudDetectionDemo:
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         
         # Class labels based on your multiclass training
-        # Update these if your actual classes are different
+        # CORRECTED: Must match the LabelEncoder order from training (alphabetical)
         self.class_labels = [
-            'legitimate',
-            'job_scam', 
-            'phishing',
-            'popup_scam',
-            'refund_scam',
-            'reward_scam',
-            'sms_spam',
-            'ssn_scam',
-            'tech_support_scam'
+            'job_scam',        # 0
+            'legitimate',      # 1  
+            'phishing',        # 2
+            'popup_scam',      # 3
+            'refund_scam',     # 4
+            'reward_scam',     # 5
+            'sms_spam',        # 6
+            'ssn_scam',        # 7
+            'tech_support_scam' # 8
         ]
         
         print(f"🚀 Initializing Fraud Detection Demo...")

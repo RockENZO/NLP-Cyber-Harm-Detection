@@ -21,9 +21,9 @@ def quick_demo():
     print("🚀 Quick Fraud Detection Demo")
     print("=" * 40)
     
-    # Class labels
+    # Class labels - CORRECTED to match LabelEncoder order (alphabetical)
     class_labels = [
-        'legitimate', 'job_scam', 'phishing', 'popup_scam', 
+        'job_scam', 'legitimate', 'phishing', 'popup_scam', 
         'refund_scam', 'reward_scam', 'sms_spam', 'ssn_scam', 'tech_support_scam'
     ]
     
