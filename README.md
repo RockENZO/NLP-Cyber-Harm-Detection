@@ -200,7 +200,7 @@ Your trained model can detect these 9 classes:
 8. **refund_scam** - Fake refund/billing notifications
 9. **ssn_scam** - Social Security number theft attempts
 
-## � Demo Usage Examples
+##  Demo Usage Examples
 
 ### Single Prediction
 ```python
@@ -234,7 +234,7 @@ result = predict_fraud(your_text)
 display_prediction(result)
 ```
 
-## �📈 Expected Performance
+## 📈 Expected Performance
 
 Based on similar projects and baseline implementations:
 
@@ -246,7 +246,7 @@ Based on similar projects and baseline implementations:
 | BERT Fine-tuned | 90-95% | 0.9-0.95 | Best performance |
 | DistilBERT Fine-tuned | 89-94% | 0.89-0.94 | 60% faster, 97% of BERT performance |
 
-## �️ Demo Troubleshooting
+## Demo Troubleshooting
 
 ### Model Not Loading
 - ✅ Check that `models/bert_model/` and `models/bert_tokenizer/` exist (for BERT)
@@ -269,7 +269,7 @@ Based on similar projects and baseline implementations:
 - **Adding custom test cases**: Edit the sample test cases in the demo files
 - **Integration**: Use the `FraudDetectionDemo` class as a starting point for applications
 
-## �🔧 Configuration
+## 🔧 Configuration
 
 ### Traditional ML Parameters
 ```python
@@ -572,11 +572,6 @@ python training/baseline_fraud_detection.py
 3. Add your improvements
 4. Submit a pull request
 
-## 📄 License
-
-This project is provided as-is for educational and research purposes.
-
----
 
 **Note**: This is a baseline implementation. For production use, consider:
 - Larger, diverse datasets
