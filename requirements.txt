@@ -28,3 +28,7 @@ streamlit==1.26.0
 # Jupyter notebook support
 jupyter==1.0.0
 ipykernel==6.25.0
+
+# Reasoning Pipeline Dependencies (for AI-powered explanations)
+requests>=2.31.0
+python-dotenv>=1.0.0

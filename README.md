@@ -1,6 +1,8 @@
 # NLP Fraud/Scam Detection Baseline Models
 
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
+[![GitHub R├── reasoning/                         # 🧠 AI-powered reasoning pipeline  
+│   └── KaggleGPTReasoning.ipynb      # 🆕 LOCAL reasoning notebook (RECOMMENDED)
+├── training/                          # Training scripts and notebooks(https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
 
 A comprehensive baseline implementation for fraud and scam detection using Natural Language Processing techniques. This project provides multiple approaches from simple keyword-based detection to advanced BERT-based classification.
 
@@ -16,6 +18,7 @@ This project implements baseline models for detecting fraudulent content (scams,
 - **Traditional ML approaches** (TF-IDF + SVM/Logistic Regression)
 - **Deep Learning approaches** (BERT and DistilBERT-based classification)
 - **Simple rule-based approach** (for quick prototyping)
+- **🧠 AI-Powered Reasoning Pipeline** (NEW) - Explains why texts are classified as fraud using LLM models
 
 ## ⚡ DistilBERT Model Highlights
 
@@ -38,6 +41,7 @@ NLP Detection/
 ├── requirements.txt                    # Python dependencies
 ├── final_fraud_detection_dataset.csv  # Training dataset (Git LFS)
 ├── models/                            # Saved trained models
+│   ├── model.zip                      # Compressed model bundle (excluded from git)
 │   ├── bert_model/                    # Trained BERT model files
 │   ├── bert_tokenizer/               # BERT tokenizer files
 │   ├── distilbert_model/             # Trained DistilBERT model files (60% faster)
@@ -46,15 +50,18 @@ NLP Detection/
 │   ├── baseline_fraud_detection.py   # Traditional ML baseline models
 │   ├── bert_fraud_detection.py       # BERT-based classifier
 │   ├── fraud_detection_baseline.ipynb # Interactive Jupyter notebook
-│   ├── kaggle_fraud_detection.ipynb  # Kaggle-optimized training notebook
-│   └── fraud-detection-kaggle-training-bert-run.ipynb # Kaggle BERT training notebook (multiclass)
+│   └── kaggle_fraud_detection.ipynb  # Kaggle-optimized training notebook
 ├── demos/                             # Demo and testing tools
 │   ├── fraud_detection_demo.py       # Full-featured demo script
 │   ├── fraud_detection_demo.ipynb    # Interactive demo notebook
 │   └── quick_demo.py                 # Quick verification script
+├── reasoning/                         # 🧠 AI-powered reasoning pipeline  
+│   └── KaggleGPTReasoning.ipynb      # 🆕 LOCAL reasoning notebook (RECOMMENDED)
 ├── docs/                              # Documentation
 │   └── nlp_terms_explanation.md      # NLP concepts explanation
+├── runs/                              # Training run outputs
 ├── .gitattributes                     # Git LFS configuration
+├── .gitignore                         # Git ignore rules
 └── .git/                             # Git repository
 ```
 
@@ -84,6 +91,14 @@ If you have already trained a model on Kaggle:
    python demos/fraud_detection_demo.py
    ```
 
+5. **🧠 NEW: Free Local AI Reasoning**
+   ```bash
+   # Upload KaggleGPTReasoning.ipynb to Kaggle (100% FREE)
+   # Enable GPU accelerator
+   # Run all cells for fraud detection + AI explanations
+   # Download results - zero API costs!
+   ```
+
 ### Option 2: Train from Scratch
 
 1. **Install Dependencies**
@@ -109,7 +124,7 @@ If you have already trained a model on Kaggle:
 4. Download the trained models from Kaggle output
 5. Use the demo scripts to test your trained model
 
-**Note**: The dataset is stored with Git LFS due to its size (~158MB). Clone with `git lfs pull` to download the full dataset.
+**Note**: The dataset is stored with Git LFS due to its size (~158MB). Clone with `git lfs pull` to download the full dataset. Large model files like `model.zip` are excluded from git to keep the repository size manageable.
 
 ## 📊 Models Implemented
 
@@ -148,6 +163,14 @@ If you have already trained a model on Kaggle:
 - **Complete pipeline**: Data loading, preprocessing, training, evaluation
 - **Model export**: Saves trained models for download
 - **DistilBERT support**: Optimized for faster training and deployment
+
+### 5. AI-Powered Reasoning Pipeline (`reasoning/`)
+- **🆕 Local Processing (RECOMMENDED)**: Use `reasoning/KaggleGPTReasoning.ipynb` for 100% FREE reasoning
+- **Zero API Costs**: Everything runs locally on Kaggle's free GPU resources
+- **Privacy First**: No data sent to external APIs
+- **Selective reasoning**: Only explains fraud classifications (legitimate content skipped)
+- **Educational**: Identifies specific scam indicators and risk factors
+- **Easy Integration**: Works with existing DistilBERT models
 
 ## 🎮 Demo and Testing Tools
 
@@ -549,6 +572,7 @@ Based on analysis of existing projects including:
 - `models/bert_tokenizer/` - BERT tokenizer
 - `models/distilbert_model/` - Trained DistilBERT model (60% faster)
 - `models/distilbert_tokenizer/` - DistilBERT tokenizer
+- `models/model.zip` - Compressed model bundle (excluded from git)
 
 ### Commands
 ```bash
