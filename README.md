@@ -1,8 +1,6 @@
 # NLP Fraud/Scam Detection Baseline Models
 
-[![GitHub R├── reasoning/                         # 🧠 AI-powered reasoning pipeline  
-│   └── KaggleGPTReasoning.ipynb      # 🆕 LOCAL reasoning notebook (RECOMMENDED)
-├── training/                          # Training scripts and notebooks(https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
 
 A comprehensive baseline implementation for fraud and scam detection using Natural Language Processing techniques. This project provides multiple approaches from simple keyword-based detection to advanced BERT-based classification.
 
@@ -36,7 +34,6 @@ The DistilBERT model is trained for **multiclass classification**, providing gra
 ## 📁 Project Structure
 
 ```
-NLP Detection/
 ├── README.md                           # This comprehensive documentation
 ├── requirements.txt                    # Python dependencies
 ├── final_fraud_detection_dataset.csv  # Training dataset (Git LFS)
@@ -56,10 +53,25 @@ NLP Detection/
 │   ├── fraud_detection_demo.ipynb    # Interactive demo notebook
 │   └── quick_demo.py                 # Quick verification script
 ├── reasoning/                         # 🧠 AI-powered reasoning pipeline  
-│   └── KaggleGPTReasoning.ipynb      # 🆕 LOCAL reasoning notebook (RECOMMENDED)
+│   ├── GPT2_Fraud_Reasoning.ipynb    # GPT2-based reasoning analysis
+│   └── KaggleLLMsReasoning.ipynb     # 🆕 LOCAL reasoning notebook (RECOMMENDED)
 ├── docs/                              # Documentation
 │   └── nlp_terms_explanation.md      # NLP concepts explanation
-├── runs/                              # Training run outputs
+├── runs/                              # Training run outputs and analysis results
+│   ├── fraud_analysis_results_20250916_155231.csv
+│   ├── fraud-detection-kaggle-training-bert-run.ipynb
+│   ├── gpt2_fraud_analysis_20250917_034015.csv
+│   ├── LLMsReasoningResultVisualization.ipynb
+│   ├── MultipleLLMsReasoning(small-models).ipynb
+│   └── LLMsStats/                     # LLM performance comparison charts
+│       ├── llm_category_heatmap.png
+│       ├── llm_comparison_table.csv
+│       ├── llm_performance_comparison.png
+│       ├── llm_quality_radar.png
+│       ├── llm_size_performance.png
+│       ├── llm_speed_quality_scatter.png
+│       ├── llm_model_size_comparison.png    # Model size vs performance charts
+│       └── llm_speed_quality_bubble.png     # Speed vs quality bubble chart
 ├── .gitattributes                     # Git LFS configuration
 ├── .gitignore                         # Git ignore rules
 └── .git/                             # Git repository
@@ -91,13 +103,15 @@ If you have already trained a model on Kaggle:
    python demos/fraud_detection_demo.py
    ```
 
-5. **🧠 NEW: Free Local AI Reasoning**
+5. **🧠 Local AI Reasoning**
    ```bash
    # Upload KaggleGPTReasoning.ipynb to Kaggle (100% FREE)
    # Enable GPU accelerator
    # Run all cells for fraud detection + AI explanations
    # Download results - zero API costs!
    ```
+
+   **📊 LLM Performance Analysis**: Check `runs/LLMsStats/` for performance comparisons.
 
 ### Option 2: Train from Scratch
 
@@ -125,6 +139,10 @@ If you have already trained a model on Kaggle:
 5. Use the demo scripts to test your trained model
 
 **Note**: The dataset is stored with Git LFS due to its size (~158MB). Clone with `git lfs pull` to download the full dataset. Large model files like `model.zip` are excluded from git to keep the repository size manageable.
+
+## 📊 LLM Performance Analysis Results
+
+The `runs/LLMsStats/` directory contains LLM model analysis for fraud reasoning tasks.
 
 ## 📊 Models Implemented
 
@@ -158,7 +176,7 @@ If you have already trained a model on Kaggle:
   - GPU-accelerated training on Kaggle
   - Production-ready lightweight model
 
-### 4. Kaggle Training Notebook (`training/fraud-detection-kaggle-training-bert-run.ipynb`)
+### 4. Kaggle Training Notebook (`runs/fraud-detection-kaggle-training-bert-run.ipynb`)
 - **GPU-accelerated training** on Kaggle's free infrastructure
 - **Complete pipeline**: Data loading, preprocessing, training, evaluation
 - **Model export**: Saves trained models for download
@@ -171,6 +189,12 @@ If you have already trained a model on Kaggle:
 - **Selective reasoning**: Only explains fraud classifications (legitimate content skipped)
 - **Educational**: Identifies specific scam indicators and risk factors
 - **Easy Integration**: Works with existing DistilBERT models
+
+#### 🤖 LLM Model Selection for Reasoning
+
+![LLM Model Size vs Performance](runs/LLMsStats/llm_model_size_comparison.png)
+
+![LLM Speed vs Quality](runs/LLMsStats/llm_speed_quality_bubble.png)
 
 ## 🎮 Demo and Testing Tools
 
@@ -223,7 +247,7 @@ Your trained model can detect these 9 classes:
 8. **refund_scam** - Fake refund/billing notifications
 9. **ssn_scam** - Social Security number theft attempts
 
-##  Demo Usage Examples
+## 💡 Demo Usage Examples
 
 ### Single Prediction
 ```python
@@ -329,7 +353,7 @@ learning_rate = 2e-5 # DistilBERT learning rate
 
 ### Kaggle Training Configuration
 ```python
-# In training/fraud-detection-kaggle-training-bert-run.ipynb
+# In runs/fraud-detection-kaggle-training-bert-run.ipynb
 batch_size = 16      # Adjust based on GPU memory
 max_length = 128     # Maximum sequence length
 epochs = 3          # Training epochs
@@ -560,7 +584,7 @@ Based on analysis of existing projects including:
 ### Training Files
 - `training/baseline_fraud_detection.py` - Traditional ML models
 - `training/bert_fraud_detection.py` - BERT training script
-- `training/fraud-detection-kaggle-training-bert-run.ipynb` - Kaggle BERT training notebook
+- `runs/fraud-detection-kaggle-training-bert-run.ipynb` - Kaggle BERT training notebook
 
 ### Demo Files
 - `demos/fraud_detection_demo.ipynb` - Interactive demo notebook ⭐
