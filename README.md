@@ -22,12 +22,12 @@ This project implements baseline models for detecting fraudulent content (scams,
 
 **NEW**: The project now includes a production-ready **DistilBERT model** with significant advantages:
 
-✅ **60% faster training** than BERT while maintaining 97% performance  
-✅ **40% smaller model size** - better for deployment and storage  
-✅ **Lower memory usage** - fits better in resource-constrained environments  
-✅ **Faster inference times** - ideal for real-time fraud detection  
-✅ **Multiclass classification** - detects 9 specific fraud types + legitimate messages  
-✅ **GPU-optimized training** - trained on Kaggle with full pipeline  
+- **60% faster training** than BERT while maintaining 97% performance  
+- **40% smaller model size** - better for deployment and storage  
+- **Lower memory usage** - fits better in resource-constrained environments  
+- **Faster inference times** - ideal for real-time fraud detection  
+- **Multiclass classification** - detects 9 specific fraud types + legitimate messages  
+- **GPU-optimized training** - trained on Kaggle with full pipeline  
 
 The DistilBERT model is trained for **multiclass classification**, providing granular fraud type detection rather than just binary fraud/legitimate classification.
 
@@ -54,7 +54,7 @@ The DistilBERT model is trained for **multiclass classification**, providing gra
 │   └── quick_demo.py                 # Quick verification script
 ├── reasoning/                         # 🧠 AI-powered reasoning pipeline  
 │   ├── GPT2_Fraud_Reasoning.ipynb    # GPT2-based reasoning analysis
-│   └── KaggleLLMsReasoning.ipynb     # 🆕 LOCAL reasoning notebook (RECOMMENDED)
+│   └── KaggleLLMsReasoning.ipynb     # Local reasoning notebook
 ├── docs/                              # Documentation
 │   └── nlp_terms_explanation.md      # NLP concepts explanation
 ├── runs/                              # Training run outputs and analysis results
@@ -93,7 +93,7 @@ If you have already trained a model on Kaggle:
    python demos/quick_demo.py
    ```
 
-3. **Interactive Demo Notebook** ⭐
+3. **Interactive Demo Notebook**
    ```bash
    jupyter notebook demos/fraud_detection_demo.ipynb
    ```
@@ -103,12 +103,12 @@ If you have already trained a model on Kaggle:
    python demos/fraud_detection_demo.py
    ```
 
-5. **🧠 Local AI Reasoning**
+5. **Local AI Reasoning**
    ```bash
-   # Upload KaggleGPTReasoning.ipynb to Kaggle (100% FREE)
+   # Upload KaggleGPTReasoning.ipynb to Kaggle
    # Enable GPU accelerator
    # Run all cells for fraud detection + AI explanations
-   # Download results - zero API costs!
+   # Download results - no API costs
    ```
 
    **📊 LLM Performance Analysis**: Check `runs/LLMsStats/` for performance comparisons.
@@ -183,9 +183,9 @@ The `runs/LLMsStats/` directory contains LLM model analysis for fraud reasoning 
 - **DistilBERT support**: Optimized for faster training and deployment
 
 ### 5. AI-Powered Reasoning Pipeline (`reasoning/`)
-- **🆕 Local Processing (RECOMMENDED)**: Use `reasoning/KaggleGPTReasoning.ipynb` for 100% FREE reasoning
-- **Zero API Costs**: Everything runs locally on Kaggle's free GPU resources
-- **Privacy First**: No data sent to external APIs
+- **Local Processing**: Use `reasoning/KaggleGPTReasoning.ipynb` for local reasoning analysis
+- **No API costs**: Runs locally on Kaggle's GPU resources
+- **Privacy-focused**: No data sent to external APIs
 - **Selective reasoning**: Only explains fraud classifications (legitimate content skipped)
 - **Educational**: Identifies specific scam indicators and risk factors
 - **Easy Integration**: Works with existing DistilBERT models
@@ -200,7 +200,7 @@ The `runs/LLMsStats/` directory contains LLM model analysis for fraud reasoning 
 
 Once you have a trained model, use these tools to test and demonstrate fraud detection capabilities:
 
-### 1. **fraud_detection_demo.ipynb** ⭐ (Recommended)
+### 1. **fraud_detection_demo.ipynb** (Recommended)
 - **Type**: Interactive Jupyter Notebook
 - **Location**: `demos/fraud_detection_demo.ipynb`
 - **Best for**: Exploratory testing, visualizations, learning
@@ -296,10 +296,10 @@ Based on similar projects and baseline implementations:
 ## Demo Troubleshooting
 
 ### Model Not Loading
-- ✅ Check that `models/bert_model/` and `models/bert_tokenizer/` exist (for BERT)
-- ✅ Check that `models/distilbert_model/` and `models/distilbert_tokenizer/` exist (for DistilBERT)
-- ✅ Verify you downloaded the complete model from Kaggle
-- ✅ Ensure all required packages are installed: `pip install torch transformers pandas numpy matplotlib seaborn`
+- Check that `models/bert_model/` and `models/bert_tokenizer/` exist (for BERT)
+- Check that `models/distilbert_model/` and `models/distilbert_tokenizer/` exist (for DistilBERT)
+- Verify you downloaded the complete model from Kaggle
+- Ensure all required packages are installed: `pip install torch transformers pandas numpy matplotlib seaborn`
 
 ### Low Performance
 - 🎯 Check if your test data matches the training distribution
@@ -587,7 +587,7 @@ Based on analysis of existing projects including:
 - `runs/fraud-detection-kaggle-training-bert-run.ipynb` - Kaggle BERT training notebook
 
 ### Demo Files
-- `demos/fraud_detection_demo.ipynb` - Interactive demo notebook ⭐
+- `demos/fraud_detection_demo.ipynb` - Interactive demo notebook
 - `demos/fraud_detection_demo.py` - Full demo script
 - `demos/quick_demo.py` - Quick verification
 
