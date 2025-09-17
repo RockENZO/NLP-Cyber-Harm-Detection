@@ -192,9 +192,9 @@ The `runs/LLMsStats/` directory contains LLM model analysis for fraud reasoning 
 
 #### 🤖 LLM Model Selection for Reasoning
 
-![LLM Model Size vs Performance](runs/LLMsStats/llm_model_size_comparison.png)
+![LLM Model Size vs Performance](runs/LLMsStats/llm_size_performance.png)
 
-![LLM Speed vs Quality](runs/LLMsStats/llm_speed_quality_bubble.png)
+![LLM Speed vs Quality](runs/LLMsStats/llm_speed_quality_scatter.png)
 
 ## 🎮 Demo and Testing Tools
 
