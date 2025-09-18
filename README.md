@@ -37,7 +37,6 @@ The DistilBERT model is trained for **multiclass classification**, providing gra
 ├── requirements.txt                    # Python dependencies
 ├── final_fraud_detection_dataset.csv  # Training dataset (Git LFS)
 ├── models/                            # Saved trained models
-│   ├── model.zip                      # Compressed model bundle (excluded from git)
 │   ├── bert_model/                    # Trained BERT model files
 │   ├── bert_tokenizer/               # BERT tokenizer files
 │   ├── distilbert_model/             # Trained DistilBERT model files (60% faster)
