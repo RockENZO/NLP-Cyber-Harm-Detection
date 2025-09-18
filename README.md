@@ -39,7 +39,7 @@ The DistilBERT model is trained for **multiclass classification**, providing gra
 ├── models/                            # Saved trained models
 │   ├── bert_model/                    # Trained BERT model files
 │   ├── bert_tokenizer/               # BERT tokenizer files
-│   ├── distilbert_model/             # Trained DistilBERT model files (60% faster)
+│   ├── distilbert_model/             # Trained DistilBERT model files
 │   └── distilbert_tokenizer/         # DistilBERT tokenizer files
 ├── training/                          # Training scripts and notebooks
 │   ├── baseline_fraud_detection.py   # Traditional ML baseline models
@@ -50,7 +50,7 @@ The DistilBERT model is trained for **multiclass classification**, providing gra
 │   ├── fraud_detection_demo.py       # Full-featured demo script
 │   ├── fraud_detection_demo.ipynb    # Interactive demo notebook
 │   └── quick_demo.py                 # Quick verification script
-├── reasoning/                         # 🧠 AI-powered reasoning pipeline  
+├── reasoning/                         # AI-powered reasoning pipeline  
 │   ├── GPT2_Fraud_Reasoning.ipynb    # GPT2-based reasoning analysis
 │   └── KaggleLLMsReasoning.ipynb     # Local reasoning notebook
 ├── docs/                              # Documentation
