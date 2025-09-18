@@ -2,7 +2,7 @@
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
 
-A comprehensive baseline implementation for fraud and scam detection using Natural Language Processing techniques. This project provides multiple approaches from simple keyword-based detection to advanced BERT-based classification.
+A comprehensive implementation for fraud and scam detection using advanced Natural Language Processing techniques. This project leverages transformer-based models (BERT/DistilBERT) for accurate fraud classification and Large Language Models (LLMs) for AI-powered reasoning pipelines that provide explainable fraud detection.
 
 ## 📁 Repository
 
@@ -11,12 +11,11 @@ A comprehensive baseline implementation for fraud and scam detection using Natur
 
 ## 🎯 Project Overview
 
-This project implements baseline models for detecting fraudulent content (scams, phishing, spam) in text data, based on analysis of existing similar projects. It includes:
+This project implements advanced models for detecting fraudulent content (scams, phishing, spam) in text data using state-of-the-art transformer architectures. It focuses on:
 
-- **Traditional ML approaches** (TF-IDF + SVM/Logistic Regression)
-- **Deep Learning approaches** (BERT and DistilBERT-based classification)
-- **Simple rule-based approach** (for quick prototyping)
-- **🧠 AI-Powered Reasoning Pipeline** (NEW) - Explains why texts are classified as fraud using LLM models
+- **Transformer-based Classification** (BERT and DistilBERT fine-tuned models)
+- **🧠 AI-Powered Reasoning Pipeline** - Explains why texts are classified as fraud using LLM models
+- **Production-ready implementations** optimized for real-world deployment
 
 ## ⚡ DistilBERT Model Highlights
 
