@@ -17,6 +17,9 @@ torch==2.0.1
 transformers==4.33.0
 tqdm==4.66.1
 
+# Tokenizer for T5/FLAN models
+sentencepiece>=0.1.99
+
 # Optional: For GPU support (install appropriate version for your system)
 # torch-audio==2.0.1
 # torch-vision==0.15.1
