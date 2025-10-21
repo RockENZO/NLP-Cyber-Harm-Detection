@@ -8,6 +8,8 @@ A comprehensive implementation for fraud and scam detection using advanced Natur
 
 🔗 **GitHub Repository**: [https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git](https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git)
 
+🔗 **Hugging Face Space (Demo)**: [https://huggingface.co/spaces/RockENZ0/fraud-detection-ai](https://huggingface.co/spaces/RockENZ0/fraud-detection-ai)
+
 
 ## 🎯 Project Overview
 
