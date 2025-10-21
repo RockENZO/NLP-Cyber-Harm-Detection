@@ -13,36 +13,26 @@ A comprehensive implementation for fraud and scam detection using advanced Natur
 
 ## 🎯 Project Overview
 
-This project implements advanced models for detecting fraudulent content (scams, phishing, spam) in text data using state-of-the-art transformer architectures. Key approaches include:
+This project implements advanced models for detecting fraudulent content (scams, phishing, spam) in text data using state-of-the-art transformer architectures. The project evolved through multiple phases:
 
-### Unified Classification + Reasoning (FLAN-T5)
+### Phase 1: Classification Models (BERT & DistilBERT)
+Initial implementation focused on pure classification using transformer models to detect fraud types with high accuracy.
 
-We added a unified, text-to-text approach using FLAN-T5 that produces both the class label and a concise explanation in a single generation. This works directly with your existing CSV (`final_fraud_detection_dataset.csv`) that has `text` and `detailed_category` columns. If your dataset also has rationale fields such as `explanation` or `rationale`, the trainer will use them; otherwise, it auto-synthesizes short label-specific explanations.
+### Phase 2: LLM Reasoning Analysis
+Comprehensive analysis of reasoning-capable LLMs (GPT-2, FLAN-T5 variants) for post-hoc fraud explanation generation, with performance benchmarking and quality assessment.
 
-Key files:
-- `training/unified_t5_fraud.py` — fine-tunes FLAN-T5 on your dataset to generate outputs like: `label: phishing | reason: asks for login via suspicious link`
-- `demos/unified_reasoning_demo.py` — loads a fine-tuned model and runs inference, parsing both label and reason.
+### Phase 3: Unified Classification + Reasoning (FLAN-T5)
+Developed a unified, text-to-text approach using FLAN-T5 that produces both the class label and a concise explanation in a single generation. This works directly with your existing CSV (`final_fraud_detection_dataset.csv`) that has `text` and `detailed_category` columns. If your dataset also has rationale fields such as `explanation` or `rationale`, the trainer will use them; otherwise, it auto-synthesizes short label-specific explanations.
 
-Install/update dependencies:
-- We rely on `transformers` and `sentencepiece` for FLAN-T5. `sentencepiece` is now added to `requirements.txt`.
+### Phase 4: BART Joint Model (Latest & Best) 
+State-of-the-art custom architecture combining classification and rich contextual reasoning in a single unified model with superior performance.
 
-Quick start (macOS, zsh):
-1) Train the unified model (adjust args as needed):
-  - csv_path: `final_fraud_detection_dataset.csv`
-  - model_name: `google/flan-t5-small` (fits CPU/MPS easily). Try `flan-t5-base` for higher quality.
-2) After training, run the demo to classify text and see a concise reason.
-
-Apple Silicon acceleration: the trainer auto-selects CUDA, MPS, or CPU. You can force MPS with `--device mps`.
-
-Notes:
-- Targets are compact (label + reason) to keep training stable and generation fast.
-- Labels are restricted to your known set (9 classes). During training, rows with unknown labels are filtered out.
-- The demo prints a rough confidence proxy based on token-level probabilities. This is not a calibrated class probability.
-
-- **Transformer-based Classification** (BERT and DistilBERT fine-tuned models)
-- **🧠 AI-Powered Reasoning Pipeline** - Explains why texts are classified as fraud using LLM models
-- **🚀 Joint Classification + Contextual Reasoning** - BART model for simultaneous classification and explanation
-- **Production-ready implementations** optimized for real-world deployment
+### Key Capabilities:
+- **📊 Multiclass Classification** - Detects 9 specific fraud types + legitimate messages
+- **🧠 Explainable AI** - Rich contextual reasoning explaining fraud indicators
+- **⚡ Optimized Performance** - From 60% faster training (DistilBERT) to unified inference (BART)
+- **🔬 Research-to-Production** - Complete pipeline from baseline models to state-of-the-art joint architecture
+- **📈 Comprehensive Analysis** - LLM benchmarking, performance visualization, and model comparison
 
 ## 🌟 BART Joint Model - Enhanced Classification + Contextual Reasoning (LATEST)
 
