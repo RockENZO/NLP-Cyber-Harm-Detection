@@ -52,8 +52,8 @@ Notes:
 - **🎯 Joint Architecture**: Simultaneous fraud classification and detailed contextual explanation generation
 - **📝 Enhanced Reasoning**: Generates rich, context-aware explanations (MAX_TARGET_LENGTH=128) identifying specific suspicious elements
 - **🔍 Feature-Based Analysis**: Provides detailed reasoning about why a message is classified as fraud, citing specific patterns and indicators
-- **⚡ High-Quality Generation**: Uses beam search (num_beams=5) with length penalty and no-repeat-ngram constraints for better output
-- **📊 Dual Loss Optimization**: Balanced training with both classification loss and generation loss for optimal performance
+- **⚡ High-Quality Generation**: Uses beam search (num_beams=4) with length penalty (1.0) and no-repeat-ngram (3) constraints for better output quality
+- **📊 Dual Loss Optimization**: Balanced training with weighted losses (CLS: 0.8, GEN: 1.2) emphasizing quality reasoning
 - **🎓 Multiclass Classification**: Detects 9 fraud types + legitimate messages with confidence scores
 - **💡 Explainable AI**: Every prediction comes with a human-readable contextual explanation
 
@@ -62,13 +62,18 @@ Notes:
 - **Custom Architecture**: `BartForJointClassificationAndGeneration` with dual heads:
   - Classification head: Linear classifier on pooled encoder output
   - Generation head: Standard BART decoder for contextual reasoning
-- **Training Strategy**: Multi-task learning with weighted losses (classification + generation)
+- **Training Configuration**:
+  - Loss weights: Classification (0.8) + Generation (1.2)
+  - Max target length: 128 tokens for rich explanations
+  - Training epochs: 4 epochs with early stopping
+  - Total training steps: 21,928 steps
+  - Available checkpoints: 5,482 | 10,964 | 16,446 | 21,928
 - **Inference**: Single forward pass produces both label prediction and detailed explanation
 
 ### Key Files:
 - `training/unified-bart-joint-enhanced-reasoning.ipynb` - Training pipeline for joint model
 - `demos/test-unified-bart-joint-enhanced.ipynb` - Comprehensive testing and evaluation notebook
-- `models/unified-bart-joint-enhanced/` - Trained model with multiple checkpoints
+- `models/unified-bart-joint-enhanced/` - Trained model with 4 checkpoints
 
 ### Sample Output:
 ```
@@ -82,6 +87,14 @@ via suspicious link, and promises of high-value rewards without prior participat
 These are classic tactics used to lure victims into providing personal information 
 or making fraudulent payments.
 ```
+
+### Training Details:
+- **Trained Model**: facebook/bart-base (139M parameters)
+- **Training Data**: final_fraud_detection_dataset.csv
+- **Epochs**: 4 full epochs
+- **Loss Weights**: CLS_LOSS_WEIGHT=0.8, GEN_LOSS_WEIGHT=1.2
+- **Max Lengths**: Source=256, Target=128
+- **Generation Config**: beam_search=4, length_penalty=1.0, no_repeat_ngram_size=3, early_stopping=True
 
 ### Performance:
 - **Classification Accuracy**: 91%+ on test set
@@ -122,10 +135,13 @@ The DistilBERT model is trained for **multiclass classification**, providing gra
 │   ├── distilbert_tokenizer/         # DistilBERT tokenizer files
 │   ├── unified-bart-joint-enhanced/  # BART joint classification + reasoning model
 │   │   ├── config.json               # Model configuration
-│   │   ├── model.safetensors         # Trained model weights
-│   │   ├── generation_config.json    # Generation parameters
-│   │   ├── tokenizer files           # BART tokenizer
-│   │   └── checkpoint-*/             # Training checkpoints
+│   │   ├── model.safetensors         # Trained model weights (final, 21,928 steps)
+│   │   ├── generation_config.json    # Generation parameters (beam=4, length_penalty=1.0)
+│   │   ├── tokenizer files           # BART tokenizer (merges.txt, vocab.json, etc.)
+│   │   ├── checkpoint-5482/          # Early checkpoint (epoch 1)
+│   │   ├── checkpoint-10964/         # Mid-training checkpoint (epoch 2)
+│   │   ├── checkpoint-16446/         # Late-training checkpoint (epoch 3)
+│   │   └── checkpoint-21928/         # Final checkpoint (epoch 4)
 │   ├── flan-t5-base/                 # FLAN-T5 model files
 │   └── unified-flan-t5-small/        # Unified FLAN-T5 model
 ├── training/                          # Training scripts and notebooks
@@ -309,7 +325,7 @@ The `runs/LLMsStats/` directory contains LLM model analysis for fraud reasoning 
   - **Loss Weights**: Configurable balance between classification and generation objectives
 - **Enhanced Features**:
   - **Context-Aware Reasoning**: Generates explanations citing specific message features
-  - **Beam Search**: High-quality generation with num_beams=5
+  - **Beam Search**: High-quality generation with num_beams=4
   - **Length Control**: MAX_TARGET_LENGTH=128 for rich, detailed explanations
   - **Quality Constraints**: No-repeat-ngram-size=3, length penalty=1.0
   - **Instruction-Based**: Uses detailed instruction prefix for consistent output format
@@ -448,9 +464,10 @@ def predict_with_reasoning(text):
         gen_ids = joint_model.generate(
             **inputs,
             max_new_tokens=128,
-            num_beams=5,
+            num_beams=4,
             length_penalty=1.0,
-            no_repeat_ngram_size=3
+            no_repeat_ngram_size=3,
+            early_stopping=True
         )
         reasoning = tokenizer.decode(gen_ids[0], skip_special_tokens=True)
     
