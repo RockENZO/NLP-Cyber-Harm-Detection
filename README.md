@@ -7,17 +7,17 @@ Research code and model artifacts for multiclass scam detection and explanation 
 The BERT checkpoint and tokenizer are tracked with Git LFS. From the repository root:
 
 ```bash
-git clone https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git
+GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git
 cd NLP-Cyber-Harm-Detection
 git lfs install
-git lfs pull
+git lfs pull --include="models/bert_model/*"
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python demos/quick_demo.py --text "Your appointment is confirmed for tomorrow"
 ```
 
-The demo uses the checked-in `models/bert_model` and `models/bert_tokenizer` folders and prints a predicted label and model score. It is a smoke check, not a measurement of accuracy. The checkpoint is approximately 438 MB, so downloading it and running inference need adequate storage and memory. If Git LFS files are missing, `git lfs pull` is required before inference.
+The demo uses the checked-in `models/bert_model` and `models/bert_tokenizer` folders and prints a predicted label and model score. It is a smoke check, not a measurement of accuracy. The checkpoint is approximately 438 MB, so downloading it and running inference need adequate storage and memory. If Git LFS files are missing, `git lfs pull --include="models/bert_model/*"` is required before inference.
 
 ## Evaluation
 
