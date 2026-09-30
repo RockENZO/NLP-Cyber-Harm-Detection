@@ -49,3 +49,5 @@ model.zip
 logs/
 .venv/
 runs/source-baseline*/
+
+runs/nine-class-study/
