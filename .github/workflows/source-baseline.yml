@@ -1,0 +1,27 @@
+name: Reproduce source baseline
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: RockENZO/data
+          ref: e19cf13bf69fa3f74f4f8d080b855332121e5068
+          path: corpus
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: git -C corpus lfs pull --include='corrected_fraud_detection_dataset.csv'
+      - run: python corpus/build_dataset.py --input corpus/corrected_fraud_detection_dataset.csv --output-dir corpus/artifacts/verified
+      - run: pip install -r evaluation/requirements.txt
+      - run: python evaluation/source_baseline.py --data corpus/artifacts/verified/final_fraud_detection_dataset.csv --provenance corpus/artifacts/verified/provenance.jsonl --output-dir runs/source-baseline
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-baseline-evidence
+          path: runs/source-baseline

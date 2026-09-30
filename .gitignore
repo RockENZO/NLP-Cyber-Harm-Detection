@@ -47,3 +47,5 @@ model.zip
 # Logs
 *.log
 logs/
+.venv/
+runs/source-baseline*/
