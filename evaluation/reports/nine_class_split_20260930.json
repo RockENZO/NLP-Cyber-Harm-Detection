@@ -1,0 +1,61 @@
+{
+  "class_support": {
+    "test": {
+      "job_scam": 60,
+      "legitimate": 9864,
+      "phishing": 6954,
+      "popup_scam": 463,
+      "refund_scam": 61,
+      "reward_scam": 60,
+      "sms_spam": 672,
+      "ssn_scam": 67,
+      "tech_support_scam": 60
+    },
+    "train": {
+      "job_scam": 479,
+      "legitimate": 78414,
+      "phishing": 56471,
+      "popup_scam": 3729,
+      "refund_scam": 493,
+      "reward_scam": 473,
+      "sms_spam": 5492,
+      "ssn_scam": 477,
+      "tech_support_scam": 484
+    },
+    "val": {
+      "job_scam": 60,
+      "legitimate": 9712,
+      "phishing": 7055,
+      "popup_scam": 468,
+      "refund_scam": 50,
+      "reward_scam": 73,
+      "sms_spam": 693,
+      "ssn_scam": 60,
+      "tech_support_scam": 61
+    }
+  },
+  "counts": {
+    "test": 18261,
+    "train": 146512,
+    "val": 18232
+  },
+  "excluded": {
+    "conflicting_template_labels": 99,
+    "normalized_duplicates": 11809
+  },
+  "groups": 183036,
+  "input_rows": 194913,
+  "input_sha256": "453de8f230994ce29eae4ce2a9a94a7ced6f6e7f7176b38a1ad813bbfacd2794",
+  "limitations": [
+    "This is an in-corpus benchmark, not unseen-source validation.",
+    "The historical models may have trained on these records; this study fits new models from scratch.",
+    "Normalization catches some templates, not every semantic near duplicate.",
+    "Inherited source labels, synthetic records and source-specific shortcuts limit external generalization."
+  ],
+  "manifest_sha256": "bf4b0b82398cc5d80adddf27062ef4289b0c128cf6897bc286dce2ab1cb18759",
+  "official_group_promotions": 166,
+  "protocol": "newly fitted nine-class in-corpus comparison; official DIFrauD test/validation boundaries retained after template grouping",
+  "provenance_sha256": "51b85b7b0a33ead373357290326d5e5969d1cd89a010225e5fc75d669111ae0b",
+  "seed": 20260930,
+  "template_rule": "Unicode NFKC lowercase; replace URLs/emails/numbers; collapse whitespace; SHA256; preserve official DIFrauD boundaries at group level"
+}

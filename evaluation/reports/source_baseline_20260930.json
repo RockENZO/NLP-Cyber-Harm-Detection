@@ -1,0 +1,195 @@
+{
+  "accuracy": 0.7773025219420064,
+  "confusion_matrix": {
+    "fraud": {
+      "fraud": 6724,
+      "legitimate": 1100
+    },
+    "legitimate": {
+      "fraud": 6918,
+      "legitimate": 21262
+    }
+  },
+  "environment": {
+    "numpy": "2.5.3",
+    "python": "3.12.13",
+    "scipy": "1.18.1",
+    "sklearn": "1.7.2"
+  },
+  "holdout_prefix": "difraud_",
+  "input_sha256": "453de8f230994ce29eae4ce2a9a94a7ced6f6e7f7176b38a1ad813bbfacd2794",
+  "labels": [
+    "fraud",
+    "legitimate"
+  ],
+  "legitimate_false_positive_rate": 0.24549325762952448,
+  "limitations": [
+    "Source grouping is not proof of semantic or template independence.",
+    "This baseline is newly trained with excluded sources; it does not evaluate bundled BERT/T5/BART/GPT checkpoints.",
+    "Upstream inherited labels and synthetic records require separate validation.",
+    "Binary fraud labels include spam under the corpus definition."
+  ],
+  "macro_f1": 0.7339193722365777,
+  "model": "TF-IDF + balanced LogisticRegression",
+  "parameters": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_features": 40000,
+    "max_iter": 1000,
+    "min_df": 2,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "random_state": 42,
+    "solver": "liblinear",
+    "sublinear_tf": true
+  },
+  "per_class": {
+    "fraud": {
+      "f1": 0.6264790832013416,
+      "precision": 0.49288960562967304,
+      "recall": 0.8594069529652352,
+      "support": 7824
+    },
+    "legitimate": {
+      "f1": 0.8413596612718137,
+      "precision": 0.9508094088185315,
+      "recall": 0.7545067423704755,
+      "support": 28180
+    }
+  },
+  "predictions_sha256": "4bf80509c3ed6eb25617b1ff03dd9f277da7b655f483533da65bd37ad37183ee",
+  "provenance_sha256": "51b85b7b0a33ead373357290326d5e5969d1cd89a010225e5fc75d669111ae0b",
+  "samples": 36004,
+  "source_metrics": {
+    "difraud_job_scams": {
+      "accuracy": 0.7480937390696047,
+      "confusion_matrix": {
+        "fraud": {
+          "fraud": 149,
+          "legitimate": 450
+        },
+        "legitimate": {
+          "fraud": 3151,
+          "legitimate": 10545
+        }
+      },
+      "labels": [
+        "fraud",
+        "legitimate"
+      ],
+      "legitimate_false_positive_rate": 0.23006717289719625,
+      "macro_f1": 0.4652936195453778,
+      "per_class": {
+        "fraud": {
+          "f1": 0.07642985380866889,
+          "precision": 0.04515151515151515,
+          "recall": 0.24874791318864775,
+          "support": 599
+        },
+        "legitimate": {
+          "f1": 0.8541573852820867,
+          "precision": 0.9590723055934516,
+          "recall": 0.7699328271028038,
+          "support": 13696
+        }
+      },
+      "samples": 14295
+    },
+    "difraud_phishing": {
+      "accuracy": 0.908820614469772,
+      "confusion_matrix": {
+        "fraud": {
+          "fraud": 5411,
+          "legitimate": 540
+        },
+        "legitimate": {
+          "fraud": 840,
+          "legitimate": 8344
+        }
+      },
+      "labels": [
+        "fraud",
+        "legitimate"
+      ],
+      "legitimate_false_positive_rate": 0.09146341463414634,
+      "macro_f1": 0.9052628295945271,
+      "per_class": {
+        "fraud": {
+          "f1": 0.8869037862645468,
+          "precision": 0.8656215005599104,
+          "recall": 0.9092589480759536,
+          "support": 5951
+        },
+        "legitimate": {
+          "f1": 0.9236218729245075,
+          "precision": 0.9392165691130122,
+          "recall": 0.9085365853658537,
+          "support": 9184
+        }
+      },
+      "samples": 15135
+    },
+    "difraud_sms": {
+      "accuracy": 0.5380285975053241,
+      "confusion_matrix": {
+        "fraud": {
+          "fraud": 1164,
+          "legitimate": 110
+        },
+        "legitimate": {
+          "fraud": 2927,
+          "legitimate": 2373
+        }
+      },
+      "labels": [
+        "fraud",
+        "legitimate"
+      ],
+      "legitimate_false_positive_rate": 0.5522641509433962,
+      "macro_f1": 0.5218570739702117,
+      "per_class": {
+        "fraud": {
+          "f1": 0.43392357875116494,
+          "precision": 0.28452701051087753,
+          "recall": 0.9136577708006279,
+          "support": 1274
+        },
+        "legitimate": {
+          "f1": 0.6097905691892587,
+          "precision": 0.9556987515102698,
+          "recall": 0.4477358490566038,
+          "support": 5300
+        }
+      },
+      "samples": 6574
+    }
+  },
+  "split_manifest_sha256": "ea79545c5d22842d6862f8602f524a4db58125f7f4e09d98ac05ef0d1b62c49f",
+  "task": "binary source-family holdout baseline",
+  "test_sources": {
+    "difraud_job_scams": 14295,
+    "difraud_phishing": 15135,
+    "difraud_sms": 6574
+  },
+  "train_samples": 158909,
+  "train_sources": {
+    "phishing_CEAS_08": 15222,
+    "phishing_Enron": 23485,
+    "phishing_Ling": 2594,
+    "phishing_Nazario": 1399,
+    "phishing_Nigerian_Fraud": 2459,
+    "phishing_SpamAssasin": 4161,
+    "phishing_phishing_email": 82075,
+    "popupdb": 11333,
+    "scam_dialogue_scam-dialogue_all": 1278,
+    "scam_dialogue_scam-dialogue_test": 320,
+    "spam_main": 706,
+    "spam_parquet": 10657,
+    "synthetic_multi-agent_conversation_all": 1600,
+    "synthetic_single-agent-scam-dialogue_test": 320,
+    "synthetic_single-agent-scam-dialogue_train": 1280,
+    "synthetic_youtube_scam_conversations": 20
+  }
+}

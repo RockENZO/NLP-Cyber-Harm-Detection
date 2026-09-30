@@ -1,0 +1,2451 @@
+{
+  "full_generated_report_sha256": "b23ea872fcb35cb5c6c569f0c72ae0d17ed1f4117d47252d9404940388b97646",
+  "limitations": [
+    "This is an in-corpus benchmark, not unseen-source validation.",
+    "The historical models may have trained on these records; this study fits new models from scratch.",
+    "Normalization catches some templates, not every semantic near duplicate.",
+    "Inherited source labels, synthetic records and source-specific shortcuts limit external generalization."
+  ],
+  "protocol": "newly fitted nine-class in-corpus comparison; official DIFrauD test/validation boundaries retained after template grouping",
+  "results": {
+    "baseline": {
+      "binary": {
+        "accuracy": 0.9642407316138218,
+        "confusion_matrix": {
+          "fraud": {
+            "fraud": 8076,
+            "legitimate": 321
+          },
+          "legitimate": {
+            "fraud": 332,
+            "legitimate": 9532
+          }
+        },
+        "labels": [
+          "fraud",
+          "legitimate"
+        ],
+        "legitimate_false_positive_rate": 0.033657745336577456,
+        "macro_f1": 0.9640119442566949,
+        "per_class": {
+          "fraud": {
+            "f1": 0.9611425171080037,
+            "precision": 0.9605137963843958,
+            "recall": 0.9617720614505181,
+            "support": 8397
+          },
+          "legitimate": {
+            "f1": 0.9668813714053861,
+            "precision": 0.9674210900233431,
+            "recall": 0.9663422546634225,
+            "support": 9864
+          }
+        },
+        "samples": 18261
+      },
+      "by_source": {
+        "difraud_job_scams": {
+          "binary": {
+            "accuracy": 0.9706293706293706,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 24,
+                "legitimate": 36
+              },
+              "legitimate": {
+                "fraud": 6,
+                "legitimate": 1364
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.004379562043795621,
+            "macro_f1": 0.7590854392298436,
+            "per_class": {
+              "fraud": {
+                "f1": 0.5333333333333333,
+                "precision": 0.8,
+                "recall": 0.4,
+                "support": 60
+              },
+              "legitimate": {
+                "f1": 0.9848375451263538,
+                "precision": 0.9742857142857143,
+                "recall": 0.9956204379562044,
+                "support": 1370
+              }
+            },
+            "samples": 1430
+          },
+          "class_support": {
+            "job_scam": 60,
+            "legitimate": 1370
+          },
+          "nine_class_accuracy": 0.9706293706293706
+        },
+        "difraud_phishing": {
+          "binary": {
+            "accuracy": 0.9746328437917223,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 559,
+                "legitimate": 26
+              },
+              "legitimate": {
+                "fraud": 12,
+                "legitimate": 901
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.013143483023001095,
+            "macro_f1": 0.9732379268843088,
+            "per_class": {
+              "fraud": {
+                "f1": 0.967128027681661,
+                "precision": 0.978984238178634,
+                "recall": 0.9555555555555556,
+                "support": 585
+              },
+              "legitimate": {
+                "f1": 0.9793478260869566,
+                "precision": 0.9719525350593312,
+                "recall": 0.9868565169769989,
+                "support": 913
+              }
+            },
+            "samples": 1498
+          },
+          "class_support": {
+            "legitimate": 913,
+            "phishing": 585
+          },
+          "nine_class_accuracy": 0.9746328437917223
+        },
+        "difraud_sms": {
+          "binary": {
+            "accuracy": 0.9042553191489362,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 123,
+                "legitimate": 5
+              },
+              "legitimate": {
+                "fraud": 58,
+                "legitimate": 472
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.10943396226415095,
+            "macro_f1": 0.8667772196565786,
+            "per_class": {
+              "fraud": {
+                "f1": 0.7961165048543689,
+                "precision": 0.6795580110497238,
+                "recall": 0.9609375,
+                "support": 128
+              },
+              "legitimate": {
+                "f1": 0.9374379344587884,
+                "precision": 0.989517819706499,
+                "recall": 0.8905660377358491,
+                "support": 530
+              }
+            },
+            "samples": 658
+          },
+          "class_support": {
+            "legitimate": 530,
+            "sms_spam": 128
+          },
+          "nine_class_accuracy": 0.8890577507598785
+        },
+        "phishing_CEAS_08": {
+          "binary": {
+            "accuracy": 0.9488636363636364,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 574,
+                "legitimate": 21
+              },
+              "legitimate": {
+                "fraud": 51,
+                "legitimate": 762
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.06273062730627306,
+            "macro_f1": 0.9479354123012449,
+            "per_class": {
+              "fraud": {
+                "f1": 0.940983606557377,
+                "precision": 0.9184,
+                "recall": 0.9647058823529412,
+                "support": 595
+              },
+              "legitimate": {
+                "f1": 0.9548872180451127,
+                "precision": 0.9731800766283525,
+                "recall": 0.9372693726937269,
+                "support": 813
+              }
+            },
+            "samples": 1408
+          },
+          "class_support": {
+            "legitimate": 813,
+            "phishing": 595
+          },
+          "nine_class_accuracy": 0.9474431818181818
+        },
+        "phishing_Enron": {
+          "binary": {
+            "accuracy": 0.893144208037825,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 886,
+                "legitimate": 137
+              },
+              "legitimate": {
+                "fraud": 89,
+                "legitimate": 1003
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0815018315018315,
+            "macro_f1": 0.8928162033000743,
+            "per_class": {
+              "fraud": {
+                "f1": 0.8868868868868869,
+                "precision": 0.9087179487179488,
+                "recall": 0.8660801564027371,
+                "support": 1023
+              },
+              "legitimate": {
+                "f1": 0.8987455197132617,
+                "precision": 0.8798245614035087,
+                "recall": 0.9184981684981685,
+                "support": 1092
+              }
+            },
+            "samples": 2115
+          },
+          "class_support": {
+            "legitimate": 1092,
+            "phishing": 1023
+          },
+          "nine_class_accuracy": 0.8926713947990543
+        },
+        "phishing_Ling": {
+          "binary": {
+            "accuracy": 0.88,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 31,
+                "legitimate": 8
+              },
+              "legitimate": {
+                "fraud": 22,
+                "legitimate": 189
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.10426540284360189,
+            "macro_f1": 0.8001918158567776,
+            "per_class": {
+              "fraud": {
+                "f1": 0.6739130434782609,
+                "precision": 0.5849056603773585,
+                "recall": 0.7948717948717948,
+                "support": 39
+              },
+              "legitimate": {
+                "f1": 0.9264705882352942,
+                "precision": 0.9593908629441624,
+                "recall": 0.8957345971563981,
+                "support": 211
+              }
+            },
+            "samples": 250
+          },
+          "class_support": {
+            "legitimate": 211,
+            "phishing": 39
+          },
+          "nine_class_accuracy": 0.88
+        },
+        "phishing_Nazario": {
+          "binary": {
+            "accuracy": 0.9487179487179487,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 148,
+                "legitimate": 8
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.4868421052631579,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9736842105263158,
+                "precision": 1.0,
+                "recall": 0.9487179487179487,
+                "support": 156
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 156
+          },
+          "class_support": {
+            "phishing": 156
+          },
+          "nine_class_accuracy": 0.9487179487179487
+        },
+        "phishing_Nigerian_Fraud": {
+          "binary": {
+            "accuracy": 0.9311740890688259,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 230,
+                "legitimate": 17
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.4821802935010482,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9643605870020964,
+                "precision": 1.0,
+                "recall": 0.9311740890688259,
+                "support": 247
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 247
+          },
+          "class_support": {
+            "phishing": 247
+          },
+          "nine_class_accuracy": 0.9311740890688259
+        },
+        "phishing_SpamAssasin": {
+          "binary": {
+            "accuracy": 0.8248587570621468,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 112,
+                "legitimate": 16
+              },
+              "legitimate": {
+                "fraud": 46,
+                "legitimate": 180
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.20353982300884957,
+            "macro_f1": 0.8181486759685812,
+            "per_class": {
+              "fraud": {
+                "f1": 0.7832167832167832,
+                "precision": 0.7088607594936709,
+                "recall": 0.875,
+                "support": 128
+              },
+              "legitimate": {
+                "f1": 0.8530805687203792,
+                "precision": 0.9183673469387755,
+                "recall": 0.7964601769911505,
+                "support": 226
+              }
+            },
+            "samples": 354
+          },
+          "class_support": {
+            "legitimate": 226,
+            "phishing": 128
+          },
+          "nine_class_accuracy": 0.8248587570621468
+        },
+        "phishing_phishing_email": {
+          "binary": {
+            "accuracy": 0.9900373599003736,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 4142,
+                "legitimate": 39
+              },
+              "legitimate": {
+                "fraud": 41,
+                "legitimate": 3808
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.010652117433099507,
+            "macro_f1": 0.9900200940373106,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9904351984696317,
+                "precision": 0.9901984221850346,
+                "recall": 0.9906720880172207,
+                "support": 4181
+              },
+              "legitimate": {
+                "f1": 0.9896049896049895,
+                "precision": 0.989862230309332,
+                "recall": 0.9893478825669005,
+                "support": 3849
+              }
+            },
+            "samples": 8030
+          },
+          "class_support": {
+            "legitimate": 3849,
+            "phishing": 4181
+          },
+          "nine_class_accuracy": 0.9900373599003736
+        },
+        "popupdb": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 463,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.5,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 463
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 463
+          },
+          "class_support": {
+            "popup_scam": 463
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "scam_dialogue_scam-dialogue_all": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 63,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 72
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 63
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 72
+              }
+            },
+            "samples": 135
+          },
+          "class_support": {
+            "legitimate": 72,
+            "refund_scam": 15,
+            "reward_scam": 14,
+            "ssn_scam": 16,
+            "tech_support_scam": 18
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "scam_dialogue_scam-dialogue_test": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 17,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 21
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 17
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 21
+              }
+            },
+            "samples": 38
+          },
+          "class_support": {
+            "legitimate": 21,
+            "refund_scam": 1,
+            "reward_scam": 9,
+            "ssn_scam": 5,
+            "tech_support_scam": 2
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "spam_main": {
+          "binary": {
+            "accuracy": 0.9682539682539683,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 19,
+                "legitimate": 1
+              },
+              "legitimate": {
+                "fraud": 1,
+                "legitimate": 42
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.023255813953488372,
+            "macro_f1": 0.9633720930232559,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9500000000000001,
+                "precision": 0.95,
+                "recall": 0.95,
+                "support": 20
+              },
+              "legitimate": {
+                "f1": 0.9767441860465116,
+                "precision": 0.9767441860465116,
+                "recall": 0.9767441860465116,
+                "support": 43
+              }
+            },
+            "samples": 63
+          },
+          "class_support": {
+            "legitimate": 43,
+            "sms_spam": 20
+          },
+          "nine_class_accuracy": 0.9682539682539683
+        },
+        "spam_parquet": {
+          "binary": {
+            "accuracy": 0.9898617511520738,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 519,
+                "legitimate": 5
+              },
+              "legitimate": {
+                "fraud": 6,
+                "legitimate": 555
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0106951871657754,
+            "macro_f1": 0.9898505777134503,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9895138226882745,
+                "precision": 0.9885714285714285,
+                "recall": 0.9904580152671756,
+                "support": 524
+              },
+              "legitimate": {
+                "f1": 0.9901873327386262,
+                "precision": 0.9910714285714286,
+                "recall": 0.9893048128342246,
+                "support": 561
+              }
+            },
+            "samples": 1085
+          },
+          "class_support": {
+            "legitimate": 561,
+            "sms_spam": 524
+          },
+          "nine_class_accuracy": 0.9797235023041475
+        },
+        "synthetic_multi-agent_conversation_all": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 77,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 78
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 77
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 78
+              }
+            },
+            "samples": 155
+          },
+          "class_support": {
+            "legitimate": 78,
+            "refund_scam": 25,
+            "reward_scam": 17,
+            "ssn_scam": 15,
+            "tech_support_scam": 20
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "synthetic_single-agent-scam-dialogue_test": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 13,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 17
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 13
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 17
+              }
+            },
+            "samples": 30
+          },
+          "class_support": {
+            "legitimate": 17,
+            "refund_scam": 3,
+            "reward_scam": 3,
+            "ssn_scam": 6,
+            "tech_support_scam": 1
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "synthetic_single-agent-scam-dialogue_train": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 76,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 68
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 76
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 68
+              }
+            },
+            "samples": 144
+          },
+          "class_support": {
+            "legitimate": 68,
+            "refund_scam": 16,
+            "reward_scam": 17,
+            "ssn_scam": 24,
+            "tech_support_scam": 19
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "synthetic_youtube_scam_conversations": {
+          "binary": {
+            "accuracy": 0.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 0,
+                "legitimate": 2
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.0,
+            "per_class": {
+              "fraud": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 2
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 2
+          },
+          "class_support": {
+            "refund_scam": 1,
+            "ssn_scam": 1
+          },
+          "nine_class_accuracy": 0.0
+        }
+      },
+      "candidate": "word_baseline",
+      "email_sms_jobs_subset": {
+        "binary": {
+          "accuracy": 0.9623568867815427,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 7367,
+              "legitimate": 319
+            },
+            "legitimate": {
+              "fraud": 332,
+              "legitimate": 9276
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.03455453788509576,
+          "macro_f1": 0.9618925524362282,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9576860578485538,
+              "precision": 0.9568775165605923,
+              "recall": 0.958495966692688,
+              "support": 7686
+            },
+            "legitimate": {
+              "f1": 0.9660990470239026,
+              "precision": 0.9667535174570089,
+              "recall": 0.9654454621149042,
+              "support": 9608
+            }
+          },
+          "samples": 17294
+        },
+        "metrics": {
+          "accuracy": 0.9609691222389268,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 24,
+              "legitimate": 36,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 1,
+              "legitimate": 9276,
+              "phishing": 326,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 5,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 272,
+              "phishing": 6679,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 3,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 11,
+              "phishing": 21,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 640,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.03455453788509576,
+          "macro_f1": 0.3840010852730243,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.5647058823529413,
+              "precision": 0.96,
+              "recall": 0.4,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9660990470239026,
+              "precision": 0.9667535174570089,
+              "recall": 0.9654454621149042,
+              "support": 9608
+            },
+            "phishing": {
+              "f1": 0.955507868383405,
+              "precision": 0.9506120125249075,
+              "recall": 0.960454414725338,
+              "support": 6954
+            },
+            "popup_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "refund_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "reward_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "sms_spam": {
+              "f1": 0.9696969696969696,
+              "precision": 0.9876543209876543,
+              "recall": 0.9523809523809523,
+              "support": 672
+            },
+            "ssn_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "tech_support_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            }
+          },
+          "samples": 17294
+        },
+        "scope": "DIFrauD, phishing and spam source families; excludes popup and dialogue sources"
+      },
+      "model_sha256": "c199b202d26f4afc8217c10a4b84b3c10cadbfdb4e39574321dc807c31cc28b4",
+      "nine_class": {
+        "accuracy": 0.9629264552872241,
+        "confusion_matrix": {
+          "job_scam": {
+            "job_scam": 24,
+            "legitimate": 36,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "legitimate": {
+            "job_scam": 1,
+            "legitimate": 9532,
+            "phishing": 326,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 5,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "phishing": {
+            "job_scam": 0,
+            "legitimate": 272,
+            "phishing": 6679,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 3,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "popup_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 463,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "refund_scam": {
+            "job_scam": 0,
+            "legitimate": 1,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 60,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "reward_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 60,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "sms_spam": {
+            "job_scam": 0,
+            "legitimate": 11,
+            "phishing": 21,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 640,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "ssn_scam": {
+            "job_scam": 0,
+            "legitimate": 1,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 66,
+            "tech_support_scam": 0
+          },
+          "tech_support_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 60
+          }
+        },
+        "labels": [
+          "job_scam",
+          "legitimate",
+          "phishing",
+          "popup_scam",
+          "refund_scam",
+          "reward_scam",
+          "sms_spam",
+          "ssn_scam",
+          "tech_support_scam"
+        ],
+        "legitimate_false_positive_rate": 0.033657745336577456,
+        "macro_f1": 0.9378898702262559,
+        "per_class": {
+          "job_scam": {
+            "f1": 0.5647058823529413,
+            "precision": 0.96,
+            "recall": 0.4,
+            "support": 60
+          },
+          "legitimate": {
+            "f1": 0.9668813714053861,
+            "precision": 0.9674210900233431,
+            "recall": 0.9663422546634225,
+            "support": 9864
+          },
+          "phishing": {
+            "f1": 0.955507868383405,
+            "precision": 0.9506120125249075,
+            "recall": 0.960454414725338,
+            "support": 6954
+          },
+          "popup_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 463
+          },
+          "refund_scam": {
+            "f1": 0.9917355371900827,
+            "precision": 1.0,
+            "recall": 0.9836065573770492,
+            "support": 61
+          },
+          "reward_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 60
+          },
+          "sms_spam": {
+            "f1": 0.9696969696969696,
+            "precision": 0.9876543209876543,
+            "recall": 0.9523809523809523,
+            "support": 672
+          },
+          "ssn_scam": {
+            "f1": 0.9924812030075187,
+            "precision": 1.0,
+            "recall": 0.9850746268656716,
+            "support": 67
+          },
+          "tech_support_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 60
+          }
+        },
+        "samples": 18261
+      },
+      "offset": 0,
+      "predictions_sha256": "51ceebce3237ae9c1374f6377a1e112014552f7c92f82db23c43d5c31a66d99b"
+    },
+    "selected": {
+      "binary": {
+        "accuracy": 0.9709763977876349,
+        "confusion_matrix": {
+          "fraud": {
+            "fraud": 8040,
+            "legitimate": 357
+          },
+          "legitimate": {
+            "fraud": 173,
+            "legitimate": 9691
+          }
+        },
+        "labels": [
+          "fraud",
+          "legitimate"
+        ],
+        "legitimate_false_positive_rate": 0.01753852392538524,
+        "macro_f1": 0.9707371979152581,
+        "per_class": {
+          "fraud": {
+            "f1": 0.9680915111378687,
+            "precision": 0.9789358334347985,
+            "recall": 0.9574848160057163,
+            "support": 8397
+          },
+          "legitimate": {
+            "f1": 0.9733828846926477,
+            "precision": 0.9644705414012739,
+            "recall": 0.9824614760746148,
+            "support": 9864
+          }
+        },
+        "samples": 18261
+      },
+      "by_source": {
+        "difraud_job_scams": {
+          "binary": {
+            "accuracy": 0.9748251748251748,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 29,
+                "legitimate": 31
+              },
+              "legitimate": {
+                "fraud": 5,
+                "legitimate": 1365
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0036496350364963502,
+            "macro_f1": 0.8020030461069829,
+            "per_class": {
+              "fraud": {
+                "f1": 0.6170212765957447,
+                "precision": 0.8529411764705882,
+                "recall": 0.48333333333333334,
+                "support": 60
+              },
+              "legitimate": {
+                "f1": 0.9869848156182212,
+                "precision": 0.9777936962750716,
+                "recall": 0.9963503649635036,
+                "support": 1370
+              }
+            },
+            "samples": 1430
+          },
+          "class_support": {
+            "job_scam": 60,
+            "legitimate": 1370
+          },
+          "nine_class_accuracy": 0.9748251748251748
+        },
+        "difraud_phishing": {
+          "binary": {
+            "accuracy": 0.9799732977303071,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 562,
+                "legitimate": 23
+              },
+              "legitimate": {
+                "fraud": 7,
+                "legitimate": 906
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.007667031763417305,
+            "macro_f1": 0.9788584106266831,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9740034662045062,
+                "precision": 0.9876977152899824,
+                "recall": 0.9606837606837607,
+                "support": 585
+              },
+              "legitimate": {
+                "f1": 0.9837133550488599,
+                "precision": 0.9752421959095802,
+                "recall": 0.9923329682365827,
+                "support": 913
+              }
+            },
+            "samples": 1498
+          },
+          "class_support": {
+            "legitimate": 913,
+            "phishing": 585
+          },
+          "nine_class_accuracy": 0.9799732977303071
+        },
+        "difraud_sms": {
+          "binary": {
+            "accuracy": 0.9498480243161094,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 125,
+                "legitimate": 3
+              },
+              "legitimate": {
+                "fraud": 30,
+                "legitimate": 500
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.05660377358490566,
+            "macro_f1": 0.9257232185921139,
+            "per_class": {
+              "fraud": {
+                "f1": 0.8833922261484098,
+                "precision": 0.8064516129032258,
+                "recall": 0.9765625,
+                "support": 128
+              },
+              "legitimate": {
+                "f1": 0.968054211035818,
+                "precision": 0.9940357852882704,
+                "recall": 0.9433962264150944,
+                "support": 530
+              }
+            },
+            "samples": 658
+          },
+          "class_support": {
+            "legitimate": 530,
+            "sms_spam": 128
+          },
+          "nine_class_accuracy": 0.9468085106382979
+        },
+        "phishing_CEAS_08": {
+          "binary": {
+            "accuracy": 0.9566761363636364,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 556,
+                "legitimate": 39
+              },
+              "legitimate": {
+                "fraud": 22,
+                "legitimate": 791
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.02706027060270603,
+            "macro_f1": 0.9554346918052198,
+            "per_class": {
+              "fraud": {
+                "f1": 0.947996589940324,
+                "precision": 0.9619377162629758,
+                "recall": 0.934453781512605,
+                "support": 595
+              },
+              "legitimate": {
+                "f1": 0.9628727936701156,
+                "precision": 0.9530120481927711,
+                "recall": 0.972939729397294,
+                "support": 813
+              }
+            },
+            "samples": 1408
+          },
+          "class_support": {
+            "legitimate": 813,
+            "phishing": 595
+          },
+          "nine_class_accuracy": 0.9559659090909091
+        },
+        "phishing_Enron": {
+          "binary": {
+            "accuracy": 0.9030732860520094,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 874,
+                "legitimate": 149
+              },
+              "legitimate": {
+                "fraud": 56,
+                "legitimate": 1036
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.05128205128205128,
+            "macro_f1": 0.9025012699627005,
+            "per_class": {
+              "fraud": {
+                "f1": 0.8950332821300563,
+                "precision": 0.9397849462365592,
+                "recall": 0.8543499511241447,
+                "support": 1023
+              },
+              "legitimate": {
+                "f1": 0.9099692577953448,
+                "precision": 0.8742616033755274,
+                "recall": 0.9487179487179487,
+                "support": 1092
+              }
+            },
+            "samples": 2115
+          },
+          "class_support": {
+            "legitimate": 1092,
+            "phishing": 1023
+          },
+          "nine_class_accuracy": 0.9026004728132387
+        },
+        "phishing_Ling": {
+          "binary": {
+            "accuracy": 0.956,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 35,
+                "legitimate": 4
+              },
+              "legitimate": {
+                "fraud": 7,
+                "legitimate": 204
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.03317535545023697,
+            "macro_f1": 0.9189722737853208,
+            "per_class": {
+              "fraud": {
+                "f1": 0.8641975308641975,
+                "precision": 0.8333333333333334,
+                "recall": 0.8974358974358975,
+                "support": 39
+              },
+              "legitimate": {
+                "f1": 0.9737470167064439,
+                "precision": 0.9807692307692307,
+                "recall": 0.966824644549763,
+                "support": 211
+              }
+            },
+            "samples": 250
+          },
+          "class_support": {
+            "legitimate": 211,
+            "phishing": 39
+          },
+          "nine_class_accuracy": 0.956
+        },
+        "phishing_Nazario": {
+          "binary": {
+            "accuracy": 0.9102564102564102,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 142,
+                "legitimate": 14
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.476510067114094,
+            "per_class": {
+              "fraud": {
+                "f1": 0.953020134228188,
+                "precision": 1.0,
+                "recall": 0.9102564102564102,
+                "support": 156
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 156
+          },
+          "class_support": {
+            "phishing": 156
+          },
+          "nine_class_accuracy": 0.9102564102564102
+        },
+        "phishing_Nigerian_Fraud": {
+          "binary": {
+            "accuracy": 0.9271255060728745,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 229,
+                "legitimate": 18
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.4810924369747899,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9621848739495799,
+                "precision": 1.0,
+                "recall": 0.9271255060728745,
+                "support": 247
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 247
+          },
+          "class_support": {
+            "phishing": 247
+          },
+          "nine_class_accuracy": 0.9271255060728745
+        },
+        "phishing_SpamAssasin": {
+          "binary": {
+            "accuracy": 0.847457627118644,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 99,
+                "legitimate": 29
+              },
+              "legitimate": {
+                "fraud": 25,
+                "legitimate": 201
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.11061946902654868,
+            "macro_f1": 0.8336466165413534,
+            "per_class": {
+              "fraud": {
+                "f1": 0.7857142857142857,
+                "precision": 0.7983870967741935,
+                "recall": 0.7734375,
+                "support": 128
+              },
+              "legitimate": {
+                "f1": 0.881578947368421,
+                "precision": 0.8739130434782608,
+                "recall": 0.8893805309734514,
+                "support": 226
+              }
+            },
+            "samples": 354
+          },
+          "class_support": {
+            "legitimate": 226,
+            "phishing": 128
+          },
+          "nine_class_accuracy": 0.8418079096045198
+        },
+        "phishing_phishing_email": {
+          "binary": {
+            "accuracy": 0.9929016189290162,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 4140,
+                "legitimate": 41
+              },
+              "legitimate": {
+                "fraud": 16,
+                "legitimate": 3833
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.004156923876331515,
+            "macro_f1": 0.9928912283386194,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9931630082763584,
+                "precision": 0.9961501443695862,
+                "recall": 0.9901937335565654,
+                "support": 4181
+              },
+              "legitimate": {
+                "f1": 0.9926194484008805,
+                "precision": 0.9894166236448115,
+                "recall": 0.9958430761236685,
+                "support": 3849
+              }
+            },
+            "samples": 8030
+          },
+          "class_support": {
+            "legitimate": 3849,
+            "phishing": 4181
+          },
+          "nine_class_accuracy": 0.9929016189290162
+        },
+        "popupdb": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 463,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.5,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 463
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 463
+          },
+          "class_support": {
+            "popup_scam": 463
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "scam_dialogue_scam-dialogue_all": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 63,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 72
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 63
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 72
+              }
+            },
+            "samples": 135
+          },
+          "class_support": {
+            "legitimate": 72,
+            "refund_scam": 15,
+            "reward_scam": 14,
+            "ssn_scam": 16,
+            "tech_support_scam": 18
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "scam_dialogue_scam-dialogue_test": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 17,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 21
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 17
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 21
+              }
+            },
+            "samples": 38
+          },
+          "class_support": {
+            "legitimate": 21,
+            "refund_scam": 1,
+            "reward_scam": 9,
+            "ssn_scam": 5,
+            "tech_support_scam": 2
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "spam_main": {
+          "binary": {
+            "accuracy": 0.9841269841269841,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 20,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 1,
+                "legitimate": 42
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.023255813953488372,
+            "macro_f1": 0.981922525107604,
+            "per_class": {
+              "fraud": {
+                "f1": 0.975609756097561,
+                "precision": 0.9523809523809523,
+                "recall": 1.0,
+                "support": 20
+              },
+              "legitimate": {
+                "f1": 0.988235294117647,
+                "precision": 1.0,
+                "recall": 0.9767441860465116,
+                "support": 43
+              }
+            },
+            "samples": 63
+          },
+          "class_support": {
+            "legitimate": 43,
+            "sms_spam": 20
+          },
+          "nine_class_accuracy": 0.9841269841269841
+        },
+        "spam_parquet": {
+          "binary": {
+            "accuracy": 0.992626728110599,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 520,
+                "legitimate": 4
+              },
+              "legitimate": {
+                "fraud": 4,
+                "legitimate": 557
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0071301247771836,
+            "macro_f1": 0.9926181437182784,
+            "per_class": {
+              "fraud": {
+                "f1": 0.9923664122137404,
+                "precision": 0.9923664122137404,
+                "recall": 0.9923664122137404,
+                "support": 524
+              },
+              "legitimate": {
+                "f1": 0.9928698752228164,
+                "precision": 0.9928698752228164,
+                "recall": 0.9928698752228164,
+                "support": 561
+              }
+            },
+            "samples": 1085
+          },
+          "class_support": {
+            "legitimate": 561,
+            "sms_spam": 524
+          },
+          "nine_class_accuracy": 0.9889400921658986
+        },
+        "synthetic_multi-agent_conversation_all": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 77,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 78
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 77
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 78
+              }
+            },
+            "samples": 155
+          },
+          "class_support": {
+            "legitimate": 78,
+            "refund_scam": 25,
+            "reward_scam": 17,
+            "ssn_scam": 15,
+            "tech_support_scam": 20
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "synthetic_single-agent-scam-dialogue_test": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 13,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 17
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 13
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 17
+              }
+            },
+            "samples": 30
+          },
+          "class_support": {
+            "legitimate": 17,
+            "refund_scam": 3,
+            "reward_scam": 3,
+            "ssn_scam": 6,
+            "tech_support_scam": 1
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "synthetic_single-agent-scam-dialogue_train": {
+          "binary": {
+            "accuracy": 1.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 76,
+                "legitimate": 0
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 68
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": 0.0,
+            "macro_f1": 1.0,
+            "per_class": {
+              "fraud": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 76
+              },
+              "legitimate": {
+                "f1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 68
+              }
+            },
+            "samples": 144
+          },
+          "class_support": {
+            "legitimate": 68,
+            "refund_scam": 16,
+            "reward_scam": 17,
+            "ssn_scam": 24,
+            "tech_support_scam": 19
+          },
+          "nine_class_accuracy": 1.0
+        },
+        "synthetic_youtube_scam_conversations": {
+          "binary": {
+            "accuracy": 0.0,
+            "confusion_matrix": {
+              "fraud": {
+                "fraud": 0,
+                "legitimate": 2
+              },
+              "legitimate": {
+                "fraud": 0,
+                "legitimate": 0
+              }
+            },
+            "labels": [
+              "fraud",
+              "legitimate"
+            ],
+            "legitimate_false_positive_rate": null,
+            "macro_f1": 0.0,
+            "per_class": {
+              "fraud": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 2
+              },
+              "legitimate": {
+                "f1": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support": 0
+              }
+            },
+            "samples": 2
+          },
+          "class_support": {
+            "refund_scam": 1,
+            "ssn_scam": 1
+          },
+          "nine_class_accuracy": 0.0
+        }
+      },
+      "candidate": "word_char_balanced",
+      "email_sms_jobs_subset": {
+        "binary": {
+          "accuracy": 0.9694691800624494,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 7331,
+              "legitimate": 355
+            },
+            "legitimate": {
+              "fraud": 173,
+              "legitimate": 9435
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.018005828476269775,
+          "macro_f1": 0.9690104943526956,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9652402896642528,
+              "precision": 0.9769456289978679,
+              "recall": 0.9538121259432735,
+              "support": 7686
+            },
+            "legitimate": {
+              "f1": 0.9727806990411384,
+              "precision": 0.9637385086823289,
+              "recall": 0.9819941715237303,
+              "support": 9608
+            }
+          },
+          "samples": 17294
+        },
+        "metrics": {
+          "accuracy": 0.9688909448363594,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 29,
+              "legitimate": 31,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 4,
+              "legitimate": 9435,
+              "phishing": 164,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 5,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 317,
+              "phishing": 6633,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 4,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 7,
+              "phishing": 6,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 659,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.018005828476269775,
+          "macro_f1": 0.3938141979540213,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.6236559139784946,
+              "precision": 0.8787878787878788,
+              "recall": 0.48333333333333334,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9727806990411384,
+              "precision": 0.9637385086823289,
+              "recall": 0.9819941715237303,
+              "support": 9608
+            },
+            "phishing": {
+              "f1": 0.96430907901432,
+              "precision": 0.9750110245479935,
+              "recall": 0.953839516824849,
+              "support": 6954
+            },
+            "popup_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "refund_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "reward_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "sms_spam": {
+              "f1": 0.9835820895522387,
+              "precision": 0.9865269461077845,
+              "recall": 0.9806547619047619,
+              "support": 672
+            },
+            "ssn_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            },
+            "tech_support_scam": {
+              "f1": 0.0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "support": 0
+            }
+          },
+          "samples": 17294
+        },
+        "scope": "DIFrauD, phishing and spam source families; excludes popup and dialogue sources"
+      },
+      "model_sha256": "55ede1312ee8b52f98492cca5e354094155bef23fd9ffec3d15b53efec50c761",
+      "nine_class": {
+        "accuracy": 0.9704287826515525,
+        "confusion_matrix": {
+          "job_scam": {
+            "job_scam": 29,
+            "legitimate": 31,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "legitimate": {
+            "job_scam": 4,
+            "legitimate": 9691,
+            "phishing": 164,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 5,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "phishing": {
+            "job_scam": 0,
+            "legitimate": 317,
+            "phishing": 6633,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 4,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "popup_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 463,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "refund_scam": {
+            "job_scam": 0,
+            "legitimate": 1,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 60,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "reward_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 60,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "sms_spam": {
+            "job_scam": 0,
+            "legitimate": 7,
+            "phishing": 6,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 659,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "ssn_scam": {
+            "job_scam": 0,
+            "legitimate": 1,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 66,
+            "tech_support_scam": 0
+          },
+          "tech_support_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 60
+          }
+        },
+        "labels": [
+          "job_scam",
+          "legitimate",
+          "phishing",
+          "popup_scam",
+          "refund_scam",
+          "reward_scam",
+          "sms_spam",
+          "ssn_scam",
+          "tech_support_scam"
+        ],
+        "legitimate_false_positive_rate": 0.01753852392538524,
+        "macro_f1": 0.9476829674928113,
+        "per_class": {
+          "job_scam": {
+            "f1": 0.6236559139784946,
+            "precision": 0.8787878787878788,
+            "recall": 0.48333333333333334,
+            "support": 60
+          },
+          "legitimate": {
+            "f1": 0.9733828846926477,
+            "precision": 0.9644705414012739,
+            "recall": 0.9824614760746148,
+            "support": 9864
+          },
+          "phishing": {
+            "f1": 0.96430907901432,
+            "precision": 0.9750110245479935,
+            "recall": 0.953839516824849,
+            "support": 6954
+          },
+          "popup_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 463
+          },
+          "refund_scam": {
+            "f1": 0.9917355371900827,
+            "precision": 1.0,
+            "recall": 0.9836065573770492,
+            "support": 61
+          },
+          "reward_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 60
+          },
+          "sms_spam": {
+            "f1": 0.9835820895522387,
+            "precision": 0.9865269461077845,
+            "recall": 0.9806547619047619,
+            "support": 672
+          },
+          "ssn_scam": {
+            "f1": 0.9924812030075187,
+            "precision": 1.0,
+            "recall": 0.9850746268656716,
+            "support": 67
+          },
+          "tech_support_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 60
+          }
+        },
+        "samples": 18261
+      },
+      "offset": 0.25,
+      "predictions_sha256": "753ed2dfff8fc2795e7215371f091eba86f4945ee3459a72e14f2ab1f8f604a9"
+    }
+  },
+  "selection_rule": "validation FPR<=0.03 and fraud recall>=0.80, then maximum nine-class macro F1; if none eligible report unmet gate",
+  "selection_sha256": "ebd2ccec7968d84ac2a47a1ca40577efe238c06bbb362fad339effb3a06fa59b",
+  "split_manifest_sha256": "bf4b0b82398cc5d80adddf27062ef4289b0c128cf6897bc286dce2ab1cb18759"
+}

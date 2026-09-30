@@ -39,3 +39,69 @@ python evaluation/evaluate_predictions.py held_out_predictions.csv --output eval
 - `reasoning/`: experimental explanation notebooks
 
 See [historical project notes](docs/PROJECT_HISTORY.md) for previous experiments and reported results. Those notes include older commands and performance claims that have not been independently verified against a frozen test set.
+
+## Reproducible source holdout baseline
+
+The reviewed corpus has nine categories (eight fraud categories plus legitimate). `evaluation/labels.json` fixes their order for multiclass scoring, including zero-support categories. Unknown labels are rejected. Reports include legitimate false-positive rate and prediction-file SHA-256.
+
+A new **binary** baseline was trained with the entire `difraud_` source family excluded from training. This is a fresh TF-IDF + balanced Logistic Regression baseline, not a measurement of the bundled neural checkpoints.
+
+| Metric | Reviewed run |
+| --- | ---: |
+| Training rows | 158,909 |
+| Held-out source rows | 36,004 |
+| Accuracy | 0.7773 |
+| Macro F1 (binary) | 0.7339 |
+| Legitimate false-positive rate | 0.2455 |
+
+See [full report](evaluation/reports/source_baseline_20260930.json) for per-source metrics, parameters, input/provenance hashes, split/prediction hashes and runtime versions. These results show substantial false-positive and cross-source generalization problems; they do not support a production-readiness claim.
+
+```bash
+# In the data repository, use the reviewed build from its README first.
+# Then in this repository (Python 3.12):
+pip install -r evaluation/requirements.txt
+python evaluation/source_baseline.py \
+  --data ../data/artifacts/verified/final_fraud_detection_dataset.csv \
+  --provenance ../data/artifacts/verified/provenance.jsonl \
+  --output-dir runs/source-baseline
+python evaluation/evaluate_predictions.py runs/source-baseline/predictions.csv \
+  --labels evaluation/binary_labels.json --output runs/source-baseline/scored.json
+```
+
+The partition verifies row order, content hashes, unique texts and provenance before fitting. No vocabulary is fitted on test texts. It writes exact train/test sample IDs in `split_manifest.json`; predictions contain sample IDs and source identifiers without message content. Test source identity is excluded from features. Source grouping does not prove template/semantic independence, and inherited spam/fraud labels require further adjudication.
+
+For existing BERT/T5/BART/LLM checkpoints, their original training IDs and untouched held-out data must be recovered before publishing accuracy. The combined corpus may already have been used in training, so scoring these checkpoints on a newly chosen subset is not a valid held-out evaluation. Explanation faithfulness also requires a separate reviewed annotation protocol; this binary classifier report makes no explanation-quality claim.
+
+## Improved nine-class classifier study
+
+This experiment trains **new** classifiers from scratch and compares them on the same frozen template-grouped split. It addresses the complete nine-category task; it is a separate in-corpus study and must not be compared numerically to the earlier unseen-source binary benchmark as if they used the same test set.
+
+Dataset: 194,913 input records; 11,809 normalized duplicates and 99 records in conflicting-label template groups were excluded before fitting. Retained split: 146,512 training, 18,232 validation, 18,261 test records. URL/email/number variants are grouped after Unicode normalization. Official DIFrauD test/validation boundaries take priority within groups; other groups use a deterministic hash split. Each retained template contributes one representative. All nine labels are represented in every split.
+
+| Frozen internal test metric | Word SVM baseline | Selected word + character SVM |
+| --- | ---: | ---: |
+| Nine-class macro F1 | 0.93789 | **0.94768** |
+| Nine-class accuracy | 0.96293 | **0.97043** |
+| Legitimate false-positive rate | 0.03366 | **0.01754** |
+| Binary fraud recall | 0.96177 | 0.95748 |
+
+The selected model uses word 1–2 grams and character 3–5 grams, a balanced LinearSVC and a +0.25 legitimate-class decision-margin offset. Model/offset selection uses validation only: first require legitimate FPR <=3% and fraud recall >=80%, then maximize nine-class macro F1. The final test is evaluated once after selection. This reduces false positives by approximately 48% relative to the matched baseline with a small recall tradeoff.
+
+[Split protocol](evaluation/reports/nine_class_split_20260930.json), [complete validation selection](evaluation/reports/nine_class_selection_20260930.json) and [per-class/per-source final results](evaluation/reports/nine_class_test_20260930.json) include hashes and support counts. Exact split IDs, predictions and locally trained models are generated under `runs/nine-class-study/`.
+
+```bash
+# Rebuild the reviewed data corpus first, following the earlier section.
+pip install -r evaluation/requirements.txt
+python evaluation/performance_study.py prepare
+python evaluation/performance_study.py select
+python evaluation/performance_study.py evaluate
+python evaluation/predict_study.py --text 'Your appointment is confirmed for tomorrow.'
+```
+
+The script refuses existing study/model output directories or a second final test evaluation. The inference CLI checks the model hash against the frozen selection. Only load trusted locally generated joblib artifacts; joblib is not a safe format for untrusted downloaded files. Decision margins are not calibrated probabilities.
+
+### Interpretation and resume wording
+
+An accurate statement is: **“Built a reproducible nine-class text classifier; on an 18,261-record template-grouped internal test, achieved macro F1 0.948 and reduced legitimate-message false positives from 3.37% to 1.75% versus a matched baseline.”**
+
+This describes a benchmark result, not universal scam detection. Some dialogue categories include synthetic content and show near-perfect separation; aggregate macro F1 should be read with the per-class results. On the 60 job-scam test examples, recall is 0.4833 and F1 0.6237. Unknown sources, semantic near duplicates, label adjudication, dataset shift and explanation faithfulness remain separate research questions. The new study does not validate any existing BERT/T5/BART/LLM checkpoint or its explanations. No deployment-readiness claim is made.

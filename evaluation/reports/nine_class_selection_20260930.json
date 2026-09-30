@@ -1,0 +1,1536 @@
+{
+  "candidates": [
+    {
+      "candidate": "word_baseline",
+      "elapsed_seconds": 40.931675084051676,
+      "legitimate_margin_offset": 0,
+      "model_sha256": "c199b202d26f4afc8217c10a4b84b3c10cadbfdb4e39574321dc807c31cc28b4",
+      "validation": {
+        "binary": {
+          "accuracy": 0.9647871873628785,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 8199,
+              "legitimate": 321
+            },
+            "legitimate": {
+              "fraud": 321,
+              "legitimate": 9391
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.033051894563426686,
+          "macro_f1": 0.9646360245492726,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9623239436619718,
+              "precision": 0.9623239436619718,
+              "recall": 0.9623239436619718,
+              "support": 8520
+            },
+            "legitimate": {
+              "f1": 0.9669481054365733,
+              "precision": 0.9669481054365733,
+              "recall": 0.9669481054365733,
+              "support": 9712
+            }
+          },
+          "samples": 18232
+        },
+        "nine_class": {
+          "accuracy": 0.962977182974989,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 33,
+              "legitimate": 24,
+              "phishing": 3,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 3,
+              "legitimate": 9391,
+              "phishing": 313,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 5,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 278,
+              "phishing": 6773,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 4,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 468,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 50,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 1,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 72,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 18,
+              "phishing": 26,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 649,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 60,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 61
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.033051894563426686,
+          "macro_f1": 0.9515871840680852,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.6874999999999999,
+              "precision": 0.9166666666666666,
+              "recall": 0.55,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9669481054365733,
+              "precision": 0.9669481054365733,
+              "recall": 0.9669481054365733,
+              "support": 9712
+            },
+            "phishing": {
+              "f1": 0.9559633027522935,
+              "precision": 0.9519325368938861,
+              "recall": 0.9600283486888731,
+              "support": 7055
+            },
+            "popup_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 468
+            },
+            "refund_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 50
+            },
+            "reward_scam": {
+              "f1": 0.993103448275862,
+              "precision": 1.0,
+              "recall": 0.9863013698630136,
+              "support": 73
+            },
+            "sms_spam": {
+              "f1": 0.9607698001480385,
+              "precision": 0.986322188449848,
+              "recall": 0.9365079365079365,
+              "support": 693
+            },
+            "ssn_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 60
+            },
+            "tech_support_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 61
+            }
+          },
+          "samples": 18232
+        }
+      }
+    },
+    {
+      "candidate": "word_char_balanced",
+      "elapsed_seconds": 267.6971379580209,
+      "legitimate_margin_offset": 0,
+      "model_sha256": "55ede1312ee8b52f98492cca5e354094155bef23fd9ffec3d15b53efec50c761",
+      "validation": {
+        "binary": {
+          "accuracy": 0.9709302325581395,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 8260,
+              "legitimate": 260
+            },
+            "legitimate": {
+              "fraud": 270,
+              "legitimate": 9442
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.027800658978583196,
+          "macro_f1": 0.9708075346660072,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9689149560117302,
+              "precision": 0.9683470105509965,
+              "recall": 0.9694835680751174,
+              "support": 8520
+            },
+            "legitimate": {
+              "f1": 0.9727001133202843,
+              "precision": 0.9732014017728303,
+              "recall": 0.9721993410214168,
+              "support": 9712
+            }
+          },
+          "samples": 18232
+        },
+        "nine_class": {
+          "accuracy": 0.9695590171127687,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 40,
+              "legitimate": 18,
+              "phishing": 2,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 11,
+              "legitimate": 9442,
+              "phishing": 248,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 11,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 228,
+              "phishing": 6818,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 9,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 468,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 50,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 1,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 72,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 13,
+              "phishing": 13,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 1,
+              "sms_spam": 666,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 60,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 61
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.027800658978583196,
+          "macro_f1": 0.9566965389474584,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.7207207207207207,
+              "precision": 0.7843137254901961,
+              "recall": 0.6666666666666666,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9727001133202843,
+              "precision": 0.9732014017728303,
+              "recall": 0.9721993410214168,
+              "support": 9712
+            },
+            "phishing": {
+              "f1": 0.9646293152235428,
+              "precision": 0.9628583533399238,
+              "recall": 0.9664068036853296,
+              "support": 7055
+            },
+            "popup_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 468
+            },
+            "refund_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 50
+            },
+            "reward_scam": {
+              "f1": 0.9863013698630136,
+              "precision": 0.9863013698630136,
+              "recall": 0.9863013698630136,
+              "support": 73
+            },
+            "sms_spam": {
+              "f1": 0.9659173313995648,
+              "precision": 0.9708454810495627,
+              "recall": 0.961038961038961,
+              "support": 693
+            },
+            "ssn_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 60
+            },
+            "tech_support_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 61
+            }
+          },
+          "samples": 18232
+        }
+      }
+    },
+    {
+      "candidate": "word_char_balanced",
+      "elapsed_seconds": 267.71854937495664,
+      "legitimate_margin_offset": 0.25,
+      "model_sha256": "55ede1312ee8b52f98492cca5e354094155bef23fd9ffec3d15b53efec50c761",
+      "validation": {
+        "binary": {
+          "accuracy": 0.9705462922334357,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 8164,
+              "legitimate": 356
+            },
+            "legitimate": {
+              "fraud": 181,
+              "legitimate": 9531
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.01863673805601318,
+          "macro_f1": 0.9703797759365222,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9681589089831012,
+              "precision": 0.9783103654883164,
+              "recall": 0.9582159624413146,
+              "support": 8520
+            },
+            "legitimate": {
+              "f1": 0.9726006428899433,
+              "precision": 0.9639931222817841,
+              "recall": 0.9813632619439868,
+              "support": 9712
+            }
+          },
+          "samples": 18232
+        },
+        "nine_class": {
+          "accuracy": 0.9692299254058798,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 38,
+              "legitimate": 20,
+              "phishing": 2,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 7,
+              "legitimate": 9531,
+              "phishing": 168,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 6,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 318,
+              "phishing": 6729,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 8,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 468,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 50,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 1,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 72,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 17,
+              "phishing": 13,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 1,
+              "sms_spam": 662,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 60,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 61
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.01863673805601318,
+          "macro_f1": 0.9570441981885938,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.7238095238095237,
+              "precision": 0.8444444444444444,
+              "recall": 0.6333333333333333,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9726006428899433,
+              "precision": 0.9639931222817841,
+              "recall": 0.9813632619439868,
+              "support": 9712
+            },
+            "phishing": {
+              "f1": 0.9635569556812486,
+              "precision": 0.9735243055555556,
+              "recall": 0.9537916371367824,
+              "support": 7055
+            },
+            "popup_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 468
+            },
+            "refund_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 50
+            },
+            "reward_scam": {
+              "f1": 0.9863013698630136,
+              "precision": 0.9863013698630136,
+              "recall": 0.9863013698630136,
+              "support": 73
+            },
+            "sms_spam": {
+              "f1": 0.9671292914536158,
+              "precision": 0.9792899408284024,
+              "recall": 0.9552669552669553,
+              "support": 693
+            },
+            "ssn_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 60
+            },
+            "tech_support_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 61
+            }
+          },
+          "samples": 18232
+        }
+      }
+    },
+    {
+      "candidate": "word_char_balanced",
+      "elapsed_seconds": 267.7384769159835,
+      "legitimate_margin_offset": 0.5,
+      "model_sha256": "55ede1312ee8b52f98492cca5e354094155bef23fd9ffec3d15b53efec50c761",
+      "validation": {
+        "binary": {
+          "accuracy": 0.9671456779289161,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 8041,
+              "legitimate": 479
+            },
+            "legitimate": {
+              "fraud": 120,
+              "legitimate": 9592
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.012355848434925865,
+          "macro_f1": 0.9669061799391572,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9640908818416163,
+              "precision": 0.9852959196176939,
+              "recall": 0.9437793427230047,
+              "support": 8520
+            },
+            "legitimate": {
+              "f1": 0.9697214780366982,
+              "precision": 0.952437692384073,
+              "recall": 0.9876441515650741,
+              "support": 9712
+            }
+          },
+          "samples": 18232
+        },
+        "nine_class": {
+          "accuracy": 0.9659390083369899,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 37,
+              "legitimate": 21,
+              "phishing": 2,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 5,
+              "legitimate": 9592,
+              "phishing": 111,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 4,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 436,
+              "phishing": 6613,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 6,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 468,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 50,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 2,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 71,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 20,
+              "phishing": 13,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 1,
+              "sms_spam": 659,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 60,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 61
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.012355848434925865,
+          "macro_f1": 0.9556710291424724,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.7254901960784315,
+              "precision": 0.8809523809523809,
+              "recall": 0.6166666666666667,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9697214780366982,
+              "precision": 0.952437692384073,
+              "recall": 0.9876441515650741,
+              "support": 9712
+            },
+            "phishing": {
+              "f1": 0.9588226765260258,
+              "precision": 0.9813028639263985,
+              "recall": 0.9373493975903614,
+              "support": 7055
+            },
+            "popup_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 468
+            },
+            "refund_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 50
+            },
+            "reward_scam": {
+              "f1": 0.9793103448275863,
+              "precision": 0.9861111111111112,
+              "recall": 0.9726027397260274,
+              "support": 73
+            },
+            "sms_spam": {
+              "f1": 0.9676945668135095,
+              "precision": 0.9850523168908819,
+              "recall": 0.950937950937951,
+              "support": 693
+            },
+            "ssn_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 60
+            },
+            "tech_support_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 61
+            }
+          },
+          "samples": 18232
+        }
+      }
+    },
+    {
+      "candidate": "word_char_balanced",
+      "elapsed_seconds": 267.7578737910371,
+      "legitimate_margin_offset": 0.75,
+      "model_sha256": "55ede1312ee8b52f98492cca5e354094155bef23fd9ffec3d15b53efec50c761",
+      "validation": {
+        "binary": {
+          "accuracy": 0.9609477841158403,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 7900,
+              "legitimate": 620
+            },
+            "legitimate": {
+              "fraud": 92,
+              "legitimate": 9620
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.009472817133443162,
+          "macro_f1": 0.960597099705961,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9568798449612403,
+              "precision": 0.9884884884884885,
+              "recall": 0.9272300469483568,
+              "support": 8520
+            },
+            "legitimate": {
+              "f1": 0.9643143544506817,
+              "precision": 0.939453125,
+              "recall": 0.9905271828665568,
+              "support": 9712
+            }
+          },
+          "samples": 18232
+        },
+        "nine_class": {
+          "accuracy": 0.9597959631417289,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 33,
+              "legitimate": 25,
+              "phishing": 2,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 3,
+              "legitimate": 9620,
+              "phishing": 85,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 4,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 571,
+              "phishing": 6479,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 5,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 468,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 50,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 2,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 71,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 22,
+              "phishing": 13,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 1,
+              "sms_spam": 657,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 60,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 61
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.009472817133443162,
+          "macro_f1": 0.9498255765514116,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.6874999999999999,
+              "precision": 0.9166666666666666,
+              "recall": 0.55,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9643143544506817,
+              "precision": 0.939453125,
+              "recall": 0.9905271828665568,
+              "support": 9712
+            },
+            "phishing": {
+              "f1": 0.9504180724658942,
+              "precision": 0.9848001215990272,
+              "recall": 0.9183557760453579,
+              "support": 7055
+            },
+            "popup_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 468
+            },
+            "refund_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 50
+            },
+            "reward_scam": {
+              "f1": 0.9793103448275863,
+              "precision": 0.9861111111111112,
+              "recall": 0.9726027397260274,
+              "support": 73
+            },
+            "sms_spam": {
+              "f1": 0.9668874172185431,
+              "precision": 0.9864864864864865,
+              "recall": 0.948051948051948,
+              "support": 693
+            },
+            "ssn_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 60
+            },
+            "tech_support_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 61
+            }
+          },
+          "samples": 18232
+        }
+      }
+    },
+    {
+      "candidate": "word_char_balanced",
+      "elapsed_seconds": 267.77617845800705,
+      "legitimate_margin_offset": 1,
+      "model_sha256": "55ede1312ee8b52f98492cca5e354094155bef23fd9ffec3d15b53efec50c761",
+      "validation": {
+        "binary": {
+          "accuracy": 0.9529947345326898,
+          "confusion_matrix": {
+            "fraud": {
+              "fraud": 7724,
+              "legitimate": 796
+            },
+            "legitimate": {
+              "fraud": 61,
+              "legitimate": 9651
+            }
+          },
+          "labels": [
+            "fraud",
+            "legitimate"
+          ],
+          "legitimate_false_positive_rate": 0.006280889621087315,
+          "macro_f1": 0.9524637031946834,
+          "per_class": {
+            "fraud": {
+              "f1": 0.9474394357559031,
+              "precision": 0.9921644187540142,
+              "recall": 0.9065727699530517,
+              "support": 8520
+            },
+            "legitimate": {
+              "f1": 0.9574879706334639,
+              "precision": 0.923805877285345,
+              "recall": 0.9937191103789127,
+              "support": 9712
+            }
+          },
+          "samples": 18232
+        },
+        "nine_class": {
+          "accuracy": 0.9520074594120228,
+          "confusion_matrix": {
+            "job_scam": {
+              "job_scam": 30,
+              "legitimate": 28,
+              "phishing": 2,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "legitimate": {
+              "job_scam": 3,
+              "legitimate": 9651,
+              "phishing": 56,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 2,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "phishing": {
+              "job_scam": 0,
+              "legitimate": 739,
+              "phishing": 6313,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 3,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "popup_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 468,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "refund_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 50,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "reward_scam": {
+              "job_scam": 0,
+              "legitimate": 2,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 71,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "sms_spam": {
+              "job_scam": 0,
+              "legitimate": 27,
+              "phishing": 12,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 1,
+              "sms_spam": 653,
+              "ssn_scam": 0,
+              "tech_support_scam": 0
+            },
+            "ssn_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 60,
+              "tech_support_scam": 0
+            },
+            "tech_support_scam": {
+              "job_scam": 0,
+              "legitimate": 0,
+              "phishing": 0,
+              "popup_scam": 0,
+              "refund_scam": 0,
+              "reward_scam": 0,
+              "sms_spam": 0,
+              "ssn_scam": 0,
+              "tech_support_scam": 61
+            }
+          },
+          "labels": [
+            "job_scam",
+            "legitimate",
+            "phishing",
+            "popup_scam",
+            "refund_scam",
+            "reward_scam",
+            "sms_spam",
+            "ssn_scam",
+            "tech_support_scam"
+          ],
+          "legitimate_false_positive_rate": 0.006280889621087315,
+          "macro_f1": 0.9431361429946468,
+          "per_class": {
+            "job_scam": {
+              "f1": 0.6451612903225806,
+              "precision": 0.9090909090909091,
+              "recall": 0.5,
+              "support": 60
+            },
+            "legitimate": {
+              "f1": 0.9574879706334639,
+              "precision": 0.923805877285345,
+              "recall": 0.9937191103789127,
+              "support": 9712
+            },
+            "phishing": {
+              "f1": 0.9395743414198542,
+              "precision": 0.989033369888767,
+              "recall": 0.894826364280652,
+              "support": 7055
+            },
+            "popup_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 468
+            },
+            "refund_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 50
+            },
+            "reward_scam": {
+              "f1": 0.9793103448275863,
+              "precision": 0.9861111111111112,
+              "recall": 0.9726027397260274,
+              "support": 73
+            },
+            "sms_spam": {
+              "f1": 0.9666913397483345,
+              "precision": 0.9924012158054711,
+              "recall": 0.9422799422799423,
+              "support": 693
+            },
+            "ssn_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 60
+            },
+            "tech_support_scam": {
+              "f1": 1.0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "support": 61
+            }
+          },
+          "samples": 18232
+        }
+      }
+    }
+  ],
+  "chosen": {
+    "candidate": "word_char_balanced",
+    "elapsed_seconds": 267.71854937495664,
+    "legitimate_margin_offset": 0.25,
+    "model_sha256": "55ede1312ee8b52f98492cca5e354094155bef23fd9ffec3d15b53efec50c761",
+    "validation": {
+      "binary": {
+        "accuracy": 0.9705462922334357,
+        "confusion_matrix": {
+          "fraud": {
+            "fraud": 8164,
+            "legitimate": 356
+          },
+          "legitimate": {
+            "fraud": 181,
+            "legitimate": 9531
+          }
+        },
+        "labels": [
+          "fraud",
+          "legitimate"
+        ],
+        "legitimate_false_positive_rate": 0.01863673805601318,
+        "macro_f1": 0.9703797759365222,
+        "per_class": {
+          "fraud": {
+            "f1": 0.9681589089831012,
+            "precision": 0.9783103654883164,
+            "recall": 0.9582159624413146,
+            "support": 8520
+          },
+          "legitimate": {
+            "f1": 0.9726006428899433,
+            "precision": 0.9639931222817841,
+            "recall": 0.9813632619439868,
+            "support": 9712
+          }
+        },
+        "samples": 18232
+      },
+      "nine_class": {
+        "accuracy": 0.9692299254058798,
+        "confusion_matrix": {
+          "job_scam": {
+            "job_scam": 38,
+            "legitimate": 20,
+            "phishing": 2,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "legitimate": {
+            "job_scam": 7,
+            "legitimate": 9531,
+            "phishing": 168,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 6,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "phishing": {
+            "job_scam": 0,
+            "legitimate": 318,
+            "phishing": 6729,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 8,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "popup_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 468,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "refund_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 50,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "reward_scam": {
+            "job_scam": 0,
+            "legitimate": 1,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 72,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "sms_spam": {
+            "job_scam": 0,
+            "legitimate": 17,
+            "phishing": 13,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 1,
+            "sms_spam": 662,
+            "ssn_scam": 0,
+            "tech_support_scam": 0
+          },
+          "ssn_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 60,
+            "tech_support_scam": 0
+          },
+          "tech_support_scam": {
+            "job_scam": 0,
+            "legitimate": 0,
+            "phishing": 0,
+            "popup_scam": 0,
+            "refund_scam": 0,
+            "reward_scam": 0,
+            "sms_spam": 0,
+            "ssn_scam": 0,
+            "tech_support_scam": 61
+          }
+        },
+        "labels": [
+          "job_scam",
+          "legitimate",
+          "phishing",
+          "popup_scam",
+          "refund_scam",
+          "reward_scam",
+          "sms_spam",
+          "ssn_scam",
+          "tech_support_scam"
+        ],
+        "legitimate_false_positive_rate": 0.01863673805601318,
+        "macro_f1": 0.9570441981885938,
+        "per_class": {
+          "job_scam": {
+            "f1": 0.7238095238095237,
+            "precision": 0.8444444444444444,
+            "recall": 0.6333333333333333,
+            "support": 60
+          },
+          "legitimate": {
+            "f1": 0.9726006428899433,
+            "precision": 0.9639931222817841,
+            "recall": 0.9813632619439868,
+            "support": 9712
+          },
+          "phishing": {
+            "f1": 0.9635569556812486,
+            "precision": 0.9735243055555556,
+            "recall": 0.9537916371367824,
+            "support": 7055
+          },
+          "popup_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 468
+          },
+          "refund_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 50
+          },
+          "reward_scam": {
+            "f1": 0.9863013698630136,
+            "precision": 0.9863013698630136,
+            "recall": 0.9863013698630136,
+            "support": 73
+          },
+          "sms_spam": {
+            "f1": 0.9671292914536158,
+            "precision": 0.9792899408284024,
+            "recall": 0.9552669552669553,
+            "support": 693
+          },
+          "ssn_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 60
+          },
+          "tech_support_scam": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 61
+          }
+        },
+        "samples": 18232
+      }
+    }
+  },
+  "final_test_evaluated": false,
+  "gate_satisfied": true,
+  "parameters": {
+    "C": 1.0,
+    "char_max_features": 70000,
+    "char_ngrams": [
+      3,
+      5
+    ],
+    "max_iter": 5000,
+    "random_state": 42,
+    "word_max_features": 50000
+  },
+  "rule": "validation FPR<=0.03 and fraud recall>=0.80, then maximum nine-class macro F1; if none eligible report unmet gate",
+  "runtime": {
+    "numpy": "2.5.3",
+    "python": "3.12.13",
+    "sklearn": "1.7.2"
+  },
+  "split_manifest_sha256": "bf4b0b82398cc5d80adddf27062ef4289b0c128cf6897bc286dce2ab1cb18759"
+}
