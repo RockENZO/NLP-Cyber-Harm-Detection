@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from performance_study import LABELS,prepare,template_id,source_role
+from performance_study import LABELS,prepare,template_id,source_role,read_split
 
 class StudyTests(unittest.TestCase):
     def test_template_normalization(self):
@@ -25,6 +25,11 @@ class StudyTests(unittest.TestCase):
             origins.write_text(''.join(json.dumps(row)+'\n' for row in provenance))
             report=prepare(data,origins,root/'study')
             self.assertEqual(report['counts'],{'train':9,'val':9,'test':9})
+            self.assertEqual(len(read_split(root/'study','train')),9)
+            study_rows=[json.loads(line) for line in (root/'study/train.jsonl').read_text().splitlines()]
+            study_rows[0]['text']='changed'
+            (root/'study/train.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in study_rows))
+            with self.assertRaisesRegex(ValueError,'identities'):read_split(root/'study','train')
             manifest=json.loads((root/'study/manifest.json').read_text())
             ids={role:{row['group_id'] for row in records} for role,records in manifest['split_ids'].items()}
             for left,right in [('train','val'),('train','test'),('val','test')]:self.assertFalse(ids[left]&ids[right])

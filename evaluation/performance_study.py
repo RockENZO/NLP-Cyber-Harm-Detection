@@ -80,7 +80,14 @@ def prepare(data,provenance,output):
 
 
 def read_split(study,role):
-    return [json.loads(line) for line in (study/(role+'.jsonl')).open()]
+    rows=[json.loads(line) for line in (study/(role+'.jsonl')).open()]
+    manifest=json.loads((study/'manifest.json').read_text())
+    actual=[{'sample_id':r['sample_id'],'group_id':r['group_id'],'source':r['source']} for r in rows]
+    if actual!=manifest['split_ids'][role] or dict(Counter(r['detailed_category'] for r in rows))!=manifest['class_support'][role]:
+        raise ValueError('Split records differ from frozen manifest')
+    if any(hashlib.sha256(r['text'].encode()).hexdigest()!=r['sample_id'] or template_id(r['text'])!=r['group_id'] for r in rows):
+        raise ValueError('Split text differs from frozen identities')
+    return rows
 
 
 def shifted_predict(scores,classes,offset):
@@ -138,6 +145,9 @@ def evaluate(study,run):
     test=read_split(study,'test');reports={}
     chosen=selection['chosen']
     for name,offset in [('word_baseline',0),(chosen['candidate'],chosen['legitimate_margin_offset'])]:
+        expected=next(candidate['model_sha256'] for candidate in selection['candidates'] if candidate['candidate']==name)
+        if digest_file(run/(name+'.joblib'))!=expected:
+            raise ValueError('Model artifact changed after validation selection')
         pipeline=joblib.load(run/(name+'.joblib'))
         predicted=shifted_predict(pipeline.decision_function([r['text'] for r in test]),pipeline.classes_,offset)
         report=metrics(test,predicted)
