@@ -1,8 +1,32 @@
 # NLP Cyber Harm Detection
 
-Research code and model artifacts for multiclass scam detection and explanation experiments. The repository includes classical baselines, BERT and DistilBERT classifiers, and notebooks for generative models. It is a research project; the advertised historical accuracy and explanation claims do not yet have a frozen, independently reproducible test report in this repository.
+Research code for nine-class scam detection, source-holdout evaluation and explanation experiments. The current reproducible classifier study fits word/character TF-IDF + LinearSVC models and publishes frozen split, validation-selection and final-test reports. Historical BERT, DistilBERT and generative-model checkpoints remain available for research; the newer classifier reports do not validate their original accuracy or generated explanations.
 
-## Quick start: checked-in BERT classifier
+## Current results and entry points
+
+| Study | Published result | Interpretation |
+| --- | --- | --- |
+| New nine-class word + character classifier | Macro F1 **0.94768**, accuracy **0.97043**, legitimate FPR **0.01754** | 18,261-record template-grouped internal test; not unseen-source performance |
+| Separate binary source-holdout baseline | Macro F1 **0.7339**, legitimate FPR **0.2455** | Entire DIFrauD source family held out; a different task and partition |
+| Historical neural / explanation models | Original accuracy and explanation-quality claims unverified | No equivalent frozen checkpoint-specific held-out study |
+
+For the current classifier, rebuild the reviewed corpus in a sibling `data` checkout using [its documented recipe](https://github.com/RockENZO/data#files-and-schema), then use Python 3.12:
+
+```bash
+GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/RockENZO/NLP-Cyber-Harm-Detection.git
+cd NLP-Cyber-Harm-Detection
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r evaluation/requirements.txt
+python evaluation/performance_study.py prepare
+python evaluation/performance_study.py select
+python evaluation/performance_study.py evaluate
+python evaluation/predict_study.py --text 'Your appointment is confirmed for tomorrow.'
+```
+
+The default input is `../data/artifacts/verified/` (CSV plus provenance). Training generates local model artifacts; these are not bundled ready-to-download study checkpoints. Do not rerun the final evaluation to tune a model: the script refuses existing outputs and repeated final evaluation. See [the complete protocol and limitations](#improved-nine-class-classifier-study).
+
+## Historical BERT smoke demo
 
 The BERT checkpoint and tokenizer are tracked with Git LFS. From the repository root:
 
@@ -21,7 +45,7 @@ The demo uses the checked-in `models/bert_model` and `models/bert_tokenizer` fol
 
 ## Evaluation
 
-Follow [the evaluation protocol](docs/EVALUATION.md) before reporting a model score. It requires a source-disjoint held-out test set, frozen checkpoint and label mapping, exported predictions, and per-class metrics. The repository does not currently contain all of those artifacts, so the historical 94–96% accuracy and explanation-quality statements are unverified here. Classification scores alone cannot validate generated explanations.
+Follow [the evaluation protocol](docs/EVALUATION.md) before reporting a model score. It requires a source-disjoint held-out test set, frozen checkpoint and label mapping, exported predictions, and per-class metrics. The published source-holdout and nine-class reports below provide evidence for their newly fitted classical models. The original neural checkpoints lack recovered training IDs and an equivalent checkpoint-specific frozen held-out report, so their historical 94–96% accuracy and explanation-quality statements remain unverified here. Classification scores alone cannot validate generated explanations.
 
 To score an exported prediction file with `true_label,predicted_label` columns:
 
@@ -105,3 +129,4 @@ The script refuses existing study/model output directories or a second final tes
 An accurate statement is: **“Built a reproducible nine-class text classifier; on an 18,261-record template-grouped internal test, achieved macro F1 0.948 and reduced legitimate-message false positives from 3.37% to 1.75% versus a matched baseline.”**
 
 This describes a benchmark result, not universal scam detection. Some dialogue categories include synthetic content and show near-perfect separation; aggregate macro F1 should be read with the per-class results. On the 60 job-scam test examples, recall is 0.4833 and F1 0.6237. Unknown sources, semantic near duplicates, label adjudication, dataset shift and explanation faithfulness remain separate research questions. The new study does not validate any existing BERT/T5/BART/LLM checkpoint or its explanations. No deployment-readiness claim is made.
+
