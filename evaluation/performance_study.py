@@ -80,7 +80,8 @@ def prepare(data,provenance,output):
 
 
 def read_split(study,role):
-    rows=[json.loads(line) for line in (study/(role+'.jsonl')).open()]
+    with (study/(role+'.jsonl')).open() as stream:
+        rows=[json.loads(line) for line in stream]
     manifest=json.loads((study/'manifest.json').read_text())
     actual=[{'sample_id':r['sample_id'],'group_id':r['group_id'],'source':r['source']} for r in rows]
     if actual!=manifest['split_ids'][role] or dict(Counter(r['detailed_category'] for r in rows))!=manifest['class_support'][role]:
@@ -97,6 +98,9 @@ def shifted_predict(scores,classes,offset):
 
 
 def metrics(rows,predictions):
+    rows=list(rows);predictions=list(predictions)
+    if len(rows)!=len(predictions):
+        raise ValueError(f'Prediction count {len(predictions)} does not match sample count {len(rows)}')
     nine=score_rows([{'true_label':r['detailed_category'],'predicted_label':str(p)} for r,p in zip(rows,predictions)],labels=LABELS)
     binary=score_rows([{'true_label':'legitimate' if r['detailed_category']=='legitimate' else 'fraud','predicted_label':'legitimate' if p=='legitimate' else 'fraud'} for r,p in zip(rows,predictions)],labels=['fraud','legitimate'])
     return {'nine_class':nine,'binary':binary}

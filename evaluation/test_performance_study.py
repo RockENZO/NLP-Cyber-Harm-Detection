@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from performance_study import LABELS,prepare,template_id,source_role,read_split
+from performance_study import LABELS,prepare,template_id,source_role,read_split,metrics
 
 class StudyTests(unittest.TestCase):
     def test_template_normalization(self):
@@ -36,6 +36,28 @@ class StudyTests(unittest.TestCase):
             with self.assertRaises(ValueError):prepare(data,origins,root/'study')
             provenance[0]['sample_id']='bad';origins.write_text(''.join(json.dumps(row)+'\n' for row in provenance))
             with self.assertRaisesRegex(ValueError,'identity'):prepare(data,origins,root/'bad')
+
+    def test_prediction_cardinality_must_match_rows(self):
+        rows=[{'detailed_category':'legitimate'}, {'detailed_category':'phishing'}]
+        # Short predictions previously discarded the unpredicted fraud row and
+        # falsely reported perfect binary accuracy on only one sample.
+        for predictions in [['legitimate'], ['legitimate','phishing','legitimate']]:
+            with self.subTest(predictions=predictions):
+                with self.assertRaisesRegex(ValueError,'Prediction count'):
+                    metrics(rows,predictions)
+
+    def test_aligned_predictions_score_every_row_in_both_tasks(self):
+        rows=[{'detailed_category':'legitimate'}, {'detailed_category':'phishing'}]
+        report=metrics(rows,['legitimate','phishing'])
+        self.assertEqual(report['nine_class']['samples'],2)
+        self.assertEqual(report['binary']['samples'],2)
+        self.assertEqual(report['binary']['accuracy'],1.0)
+        self.assertEqual(report['binary']['per_class']['fraud']['support'],1)
+
+    def test_predictions_iterable_is_reused_for_both_reports(self):
+        rows=[{'detailed_category':'legitimate'}, {'detailed_category':'phishing'}]
+        self.assertEqual(metrics(rows,iter(['legitimate','phishing'])),
+                         metrics(rows,['legitimate','phishing']))
 
     def test_unknown_official_split_rejected(self):
         with self.assertRaises(ValueError):source_role({'dataset':'difraud_sms','source_file':'other.csv'})
