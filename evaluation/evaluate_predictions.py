@@ -52,7 +52,10 @@ def main(argv=None):
     args = parser.parse_args(argv)
     with args.predictions.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
-        if not {"true_label", "predicted_label"}.issubset(reader.fieldnames or []):
+        fields = reader.fieldnames or []
+        if any(not name or not name.strip() for name in fields) or len(set(fields)) != len(fields):
+            parser.error("CSV column names must be nonempty and unique")
+        if not {"true_label", "predicted_label"}.issubset(fields):
             parser.error("CSV must contain true_label and predicted_label columns")
         result = score_rows(reader, labels=json.loads(args.labels.read_text()))
     result['predictions_sha256'] = hashlib.sha256(args.predictions.read_bytes()).hexdigest()
