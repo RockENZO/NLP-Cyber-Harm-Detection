@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import hashlib
+import tempfile
 from collections import Counter
 from pathlib import Path
 
@@ -50,6 +51,11 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, default=Path("evaluation.json"))
     parser.add_argument('--labels', type=Path, default=Path(__file__).with_name('labels.json'), help='Explicit ordered label universe JSON')
     args = parser.parse_args(argv)
+    for source in (args.predictions, args.labels):
+        if args.output.resolve() == source.resolve() or (
+            args.output.exists() and source.exists() and args.output.samefile(source)
+        ):
+            parser.error("Output report must not overwrite predictions or labels")
     with args.predictions.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         fields = reader.fieldnames or []
@@ -60,7 +66,18 @@ def main(argv=None):
         result = score_rows(reader, labels=json.loads(args.labels.read_text()))
     result['predictions_sha256'] = hashlib.sha256(args.predictions.read_bytes()).hexdigest()
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=args.output.parent,
+                                         prefix=".evaluation-", delete=False) as report:
+            temporary = Path(report.name)
+            report.write(json.dumps(result, indent=2) + "\n")
+        # Replace the directory entry rather than following an output alias
+        # created after the initial input-identity check.
+        temporary.replace(args.output)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
     print(json.dumps(result, indent=2))
 
 
