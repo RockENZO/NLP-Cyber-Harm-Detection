@@ -3,6 +3,7 @@ import contextlib
 import io
 import os
 import tempfile
+from unittest.mock import patch
 from pathlib import Path
 
 from evaluate_predictions import score_rows, main
@@ -54,6 +55,36 @@ class ScoreRowsTests(unittest.TestCase):
                 with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(SystemExit):
                     main([str(predictions),'--labels',str(labels),'--output',str(output)])
                 self.assertEqual((predictions.read_bytes(),labels.read_bytes()),before)
+
+    def test_alias_created_after_validation_cannot_destroy_input(self):
+        for target_name in ['predictions','labels']:
+            for alias in ['symlink','hardlink']:
+                with self.subTest(target=target_name,alias=alias), tempfile.TemporaryDirectory() as folder:
+                    root=Path(folder);predictions=root/'predictions.csv';labels=root/'labels.json';output=root/'report.json'
+                    predictions.write_text('true_label,predicted_label\nfraud,fraud\n')
+                    labels.write_text('["fraud","legitimate"]')
+                    before=(predictions.read_bytes(),labels.read_bytes())
+                    target=predictions if target_name=='predictions' else labels
+                    def score_then_alias(*args,**kwargs):
+                        result=score_rows(*args,**kwargs)
+                        if alias=='symlink':output.symlink_to(target)
+                        else:os.link(target,output)
+                        return result
+                    with patch('evaluate_predictions.score_rows',side_effect=score_then_alias), contextlib.redirect_stdout(io.StringIO()):
+                        main([str(predictions),'--labels',str(labels),'--output',str(output)])
+                    self.assertEqual((predictions.read_bytes(),labels.read_bytes()),before)
+                    import json
+                    self.assertEqual(json.loads(output.read_text())['accuracy'],1.0)
+
+    def test_failed_replace_preserves_previous_report_and_cleans_temp(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);predictions=root/'predictions.csv';labels=root/'labels.json';output=root/'report.json'
+            predictions.write_text('true_label,predicted_label\nfraud,fraud\n')
+            labels.write_text('["fraud","legitimate"]');output.write_text('previous report')
+            with patch('evaluate_predictions.Path.replace',side_effect=OSError('write failure')), self.assertRaises(OSError):
+                main([str(predictions),'--labels',str(labels),'--output',str(output)])
+            self.assertEqual(output.read_text(),'previous report')
+            self.assertEqual(list(root.glob('.evaluation-*')),[])
 
     def test_report_can_be_written_separately(self):
         with tempfile.TemporaryDirectory() as folder:
