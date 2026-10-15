@@ -50,6 +50,11 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, default=Path("evaluation.json"))
     parser.add_argument('--labels', type=Path, default=Path(__file__).with_name('labels.json'), help='Explicit ordered label universe JSON')
     args = parser.parse_args(argv)
+    for source in (args.predictions, args.labels):
+        if args.output.resolve() == source.resolve() or (
+            args.output.exists() and source.exists() and args.output.samefile(source)
+        ):
+            parser.error("Output report must not overwrite predictions or labels")
     with args.predictions.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         fields = reader.fieldnames or []

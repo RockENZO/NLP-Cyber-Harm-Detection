@@ -1,4 +1,7 @@
 import unittest
+import contextlib
+import io
+import os
 import tempfile
 from pathlib import Path
 
@@ -34,6 +37,33 @@ class ScoreRowsTests(unittest.TestCase):
                 with self.subTest(header=header), self.assertRaises(SystemExit):
                     main([str(predictions),'--labels',str(labels),'--output',str(output)])
                 self.assertFalse(output.exists())
+
+    def test_report_cannot_overwrite_evaluation_inputs_or_aliases(self):
+        for alias in ['predictions','labels','symlink','hardlink']:
+            with self.subTest(alias=alias), tempfile.TemporaryDirectory() as folder:
+                root=Path(folder);predictions=root/'predictions.csv';labels=root/'labels.json'
+                predictions.write_text('true_label,predicted_label\nfraud,fraud\n')
+                labels.write_text('["fraud","legitimate"]')
+                before=(predictions.read_bytes(),labels.read_bytes())
+                if alias=='predictions':output=predictions
+                elif alias=='labels':output=labels
+                else:
+                    output=root/'alias.json'
+                    if alias=='symlink':output.symlink_to(predictions)
+                    else:os.link(predictions,output)
+                with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(SystemExit):
+                    main([str(predictions),'--labels',str(labels),'--output',str(output)])
+                self.assertEqual((predictions.read_bytes(),labels.read_bytes()),before)
+
+    def test_report_can_be_written_separately(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);predictions=root/'predictions.csv';labels=root/'labels.json';output=root/'reports/eval.json'
+            predictions.write_text('true_label,predicted_label\nfraud,fraud\n')
+            labels.write_text('["fraud","legitimate"]')
+            with contextlib.redirect_stdout(io.StringIO()):
+                main([str(predictions),'--labels',str(labels),'--output',str(output)])
+            import json
+            self.assertEqual(json.loads(output.read_text())['accuracy'],1.0)
 
     def test_empty_rows_rejected(self):
         with self.assertRaises(ValueError):
