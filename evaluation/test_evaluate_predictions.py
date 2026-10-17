@@ -96,6 +96,28 @@ class ScoreRowsTests(unittest.TestCase):
             import json
             self.assertEqual(json.loads(output.read_text())['accuracy'],1.0)
 
+    def test_hash_identifies_bytes_actually_scored_when_source_changes(self):
+        import hashlib
+        import json
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            predictions = root / 'predictions.csv'
+            labels = root / 'labels.json'
+            output = root / 'report.json'
+            original = b'true_label,predicted_label\r\nfraud,fraud\r\n'
+            predictions.write_bytes(original)
+            labels.write_text('["fraud","legitimate"]')
+            def score_then_replace(*args, **kwargs):
+                result = score_rows(*args, **kwargs)
+                predictions.write_text('true_label,predicted_label\nfraud,legitimate\n')
+                return result
+            with patch('evaluate_predictions.score_rows', side_effect=score_then_replace), contextlib.redirect_stdout(io.StringIO()):
+                main([str(predictions), '--labels', str(labels), '--output', str(output)])
+            report = json.loads(output.read_text())
+            self.assertEqual(report['accuracy'], 1.0)
+            self.assertEqual(report['predictions_sha256'], hashlib.sha256(original).hexdigest())
+            self.assertNotEqual(report['predictions_sha256'], hashlib.sha256(predictions.read_bytes()).hexdigest())
+
     def test_empty_rows_rejected(self):
         with self.assertRaises(ValueError):
             score_rows([])

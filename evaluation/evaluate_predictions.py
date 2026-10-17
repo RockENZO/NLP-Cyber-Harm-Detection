@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import hashlib
+import io
 import tempfile
 from collections import Counter
 from pathlib import Path
@@ -56,7 +57,9 @@ def main(argv=None):
             args.output.exists() and source.exists() and args.output.samefile(source)
         ):
             parser.error("Output report must not overwrite predictions or labels")
-    with args.predictions.open(newline="", encoding="utf-8") as handle:
+    # Score and hash one byte snapshot, even if another process replaces the CSV.
+    prediction_bytes = args.predictions.read_bytes()
+    with io.StringIO(prediction_bytes.decode("utf-8"), newline="") as handle:
         reader = csv.DictReader(handle)
         fields = reader.fieldnames or []
         if any(not name or not name.strip() for name in fields) or len(set(fields)) != len(fields):
@@ -64,7 +67,7 @@ def main(argv=None):
         if not {"true_label", "predicted_label"}.issubset(fields):
             parser.error("CSV must contain true_label and predicted_label columns")
         result = score_rows(reader, labels=json.loads(args.labels.read_text()))
-    result['predictions_sha256'] = hashlib.sha256(args.predictions.read_bytes()).hexdigest()
+    result['predictions_sha256'] = hashlib.sha256(prediction_bytes).hexdigest()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
     try:
