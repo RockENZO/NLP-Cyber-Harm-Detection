@@ -4,6 +4,7 @@ from collections import Counter
 import csv
 import hashlib
 import itertools
+import io
 import json
 from pathlib import Path
 import platform
@@ -17,10 +18,15 @@ def digest_file(path):
     return h.hexdigest()
 
 
-def load_partition(data_path, provenance_path, holdout_prefix):
+def load_partition(data_path, provenance_path, holdout_prefix, *, input_hashes=None):
     train, test = [], []
     seen = set()
-    with Path(data_path).open(newline='') as data, Path(provenance_path).open() as provenance:
+    # Hash the same byte snapshots that supply the parser, before model fitting.
+    data_bytes = Path(data_path).read_bytes()
+    provenance_bytes = Path(provenance_path).read_bytes()
+    hashes = {'input_sha256': hashlib.sha256(data_bytes).hexdigest(),
+              'provenance_sha256': hashlib.sha256(provenance_bytes).hexdigest()}
+    with io.StringIO(data_bytes.decode('utf-8-sig'), newline='') as data, io.StringIO(provenance_bytes.decode('utf-8-sig')) as provenance:
         for row, raw in itertools.zip_longest(csv.DictReader(data), provenance):
             if row is None or raw is None:
                 raise ValueError('Data/provenance row counts differ')
@@ -37,6 +43,8 @@ def load_partition(data_path, provenance_path, holdout_prefix):
             (test if source['dataset'].startswith(holdout_prefix) else train).append(record)
     if not train or not test or len({r[2] for r in train}) != 2:
         raise ValueError('Need non-empty train/test and both training labels')
+    if input_hashes is not None:
+        input_hashes.update(hashes)
     return train, test
 
 
@@ -56,7 +64,8 @@ def main():
     import numpy
     import scipy
     from evaluate_predictions import score_rows
-    train, test = load_partition(args.data, args.provenance, args.holdout_prefix)
+    input_hashes = {}
+    train, test = load_partition(args.data, args.provenance, args.holdout_prefix, input_hashes=input_hashes)
     model = Pipeline([('tfidf', TfidfVectorizer(max_features=40000, ngram_range=(1,2), min_df=2, sublinear_tf=True)),
                       ('classifier', LogisticRegression(C=1.0, max_iter=1000, random_state=42, class_weight='balanced', solver='liblinear'))])
     model.fit([r[1] for r in train], [r[2] for r in train])
@@ -74,7 +83,7 @@ def main():
         'train_sources': dict(sorted(Counter(r[3] for r in train).items())),
         'test_sources': dict(sorted(Counter(r[3] for r in test).items())),
         'source_metrics': {source: score_rows([r for r in rows if r['source']==source], labels=['fraud', 'legitimate']) for source in sorted({r['source'] for r in rows})},
-        'input_sha256': digest_file(args.data), 'provenance_sha256': digest_file(args.provenance),
+        **input_hashes,
         'split_manifest_sha256': digest_file(args.output_dir/'split_manifest.json'),
         'predictions_sha256': digest_file(args.output_dir/'predictions.csv'),
         'parameters': {'max_features':40000,'ngram_range':[1,2],'min_df':2,'sublinear_tf':True,'C':1.0,'max_iter':1000,'random_state':42,'class_weight':'balanced','solver':'liblinear'},

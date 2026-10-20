@@ -130,3 +130,7 @@ An accurate statement is: **“Built a reproducible nine-class text classifier; 
 
 This describes a benchmark result, not universal scam detection. Some dialogue categories include synthetic content and show near-perfect separation; aggregate macro F1 should be read with the per-class results. On the 60 job-scam test examples, recall is 0.4833 and F1 0.6237. Unknown sources, semantic near duplicates, label adjudication, dataset shift and explanation faithfulness remain separate research questions. The new study does not validate any existing BERT/T5/BART/LLM checkpoint or its explanations. No deployment-readiness claim is made.
 
+
+### Source-baseline input provenance
+
+The binary source-family baseline reads the data CSV and provenance JSONL into byte snapshots before training. Its input hashes identify those exact parsed snapshots, even if the original paths change during fitting. This uses memory proportional to both input files in addition to parsed training records. It does not make two separately stored files an atomic dataset version; existing row-order and text-identity checks still validate their pairing. No model has been retrained and existing reported metrics are unchanged by this engineering fix.
