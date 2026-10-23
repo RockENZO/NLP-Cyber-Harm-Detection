@@ -14,8 +14,15 @@ def score_rows(rows, labels=None):
     rows = list(rows)
     if not rows:
         raise ValueError("Prediction file has no data rows")
+    if any(not isinstance(row.get(field), str) or not row[field].strip()
+           for row in rows for field in ("true_label", "predicted_label")):
+        raise ValueError("Prediction labels must be nonempty strings")
     observed = {row["true_label"] for row in rows} | {row["predicted_label"] for row in rows}
+    if labels is not None and not isinstance(labels, (list, tuple)):
+        raise ValueError("Labels must be an ordered array of nonempty strings")
     labels = list(labels) if labels is not None else sorted(observed)
+    if any(not isinstance(label, str) or not label.strip() for label in labels):
+        raise ValueError("Labels must be nonempty strings")
     if not labels or len(set(labels)) != len(labels) or not observed.issubset(labels):
         raise ValueError("Labels must be unique and include every observed label")
     if any(not row["true_label"] or not row["predicted_label"] for row in rows):
@@ -45,6 +52,32 @@ def score_rows(rows, labels=None):
     }
 
 
+def validate_csv_quotes(text):
+    """Reject bare quotes that csv's strict dialect still accepts literally."""
+    state = "start"
+    for char in text:
+        if state == "quoted":
+            if char == '"':
+                state = "after_quote"
+        elif state == "after_quote":
+            if char == '"':
+                state = "quoted"
+            elif char == ',' or char in '\r\n':
+                state = "start"
+            else:
+                raise ValueError("Unexpected character after a closing CSV quote")
+        elif char == '"':
+            if state != "start":
+                raise ValueError("Bare quote in an unquoted CSV field")
+            state = "quoted"
+        elif char == ',' or char in '\r\n':
+            state = "start"
+        else:
+            state = "unquoted"
+    if state == "quoted":
+        raise ValueError("Unterminated quoted CSV field")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("predictions", type=Path,
@@ -59,15 +92,33 @@ def main(argv=None):
             parser.error("Output report must not overwrite predictions or labels")
     # Score and hash one byte snapshot, even if another process replaces the CSV.
     prediction_bytes = args.predictions.read_bytes()
-    with io.StringIO(prediction_bytes.decode("utf-8"), newline="") as handle:
-        reader = csv.DictReader(handle)
+    label_bytes = args.labels.read_bytes()
+    prediction_text = prediction_bytes.decode("utf-8")
+    try:
+        validate_csv_quotes(prediction_text)
+    except ValueError as error:
+        parser.error(str(error))
+    with io.StringIO(prediction_text, newline="") as handle:
+        reader = csv.DictReader(handle, strict=True)
         fields = reader.fieldnames or []
         if any(not name or not name.strip() for name in fields) or len(set(fields)) != len(fields):
             parser.error("CSV column names must be nonempty and unique")
         if not {"true_label", "predicted_label"}.issubset(fields):
             parser.error("CSV must contain true_label and predicted_label columns")
-        result = score_rows(reader, labels=json.loads(args.labels.read_text()))
+        try:
+            rows = []
+            for row in reader:
+                if None in row or any(value is None for value in row.values()):
+                    parser.error(f"CSV row ending at line {reader.line_num} has the wrong number of columns")
+                rows.append(row)
+            universe = json.loads(label_bytes.decode("utf-8"))
+            if not isinstance(universe, list):
+                parser.error("Labels JSON must be an ordered array of nonempty strings")
+            result = score_rows(rows, labels=universe)
+        except (csv.Error, ValueError) as error:
+            parser.error(str(error))
     result['predictions_sha256'] = hashlib.sha256(prediction_bytes).hexdigest()
+    result['labels_sha256'] = hashlib.sha256(label_bytes).hexdigest()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
     try:
