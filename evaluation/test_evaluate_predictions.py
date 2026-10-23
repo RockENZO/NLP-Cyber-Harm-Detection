@@ -118,6 +118,50 @@ class ScoreRowsTests(unittest.TestCase):
             self.assertEqual(report['predictions_sha256'], hashlib.sha256(original).hexdigest())
             self.assertNotEqual(report['predictions_sha256'], hashlib.sha256(predictions.read_bytes()).hexdigest())
 
+    def test_ragged_or_malformed_csv_cannot_publish_a_report(self):
+        for record in ['fraud,fraud,extra', 'fraud', '"fraud,fraud', '"fraud"oops,fraud']:
+            with self.subTest(record=record), tempfile.TemporaryDirectory() as folder:
+                root = Path(folder)
+                predictions, labels, output = root/'p.csv', root/'l.json', root/'report.json'
+                predictions.write_text('true_label,predicted_label\n' + record + '\n')
+                labels.write_text('["fraud","legitimate"]')
+                output.write_text('previous verified report')
+                with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                    main([str(predictions), '--labels', str(labels), '--output', str(output)])
+                self.assertEqual(output.read_text(), 'previous verified report')
+                self.assertEqual(list(root.glob('.evaluation-*')), [])
+
+    def test_label_universe_requires_an_ordered_array_of_nonempty_strings(self):
+        import json
+        for universe in ['fraud', {'fraud': 1}, ['fraud', ''], ['fraud', '   '], ['fraud', 1], ['fraud', ['nested']], ['fraud', 'fraud']]:
+            with self.subTest(labels=universe), tempfile.TemporaryDirectory() as folder:
+                root = Path(folder)
+                predictions, labels, output = root/'p.csv', root/'l.json', root/'report.json'
+                predictions.write_text('true_label,predicted_label\nfraud,fraud\n')
+                labels.write_text(json.dumps(universe))
+                with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                    main([str(predictions), '--labels', str(labels), '--output', str(output)])
+                self.assertFalse(output.exists())
+
+    def test_label_hash_uses_the_snapshot_that_defined_macro_f1(self):
+        import hashlib
+        import json
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            predictions, labels, output = root/'p.csv', root/'l.json', root/'report.json'
+            predictions.write_text('sample_id,true_label,predicted_label\nitem-1,fraud,fraud\n')
+            original = b'["fraud", "legitimate"]\r\n'
+            labels.write_bytes(original)
+            def score_then_replace(*args, **kwargs):
+                result = score_rows(*args, **kwargs)
+                labels.write_text('["fraud"]')
+                return result
+            with patch('evaluate_predictions.score_rows', side_effect=score_then_replace), contextlib.redirect_stdout(io.StringIO()):
+                main([str(predictions), '--labels', str(labels), '--output', str(output)])
+            report = json.loads(output.read_text())
+            self.assertEqual(report['macro_f1'], 0.5)
+            self.assertEqual(report['labels_sha256'], hashlib.sha256(original).hexdigest())
+
     def test_empty_rows_rejected(self):
         with self.assertRaises(ValueError):
             score_rows([])

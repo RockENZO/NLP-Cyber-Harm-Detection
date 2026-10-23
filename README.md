@@ -53,6 +53,12 @@ To score an exported prediction file with `true_label,predicted_label` columns:
 python evaluation/evaluate_predictions.py held_out_predictions.csv --output evaluation.json
 ```
 
+The scorer rejects malformed CSV rows and label mappings before writing a report.
+Its default is the checked-in nine-class label universe; use `--labels` with an
+ordered JSON array for another task. Absent classes remain in macro F1. Both the
+prediction CSV and label-file byte snapshots are hashed in the report. See
+[the input and reporting contract](docs/EVALUATION.md).
+
 ## Repository map
 
 - `demos/quick_demo.py`: BERT inference smoke check
