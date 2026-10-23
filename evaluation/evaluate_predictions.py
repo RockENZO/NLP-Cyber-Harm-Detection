@@ -52,6 +52,32 @@ def score_rows(rows, labels=None):
     }
 
 
+def validate_csv_quotes(text):
+    """Reject bare quotes that csv's strict dialect still accepts literally."""
+    state = "start"
+    for char in text:
+        if state == "quoted":
+            if char == '"':
+                state = "after_quote"
+        elif state == "after_quote":
+            if char == '"':
+                state = "quoted"
+            elif char == ',' or char in '\r\n':
+                state = "start"
+            else:
+                raise ValueError("Unexpected character after a closing CSV quote")
+        elif char == '"':
+            if state != "start":
+                raise ValueError("Bare quote in an unquoted CSV field")
+            state = "quoted"
+        elif char == ',' or char in '\r\n':
+            state = "start"
+        else:
+            state = "unquoted"
+    if state == "quoted":
+        raise ValueError("Unterminated quoted CSV field")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("predictions", type=Path,
@@ -67,7 +93,12 @@ def main(argv=None):
     # Score and hash one byte snapshot, even if another process replaces the CSV.
     prediction_bytes = args.predictions.read_bytes()
     label_bytes = args.labels.read_bytes()
-    with io.StringIO(prediction_bytes.decode("utf-8"), newline="") as handle:
+    prediction_text = prediction_bytes.decode("utf-8")
+    try:
+        validate_csv_quotes(prediction_text)
+    except ValueError as error:
+        parser.error(str(error))
+    with io.StringIO(prediction_text, newline="") as handle:
         reader = csv.DictReader(handle, strict=True)
         fields = reader.fieldnames or []
         if any(not name or not name.strip() for name in fields) or len(set(fields)) != len(fields):

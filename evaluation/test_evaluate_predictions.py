@@ -131,6 +131,25 @@ class ScoreRowsTests(unittest.TestCase):
                 self.assertEqual(output.read_text(), 'previous verified report')
                 self.assertEqual(list(root.glob('.evaluation-*')), [])
 
+    def test_metadata_quote_validation_preserves_valid_multiline_csv(self):
+        import csv
+        import json
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            predictions, labels, output = root/'p.csv', root/'l.json', root/'report.json'
+            labels.write_text('["fraud","legitimate"]')
+            predictions.write_text('true_label,predicted_label,note\nfraud,fraud,bad"quote\n')
+            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                main([str(predictions), '--labels', str(labels), '--output', str(output)])
+            self.assertFalse(output.exists())
+            with predictions.open('w', newline='') as handle:
+                writer = csv.writer(handle)
+                writer.writerow(['true_label', 'predicted_label', 'note'])
+                writer.writerow(['fraud', 'fraud', 'line 1, "quoted"\nline 2'])
+            with contextlib.redirect_stdout(io.StringIO()):
+                main([str(predictions), '--labels', str(labels), '--output', str(output)])
+            self.assertEqual(json.loads(output.read_text())['accuracy'], 1.0)
+
     def test_label_universe_requires_an_ordered_array_of_nonempty_strings(self):
         import json
         for universe in ['fraud', {'fraud': 1}, ['fraud', ''], ['fraud', '   '], ['fraud', 1], ['fraud', ['nested']], ['fraud', 'fraud']]:
