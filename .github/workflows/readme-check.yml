@@ -1,0 +1,23 @@
+name: README references
+
+# A target can disappear even when README.md itself is unchanged.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - name: Check documented local references
+        uses: RockENZO/readme-reality@abd57409da2c959593127e4c6930132854f11114 # v0.1.1
+        with:
+          root: .
+          readme: README.md
