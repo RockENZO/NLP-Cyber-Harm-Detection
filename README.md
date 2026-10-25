@@ -140,3 +140,17 @@ This describes a benchmark result, not universal scam detection. Some dialogue c
 ### Source-baseline input provenance
 
 The binary source-family baseline reads the data CSV and provenance JSONL into byte snapshots before training. Its input hashes identify those exact parsed snapshots, even if the original paths change during fitting. This uses memory proportional to both input files in addition to parsed training records. It does not make two separately stored files an atomic dataset version; existing row-order and text-identity checks still validate their pairing. No model has been retrained and existing reported metrics are unchanged by this engineering fix.
+
+## README reference checks
+
+The `README references` workflow checks local Markdown destinations and supported
+script/requirements paths on pushes and pull requests. It runs on all source
+changes because deleting a documented file can break the README without changing
+the document itself. The checker is pinned to the reviewed Readme Reality
+v0.1.1 commit and uses read-only source access; it does not install this project's
+dependencies, download LFS weights, execute commands or evaluate a model.
+
+Read the job's annotations and summary, including skipped coverage. Complex setup
+blocks, external URLs, generated artifacts and unsupported commands remain outside
+these static checks. A green result does not establish that training or inference
+works, that weights have been downloaded, or that reported metrics are valid.
