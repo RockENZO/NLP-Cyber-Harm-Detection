@@ -17,7 +17,7 @@ jobs:
         with:
           lfs: false
       - name: Check documented local references
-        uses: RockENZO/readme-reality@abd57409da2c959593127e4c6930132854f11114 # v0.1.1
+        uses: RockENZO/readme-reality@9298574e5bc5e042ab9955b2be50081c646cf51d # v0.2.0
         with:
           root: .
           readme: README.md
