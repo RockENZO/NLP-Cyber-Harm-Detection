@@ -181,10 +181,58 @@ class ScoreRowsTests(unittest.TestCase):
             self.assertEqual(report['macro_f1'], 0.5)
             self.assertEqual(report['labels_sha256'], hashlib.sha256(original).hexdigest())
 
+    def test_single_pass_iterator_preserves_explicit_and_inferred_metrics(self):
+        records = [
+            {"true_label": "fraud", "predicted_label": "fraud"},
+            {"true_label": "legitimate", "predicted_label": "fraud"},
+            {"true_label": "legitimate", "predicted_label": "legitimate"},
+        ]
+        for labels in [None, ["legitimate", "fraud", "absent"]]:
+            with self.subTest(labels=labels):
+                stream = (row for row in records)
+                self.assertEqual(score_rows(stream, labels), score_rows(records, labels))
+                self.assertEqual(list(stream), [])
+
+    def test_late_invalid_label_preserves_previous_report(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            predictions, labels, output = root/'p.csv', root/'l.json', root/'report.json'
+            predictions.write_text('true_label,predicted_label\n' + 'fraud,fraud\n' * 1000 + 'fraud,   \n')
+            labels.write_text('["fraud","legitimate"]')
+            output.write_text('previous verified report')
+            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                main([str(predictions), '--labels', str(labels), '--output', str(output)])
+            self.assertEqual(output.read_text(), 'previous verified report')
+            self.assertEqual(list(root.glob('.evaluation-*')), [])
+
     def test_empty_rows_rejected(self):
         with self.assertRaises(ValueError):
             score_rows([])
 
+
+class BenchmarkContractTests(unittest.TestCase):
+    def test_small_synthetic_measurement_preserves_previous_results(self):
+        import json
+        from benchmark_scoring import main as measure
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder)/'measurement.json'
+            with contextlib.redirect_stdout(io.StringIO()):
+                measure(['--rows', '20', '--output', str(output)])
+            result = json.loads(output.read_text())
+            self.assertEqual(result['rows'], 20)
+            self.assertEqual(len(result['report_sha256']), 64)
+            before = output.read_bytes()
+            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                measure(['--rows', '20', '--output', str(output)])
+            self.assertEqual(output.read_bytes(), before)
+
+    def test_invalid_benchmark_size_creates_no_measurement(self):
+        from benchmark_scoring import main as measure
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder)/'measurement.json'
+            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                measure(['--rows', '0', '--output', str(output)])
+            self.assertFalse(output.exists())
 
 if __name__ == "__main__":
     unittest.main()

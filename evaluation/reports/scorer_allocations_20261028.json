@@ -1,0 +1,101 @@
+{
+  "scope": "Synthetic scorer allocation benchmark; no trained-model quality, real corpus inference or production throughput claim.",
+  "baseline_source_commit": "683a8dd6045646cebc014064fa63974e79dd00c7",
+  "rows": 150000,
+  "repeats_per_version": 3,
+  "execution_order": "baseline then improved in three pairs, each in a fresh Python process; tracemalloc enabled",
+  "baseline": [
+    {
+      "scope": "Synthetic scorer allocation workload, not trained-model evaluation",
+      "python": "3.12.13",
+      "platform": "macOS-27.2-arm64-arm-64bit",
+      "rows": 150000,
+      "seconds": 1.026459166998393,
+      "tracemalloc_peak_bytes": 72528275,
+      "scorer_sha256": "5899505adeed442913ff367d4fefabf465bac14e43c43ab40a22c91a3e36218b",
+      "input_sha256": "b0620f5d7344ef58531b3463042260a56f2089236583cd8d03c576ffcad6c039",
+      "labels_sha256": "a76df0c4cda75079f36505d84412a5446ee7261952fefd53a205a3a6dfc20999",
+      "report_sha256": "f9177d041b9c9f2d07c9f3f22ffcb2dcd15f4dd903da8e36592384ea9834c8c1",
+      "limitations": "tracemalloc covers Python allocations, not full process RSS; timing includes its overhead and is not production throughput. Input byte/text snapshots are retained."
+    },
+    {
+      "scope": "Synthetic scorer allocation workload, not trained-model evaluation",
+      "python": "3.12.13",
+      "platform": "macOS-27.2-arm64-arm-64bit",
+      "rows": 150000,
+      "seconds": 1.0462408750026952,
+      "tracemalloc_peak_bytes": 72537675,
+      "scorer_sha256": "5899505adeed442913ff367d4fefabf465bac14e43c43ab40a22c91a3e36218b",
+      "input_sha256": "b0620f5d7344ef58531b3463042260a56f2089236583cd8d03c576ffcad6c039",
+      "labels_sha256": "a76df0c4cda75079f36505d84412a5446ee7261952fefd53a205a3a6dfc20999",
+      "report_sha256": "f9177d041b9c9f2d07c9f3f22ffcb2dcd15f4dd903da8e36592384ea9834c8c1",
+      "limitations": "tracemalloc covers Python allocations, not full process RSS; timing includes its overhead and is not production throughput. Input byte/text snapshots are retained."
+    },
+    {
+      "scope": "Synthetic scorer allocation workload, not trained-model evaluation",
+      "python": "3.12.13",
+      "platform": "macOS-27.2-arm64-arm-64bit",
+      "rows": 150000,
+      "seconds": 1.0553340000042226,
+      "tracemalloc_peak_bytes": 72537675,
+      "scorer_sha256": "5899505adeed442913ff367d4fefabf465bac14e43c43ab40a22c91a3e36218b",
+      "input_sha256": "b0620f5d7344ef58531b3463042260a56f2089236583cd8d03c576ffcad6c039",
+      "labels_sha256": "a76df0c4cda75079f36505d84412a5446ee7261952fefd53a205a3a6dfc20999",
+      "report_sha256": "f9177d041b9c9f2d07c9f3f22ffcb2dcd15f4dd903da8e36592384ea9834c8c1",
+      "limitations": "tracemalloc covers Python allocations, not full process RSS; timing includes its overhead and is not production throughput. Input byte/text snapshots are retained."
+    }
+  ],
+  "improved": [
+    {
+      "scope": "Synthetic scorer allocation workload, not trained-model evaluation",
+      "python": "3.12.13",
+      "platform": "macOS-27.2-arm64-arm-64bit",
+      "rows": 150000,
+      "seconds": 0.8263766250020126,
+      "tracemalloc_peak_bytes": 20972310,
+      "scorer_sha256": "c92fb6b90e971d80739983c0c54f51f130e3844b7fe571b5f10d8c8195525751",
+      "input_sha256": "b0620f5d7344ef58531b3463042260a56f2089236583cd8d03c576ffcad6c039",
+      "labels_sha256": "a76df0c4cda75079f36505d84412a5446ee7261952fefd53a205a3a6dfc20999",
+      "report_sha256": "f9177d041b9c9f2d07c9f3f22ffcb2dcd15f4dd903da8e36592384ea9834c8c1",
+      "limitations": "tracemalloc covers Python allocations, not full process RSS; timing includes its overhead and is not production throughput. Input byte/text snapshots are retained."
+    },
+    {
+      "scope": "Synthetic scorer allocation workload, not trained-model evaluation",
+      "python": "3.12.13",
+      "platform": "macOS-27.2-arm64-arm-64bit",
+      "rows": 150000,
+      "seconds": 0.8302569999941625,
+      "tracemalloc_peak_bytes": 20972310,
+      "scorer_sha256": "c92fb6b90e971d80739983c0c54f51f130e3844b7fe571b5f10d8c8195525751",
+      "input_sha256": "b0620f5d7344ef58531b3463042260a56f2089236583cd8d03c576ffcad6c039",
+      "labels_sha256": "a76df0c4cda75079f36505d84412a5446ee7261952fefd53a205a3a6dfc20999",
+      "report_sha256": "f9177d041b9c9f2d07c9f3f22ffcb2dcd15f4dd903da8e36592384ea9834c8c1",
+      "limitations": "tracemalloc covers Python allocations, not full process RSS; timing includes its overhead and is not production throughput. Input byte/text snapshots are retained."
+    },
+    {
+      "scope": "Synthetic scorer allocation workload, not trained-model evaluation",
+      "python": "3.12.13",
+      "platform": "macOS-27.2-arm64-arm-64bit",
+      "rows": 150000,
+      "seconds": 0.8274650420062244,
+      "tracemalloc_peak_bytes": 20972310,
+      "scorer_sha256": "c92fb6b90e971d80739983c0c54f51f130e3844b7fe571b5f10d8c8195525751",
+      "input_sha256": "b0620f5d7344ef58531b3463042260a56f2089236583cd8d03c576ffcad6c039",
+      "labels_sha256": "a76df0c4cda75079f36505d84412a5446ee7261952fefd53a205a3a6dfc20999",
+      "report_sha256": "f9177d041b9c9f2d07c9f3f22ffcb2dcd15f4dd903da8e36592384ea9834c8c1",
+      "limitations": "tracemalloc covers Python allocations, not full process RSS; timing includes its overhead and is not production throughput. Input byte/text snapshots are retained."
+    }
+  ],
+  "median_baseline_peak_bytes": 72537675,
+  "median_improved_peak_bytes": 20972310,
+  "median_baseline_seconds": 1.0462408750026952,
+  "median_improved_seconds": 0.8274650420062244,
+  "all_reports_byte_identical": true,
+  "limitations": [
+    "Python traced allocations, not whole-process RSS.",
+    "Timing includes tracing overhead and a single machine/workload.",
+    "CSV byte/text/StringIO snapshots still require memory proportional to input size.",
+    "Counts grow with distinct label pairs; inferred arbitrary label universes are not constant-space.",
+    "Existing corpus splits and published model-quality reports unchanged."
+  ]
+}
