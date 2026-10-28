@@ -11,13 +11,19 @@ from pathlib import Path
 
 
 def score_rows(rows, labels=None):
-    rows = list(rows)
-    if not rows:
+    # Keep label-pair counts rather than retaining all prediction row objects.
+    # Inputs may be single-pass iterators; metadata fields are not model features.
+    counts, observed, samples = Counter(), set(), 0
+    for row in rows:
+        if any(not isinstance(row.get(field), str) or not row[field].strip()
+               for field in ("true_label", "predicted_label")):
+            raise ValueError("Prediction labels must be nonempty strings")
+        actual, predicted = row["true_label"], row["predicted_label"]
+        counts[actual, predicted] += 1
+        observed.update((actual, predicted))
+        samples += 1
+    if not samples:
         raise ValueError("Prediction file has no data rows")
-    if any(not isinstance(row.get(field), str) or not row[field].strip()
-           for row in rows for field in ("true_label", "predicted_label")):
-        raise ValueError("Prediction labels must be nonempty strings")
-    observed = {row["true_label"] for row in rows} | {row["predicted_label"] for row in rows}
     if labels is not None and not isinstance(labels, (list, tuple)):
         raise ValueError("Labels must be an ordered array of nonempty strings")
     labels = list(labels) if labels is not None else sorted(observed)
@@ -25,9 +31,6 @@ def score_rows(rows, labels=None):
         raise ValueError("Labels must be nonempty strings")
     if not labels or len(set(labels)) != len(labels) or not observed.issubset(labels):
         raise ValueError("Labels must be unique and include every observed label")
-    if any(not row["true_label"] or not row["predicted_label"] for row in rows):
-        raise ValueError("Labels must not be empty")
-    counts = Counter((row["true_label"], row["predicted_label"]) for row in rows)
     per_class = {}
     for label in labels:
         tp = counts[label, label]
@@ -43,8 +46,8 @@ def score_rows(rows, labels=None):
     return {
         "labels": labels,
         "legitimate_false_positive_rate": false_positives / legitimate_support if legitimate_support else None,
-        "samples": len(rows),
-        "accuracy": sum(counts[label, label] for label in labels) / len(rows),
+        "samples": samples,
+        "accuracy": sum(counts[label, label] for label in labels) / samples,
         "macro_f1": sum(item["f1"] for item in per_class.values()) / len(labels),
         "per_class": per_class,
         "confusion_matrix": {actual: {predicted: counts[actual, predicted]
@@ -106,15 +109,15 @@ def main(argv=None):
         if not {"true_label", "predicted_label"}.issubset(fields):
             parser.error("CSV must contain true_label and predicted_label columns")
         try:
-            rows = []
-            for row in reader:
-                if None in row or any(value is None for value in row.values()):
-                    parser.error(f"CSV row ending at line {reader.line_num} has the wrong number of columns")
-                rows.append(row)
+            def checked_rows():
+                for row in reader:
+                    if None in row or any(value is None for value in row.values()):
+                        parser.error(f"CSV row ending at line {reader.line_num} has the wrong number of columns")
+                    yield row
             universe = json.loads(label_bytes.decode("utf-8"))
             if not isinstance(universe, list):
                 parser.error("Labels JSON must be an ordered array of nonempty strings")
-            result = score_rows(rows, labels=universe)
+            result = score_rows(checked_rows(), labels=universe)
         except (csv.Error, ValueError) as error:
             parser.error(str(error))
     result['predictions_sha256'] = hashlib.sha256(prediction_bytes).hexdigest()

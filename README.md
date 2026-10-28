@@ -59,6 +59,8 @@ ordered JSON array for another task. Absent classes remain in macro F1. Both the
 prediction CSV and label-file byte snapshots are hashed in the report. See
 [the input and reporting contract](docs/EVALUATION.md).
 
+The scorer aggregates prediction rows in one pass without retaining their CSV dictionaries; it still keeps exact byte/text snapshots for reproducible hashes. A [synthetic allocation study and reproduction recipe](docs/SCORER_PERFORMANCE.md) reports the scoped memory result separately from model quality.
+
 ## Repository map
 
 - `demos/quick_demo.py`: BERT inference smoke check
