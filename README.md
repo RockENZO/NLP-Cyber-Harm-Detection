@@ -2,6 +2,15 @@
 
 Research code for nine-class scam detection, source-holdout evaluation and explanation experiments. The current reproducible classifier study fits word/character TF-IDF + LinearSVC models and publishes frozen split, validation-selection and final-test reports. Historical BERT, DistilBERT and generative-model checkpoints remain available for research; the newer classifier reports do not validate their original accuracy or generated explanations.
 
+## Project overview
+
+![NLP project pipeline and frozen internal-test results](docs/preview/nlp-project-preview.png)
+
+This visual summarizes the **new nine-class TF-IDF + LinearSVC study**, not the
+historical neural or explanation models. Its numbers come directly from the
+[checked-in final test report](evaluation/reports/nine_class_test_20260930.json).
+Recreate the image with Pillow using `python docs/preview/render_preview.py`.
+
 ## Current results and entry points
 
 | Study | Published result | Interpretation |
