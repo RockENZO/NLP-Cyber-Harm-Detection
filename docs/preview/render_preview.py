@@ -7,8 +7,17 @@ report=json.loads((ROOT/'evaluation/reports/nine_class_test_20260930.json').read
 r=report['results']['selected']; m=r['nine_class']
 W,H=1600,900
 im=Image.new('RGB',(W,H),'#0b1424');d=ImageDraw.Draw(im)
-F='/System/Library/Fonts/Supplemental/'
-def font(n,b=False):return ImageFont.truetype(F+('Arial Bold.ttf' if b else 'Arial.ttf'),n)
+FONT_DIRS=['/System/Library/Fonts/Supplemental','/System/Library/Fonts','/Library/Fonts',
+           '/usr/share/fonts/truetype/dejavu','/usr/share/fonts/truetype/liberation','C:/Windows/Fonts']
+def font(n,b=False):
+    names=(['Arial Bold.ttf','Arial-Bold.ttf','DejaVuSans-Bold.ttf','LiberationSans-Bold.ttf'] if b
+           else ['Arial.ttf','DejaVuSans.ttf','LiberationSans.ttf'])
+    for directory in FONT_DIRS:
+        for name in names:
+            path=Path(directory)/name
+            if path.is_file():return ImageFont.truetype(str(path),n)
+    try:return ImageFont.load_default(size=n)
+    except TypeError:return ImageFont.load_default()
 def text(x,y,s,n=25,c='#eaf2ff',b=False):d.text((x,y),s,font=font(n,b),fill=c)
 def box(x,y,w,h,fill='#142239',outline='#2c405a',r=20):d.rounded_rectangle((x,y,x+w,y+h),r,fill=fill,outline=outline,width=2)
 text(70,40,'NLP / CYBER HARM DETECTION',23,'#6ce5cf',True)
