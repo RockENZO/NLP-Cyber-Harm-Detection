@@ -9,7 +9,7 @@ Research code for nine-class scam detection, source-holdout evaluation and expla
 This visual summarizes the **new nine-class TF-IDF + LinearSVC study**, not the
 historical neural or explanation models. Its numbers come directly from the
 [checked-in final test report](evaluation/reports/nine_class_test_20260930.json).
-Recreate the image with Pillow using `python docs/preview/render_preview.py`.
+Recreate the image with Pillow (`python -m pip install Pillow`), then run `python docs/preview/render_preview.py`. It reads the report directly and uses the first Arial/DejaVu/Liberation font it finds, falling back to Pillow's default; it is an overview rendered from the checked-in report, not a new measurement.
 
 ## Current results and entry points
 
