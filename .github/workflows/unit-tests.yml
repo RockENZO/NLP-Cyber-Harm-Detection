@@ -20,4 +20,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install the preview renderer dependency
+        run: python -m pip install --disable-pip-version-check Pillow==11.3.0
       - run: python -m unittest discover -s evaluation -p 'test_*.py'
