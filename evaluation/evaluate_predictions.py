@@ -81,25 +81,48 @@ def validate_csv_quotes(text):
         raise ValueError("Unterminated quoted CSV field")
 
 
+def read_expected_ids(snapshot):
+    """Read the frozen list into a set of IDs still to be scored."""
+    ids = json.loads(snapshot.decode("utf-8"))
+    if not isinstance(ids, list) or not ids or any(
+        not isinstance(item, str) or not item.strip() for item in ids
+    ):
+        raise ValueError("Expected IDs must be a nonempty JSON array of nonempty strings")
+    remaining = set(ids)
+    if len(remaining) != len(ids):
+        raise ValueError("Expected IDs must be unique")
+    return remaining
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("predictions", type=Path,
                         help="CSV with true_label and predicted_label columns")
     parser.add_argument("--output", type=Path, default=Path("evaluation.json"))
     parser.add_argument('--labels', type=Path, default=Path(__file__).with_name('labels.json'), help='Explicit ordered label universe JSON')
+    parser.add_argument("--expected-ids", type=Path,
+                        help="JSON array of frozen sample IDs; require exact CSV coverage")
     args = parser.parse_args(argv)
-    for source in (args.predictions, args.labels):
+    sources = (args.predictions, args.labels)
+    if args.expected_ids is not None:
+        sources += (args.expected_ids,)
+    for source in sources:
         if args.output.resolve() == source.resolve() or (
             args.output.exists() and source.exists() and args.output.samefile(source)
         ):
-            parser.error("Output report must not overwrite predictions or labels")
+            parser.error("Output report must not overwrite an evaluation input")
     # Score and hash one byte snapshot, even if another process replaces the CSV.
     prediction_bytes = args.predictions.read_bytes()
     label_bytes = args.labels.read_bytes()
-    prediction_text = prediction_bytes.decode("utf-8")
+    expected_bytes = None
+    remaining = None
     try:
+        if args.expected_ids is not None:
+            expected_bytes = args.expected_ids.read_bytes()
+            remaining = read_expected_ids(expected_bytes)
+        prediction_text = prediction_bytes.decode("utf-8")
         validate_csv_quotes(prediction_text)
-    except ValueError as error:
+    except (OSError, ValueError) as error:
         parser.error(str(error))
     with io.StringIO(prediction_text, newline="") as handle:
         reader = csv.DictReader(handle, strict=True)
@@ -108,12 +131,24 @@ def main(argv=None):
             parser.error("CSV column names must be nonempty and unique")
         if not {"true_label", "predicted_label"}.issubset(fields):
             parser.error("CSV must contain true_label and predicted_label columns")
+        if remaining is not None and "sample_id" not in fields:
+            parser.error("CSV must contain sample_id when --expected-ids is supplied")
         try:
             def checked_rows():
                 for row in reader:
                     if None in row or any(value is None for value in row.values()):
                         parser.error(f"CSV row ending at line {reader.line_num} has the wrong number of columns")
+                    if remaining is not None:
+                        sample_id = row["sample_id"]
+                        if sample_id not in remaining:
+                            raise ValueError(
+                                f"Unexpected or repeated sample ID at CSV line {reader.line_num}"
+                            )
+                        remaining.remove(sample_id)
                     yield row
+                if remaining:
+                    raise ValueError(f"Predictions are missing {len(remaining)} expected sample IDs")
+
             universe = json.loads(label_bytes.decode("utf-8"))
             if not isinstance(universe, list):
                 parser.error("Labels JSON must be an ordered array of nonempty strings")
@@ -122,6 +157,8 @@ def main(argv=None):
             parser.error(str(error))
     result['predictions_sha256'] = hashlib.sha256(prediction_bytes).hexdigest()
     result['labels_sha256'] = hashlib.sha256(label_bytes).hexdigest()
+    if expected_bytes is not None:
+        result['expected_ids_sha256'] = hashlib.sha256(expected_bytes).hexdigest()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
     try:

@@ -1,5 +1,7 @@
 import unittest
 import contextlib
+import hashlib
+import json
 import io
 import os
 import tempfile
@@ -204,6 +206,61 @@ class ScoreRowsTests(unittest.TestCase):
                 main([str(predictions), '--labels', str(labels), '--output', str(output)])
             self.assertEqual(output.read_text(), 'previous verified report')
             self.assertEqual(list(root.glob('.evaluation-*')), [])
+
+    def test_frozen_ids_allow_reordered_predictions_and_record_exact_hash(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            predictions, ids, output = root/'p.csv', root/'ids.json', root/'report.json'
+            labels = root / "labels.json"
+            labels.write_text('["fraud","legitimate"]')
+            snapshot = b'["item-1", "item-2"]\r\n'
+            ids.write_bytes(snapshot)
+            predictions.write_text(
+                "sample_id,true_label,predicted_label\n"
+                "item-2,legitimate,legitimate\nitem-1,fraud,fraud\n"
+            )
+            with contextlib.redirect_stdout(io.StringIO()):
+                main([str(predictions), '--labels', str(labels), '--expected-ids', str(ids), '--output', str(output)])
+            report = json.loads(output.read_text())
+            self.assertEqual(report['samples'], 2)
+            self.assertEqual(report['accuracy'], 1.0)
+            self.assertEqual(report['expected_ids_sha256'], hashlib.sha256(snapshot).hexdigest())
+
+    def test_bad_coverage_preserves_previous_report(self):
+        passing_row = "item-1,fraud,fraud\n"
+        header = "sample_id,true_label,predicted_label\n"
+        cases = [
+            (header + passing_row, '["item-1","item-2"]', "missing 1 expected"),
+            (header + passing_row * 2, '["item-1","item-2"]', "Unexpected or repeated"),
+            (header + passing_row + "other,fraud,fraud\n", '["item-1","item-2"]', "Unexpected or repeated"),
+            (header + passing_row + ",fraud,fraud\n", '["item-1","item-2"]', "Unexpected or repeated"),
+            ("true_label,predicted_label\nfraud,fraud\n", '["item-1"]', "must contain sample_id"),
+            (header + passing_row, '["item-1","item-1"]', "Expected IDs must be unique"),
+            (header + passing_row, '[""]', "nonempty strings"),
+        ]
+        for content, expected, message in cases:
+            with self.subTest(content=content, expected=expected), tempfile.TemporaryDirectory() as folder:
+                root = Path(folder)
+                predictions, ids, output = root/'p.csv', root/'ids.json', root/'report.json'
+                predictions.write_text(content)
+                ids.write_text(expected)
+                output.write_text("previous report")
+                stderr = io.StringIO()
+                with contextlib.redirect_stderr(stderr), self.assertRaises(SystemExit):
+                    main([str(predictions), '--expected-ids', str(ids), '--output', str(output)])
+                self.assertIn(message, stderr.getvalue())
+                self.assertEqual(output.read_text(), "previous report")
+
+    def test_report_cannot_replace_expected_ids(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            predictions, ids = root/'p.csv', root/'ids.json'
+            original = '["item-1"]'
+            ids.write_text(original)
+            predictions.write_text("sample_id,true_label,predicted_label\nitem-1,fraud,fraud\n")
+            with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+                main([str(predictions), '--expected-ids', str(ids), '--output', str(ids)])
+            self.assertEqual(ids.read_text(), original)
 
     def test_empty_rows_rejected(self):
         with self.assertRaises(ValueError):
